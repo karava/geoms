@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,25 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Media files storage
+
+DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+
+# Used to authenticate with S3
+AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
+
+# Configure which endpoint to send files to, and retrieve files from.
+if DEVELOPMENT_MODE is True:
+    AWS_STORAGE_BUCKET_NAME = 'gems-development'
+else:
+    AWS_STORAGE_BUCKET_NAME = 'gems-production'
+
+AWS_S3_REGION_NAME = 'ap-southeast-2'
+# AWS_LOCATION = 'media'
+
+# General optimization for faster delivery
+AWS_IS_GZIPPED = True
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
