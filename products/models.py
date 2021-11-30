@@ -33,10 +33,16 @@ class BaseProduct(models.Model):
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
     product_detail_geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE)
-    our_datasheets = models.CharField(blank=True, max_length=200)    
-    supplier_datasheets = models.CharField(blank=True, max_length=200)
-    sample_testing_reports = models.CharField(blank=True, max_length=200)
     packing_description = models.CharField(blank=True, max_length=200)
-    packing_photos = models.CharField(blank=True, max_length=200)
-    images = models.CharField(blank=True, max_length=200)
+
+# File models
+class DatasheetFile(models.Model):
+    file = models.FileField(upload_to="products/datasheets/")
+    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='datasheets')
+class TestingFile(models.Model):
+    file = models.FileField(upload_to="products/testing_reports/")
+    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='testReports')
+class ImageFile(models.Model):
+    file = models.ImageField(upload_to="products/product_images/")
+    image = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
 
