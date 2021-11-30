@@ -1,11 +1,29 @@
 from django.db import models
 from django.db.models import base
+from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField
 
 # Choices
 UNITS_OF_MEASURE = [
     ('rolls', 'Rolls'),
     ('sqm', 'SQM'),
+]
+
+INCOTERMS = [
+    ('fob', 'FOB'),
+    ('cif', 'CIF'),
+    ('ddp', 'DDP'),
+]
+
+CURRENCIES = [
+    ('usd', 'USD'),
+    ('aud', 'AUD'),
+]
+
+PRICE_TYPES = [
+    ('sale', 'Sale'),
+    ('cost', 'Cost'),
+    ('rrp', 'RRP'),
 ]
 
 # Create your models here.
@@ -34,6 +52,18 @@ class BaseProduct(models.Model):
     alternative_names.help_text = "Please comma separate names"
     product_detail_geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE)
     packing_description = models.CharField(blank=True, max_length=200)
+
+class Price(models.Model):
+    type = models.CharField(choices=PRICE_TYPES, max_length=200, default='sale')
+    date = models.DateField()
+    qty = models.IntegerField
+    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
+    incoterm = models.CharField(choices=INCOTERMS, max_length=200, default='cif')
+    currency = models.CharField(choices=CURRENCIES, max_length=200, default='usd')
+    expiry = models.DateField(blank=True, null=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+    base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
+
 
 # File models
 class DatasheetFile(models.Model):

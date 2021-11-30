@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, DatasheetFile, TestingFile, ImageFile
+from .models import Geocell, BaseProduct, DatasheetFile, TestingFile, ImageFile, Price
 import nested_admin
 
 # Inline Inlines
@@ -13,11 +13,15 @@ class ImageFileInLine(nested_admin.NestedStackedInline):
     model = ImageFile
     extra = 1
 
+class PriceInLine(nested_admin.NestedTabularInline):
+    model = Price
+    extra = 1
+
 # Inlines
 class BaseProductInline(nested_admin.NestedStackedInline):
     model = BaseProduct
     extra = 1
-    inlines = [DatasheetFileInLine, TestingFileInLine, ImageFileInLine]
+    inlines = [DatasheetFileInLine, TestingFileInLine, ImageFileInLine, PriceInLine]
 
 # Main
 class GeocellAdmin(nested_admin.NestedModelAdmin):
