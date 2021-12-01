@@ -142,7 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Media files storage
 
-DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'gems.storage_backends.MediaStorage'
 
 # Used to authenticate with S3
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
