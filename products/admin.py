@@ -26,17 +26,23 @@ class BaseProductInline(nested_admin.NestedStackedInline):
 # Main
 class GeocellAdmin(nested_admin.NestedModelAdmin):
     inlines = [BaseProductInline]
+    save_as = True
 
 class GeotextileAdmin(nested_admin.NestedModelAdmin):
     inlines = [BaseProductInline]
+    save_as = True
 
 class GCLAdmin(nested_admin.NestedModelAdmin):
     inlines = [BaseProductInline]
+    save_as = True
 
 class GeogridAdmin(nested_admin.NestedModelAdmin):
     inlines = [BaseProductInline]
+    save_as = True
+    
 class DrainageAdmin(nested_admin.NestedModelAdmin):
     inlines = [BaseProductInline]
+    save_as = True
 
 # Register your models here.
 admin.site.register(Geocell, GeocellAdmin)
