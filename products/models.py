@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import base
 from django.db.models.deletion import CASCADE
-from django.db.models.fields import CharField, BooleanField, DecimalField
+from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
 
 # Choices
 UNITS_OF_MEASURE = [
@@ -33,14 +33,14 @@ GEOTEXTILE_TYPES = [
 
 # Create your models here.
 class Geocell(models.Model):
-    height = CharField(max_length=3)
+    height = models.IntegerField()
     height.help_text = "Unit of measure is mm"
-    weld_spacing = CharField(max_length=200)
+    weld_spacing = models.IntegerField()
     weld_spacing.help_text = "Unit of measure is mm"
     is_textured = BooleanField(default=False)
 
     def __str__(self):
-        return ("Height: " + self.height + ", Weld spacing: " + self.weld_spacing)
+        return ("Height: " + str(self.height) + ", Weld spacing: " + str(self.weld_spacing))
 
 class GCL(models.Model):
     density = models.IntegerField()
@@ -53,7 +53,7 @@ class GCL(models.Model):
     suggested_applications = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-        return ("Density: " + self.density + ", Roll width: " + self.roll_width)
+        return ("Density: " + str(self.density) + ", Roll width: " + str(self.roll_width))
 
 class Geotextile(models.Model):
     density = models.IntegerField()
@@ -66,7 +66,7 @@ class Geotextile(models.Model):
     # aperture_size do we need this?
 
     def __str__(self):
-        return ("Density: " + self.density + ", Type: " + self.type)
+        return ("Density: " + str(self.density) + ", Type: " + self.type)
 
 # class Geogrid(models.Model):
 #     height = CharField(max_length=3)
@@ -87,9 +87,9 @@ class BaseProduct(models.Model):
     suppliers = models.CharField(max_length=200, blank=True)
     suppliers.help_text = "Please comma separate names"
     unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    twentygp_cap = models.IntegerField(blank=True)
-    fortygp_cap = models.IntegerField(blank=True, default=0)
-    fortyhc_cap = models.IntegerField(blank=True, default=0)
+    twentygp_cap = models.IntegerField(blank=True, null=True, default=0)
+    fortygp_cap = models.IntegerField(blank=True, null=True, default=0)
+    fortyhc_cap = models.IntegerField(blank=True, null=True, default=0)
     moq = models.IntegerField(null=True, default=0)
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
