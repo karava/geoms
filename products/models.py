@@ -94,9 +94,10 @@ class BaseProduct(models.Model):
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
     packing_description = models.CharField(blank=True, max_length=200)
-    product_detail_geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE, null=True, blank=True)
-    product_detail_geotextile = models.ForeignKey(Geotextile, on_delete=models.CASCADE, null=True, blank=True)
-    product_detail_gcl = models.ForeignKey(GCL, on_delete=models.CASCADE, null=True, blank=True)
+    # product_detail_geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE, null=True, blank=True)
+    product_detail_geocell = models.OneToOneField(Geocell, on_delete=models.CASCADE, null=True, blank=True, editable=False)
+    product_detail_geotextile = models.OneToOneField(Geotextile, on_delete=models.CASCADE, null=True, blank=True, editable=False)
+    product_detail_gcl = models.OneToOneField(GCL, on_delete=models.CASCADE, null=True, blank=True, editable=False)
 
 class Price(models.Model):
     type = models.CharField(choices=PRICE_TYPES, max_length=200, default='sale')

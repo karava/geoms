@@ -21,6 +21,7 @@ class PriceInLine(nested_admin.NestedTabularInline):
 class BaseProductInline(nested_admin.NestedStackedInline):
     model = BaseProduct
     extra = 1
+    # readonly_fields = ('product_detail_geocell', 'product_detail_gcl', 'product_detail_geotextile')
     inlines = [DatasheetFileInLine, TestingFileInLine, ImageFileInLine, PriceInLine]
 
 # Main
