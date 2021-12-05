@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, DatasheetFile, TestingFile, ImageFile, Price, Geotextile, GCL
+from .models import Geocell, BaseProduct, DatasheetFile, TestingFile, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid
 import nested_admin
 
 # Inline Inlines
@@ -21,7 +21,6 @@ class PriceInLine(nested_admin.NestedTabularInline):
 class BaseProductInline(nested_admin.NestedStackedInline):
     model = BaseProduct
     extra = 1
-    # readonly_fields = ('product_detail_geocell', 'product_detail_gcl', 'product_detail_geotextile')
     inlines = [DatasheetFileInLine, TestingFileInLine, ImageFileInLine, PriceInLine]
 
 # Main
@@ -34,7 +33,14 @@ class GeotextileAdmin(nested_admin.NestedModelAdmin):
 class GCLAdmin(nested_admin.NestedModelAdmin):
     inlines = [BaseProductInline]
 
+class GeogridAdmin(nested_admin.NestedModelAdmin):
+    inlines = [BaseProductInline]
+class DrainageAdmin(nested_admin.NestedModelAdmin):
+    inlines = [BaseProductInline]
+
 # Register your models here.
 admin.site.register(Geocell, GeocellAdmin)
 admin.site.register(Geotextile, GeotextileAdmin)
 admin.site.register(GCL, GCLAdmin)
+admin.site.register(Geogrid, GeogridAdmin)
+admin.site.register(DrainageProduct, DrainageAdmin)

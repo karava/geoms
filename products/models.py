@@ -31,6 +31,16 @@ GEOTEXTILE_TYPES = [
     ('nonwoven', 'Non-woven'),
 ]
 
+GEOGRID_TYPES = [
+    ('BI', 'BIAXIAL'),
+    ('TRI', 'TRIAXIAL'),
+]
+
+DRAINAGE_TYPES = [
+    ('strip', 'Strip Drain'),
+    ('sheet', 'Sheet Drain'),
+]
+
 # Create your models here.
 class Geocell(models.Model):
     height = models.IntegerField()
@@ -67,18 +77,27 @@ class Geotextile(models.Model):
 
     def __str__(self):
         return ("Density: " + str(self.density) + ", Type: " + self.type)
+class Geogrid(models.Model):
+    shape = models.CharField(choices=GEOGRID_TYPES, max_length=200) 
+    strength_md = models.IntegerField()
+    strength_md.help_text = "Strength in machine direction in kN"
+    strength_td = models.IntegerField()
+    strength_td.help_text = "Strength in transverse direction in kN"
 
-# class Geogrid(models.Model):
-#     height = CharField(max_length=3)
-#     height.help_text = "Unit of measure is mm"
-#     weld_spacing = CharField(max_length=200)
-#     weld_spacing.help_text = "Unit of measure is mm"
-#     is_textured = BooleanField(default=False)
+    def __str__(self):
+        return ("Shape: " + self.shape + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
 
-#     def __str__(self):
-#         return ("Height: " + self.height + ", Weld spacing: " + self.weld_spacing)
+class DrainageProduct(models.Model):
+    type = models.CharField(choices=DRAINAGE_TYPES, max_length=200, default='strip')
+    type.help_text = "FreDrain = Strip Drain, TerraDrain = Sheet Drain"
+    height = models.IntegerField()
+    height.help_text = "Unit of measure is mm"
+    roll_width = models.IntegerField()
+    roll_width.help_text = "Unit of measure is mm"
+    double_cuspated = BooleanField(default=False)
 
-# class drainage(models.Model):
+    def __str__(self):
+        return("Type: " + self.type + ", Height: " + str(self.height) + "x" + str(self.roll_width))
 
 class BaseProduct(models.Model):
     code = models.CharField(max_length=10, blank=True)
@@ -94,10 +113,11 @@ class BaseProduct(models.Model):
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
     packing_description = models.CharField(blank=True, max_length=200)
-    # product_detail_geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE, null=True, blank=True)
     product_detail_geocell = models.OneToOneField(Geocell, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     product_detail_geotextile = models.OneToOneField(Geotextile, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     product_detail_gcl = models.OneToOneField(GCL, on_delete=models.CASCADE, null=True, blank=True, editable=False)
+    product_detail_geogrid = models.OneToOneField(Geogrid, on_delete=models.CASCADE, null=True, blank=True, editable=False)
+    product_detail_drainage = models.OneToOneField(DrainageProduct, on_delete=models.CASCADE, null=True, blank=True, editable=False)
 
 class Price(models.Model):
     type = models.CharField(choices=PRICE_TYPES, max_length=200, default='sale')
