@@ -1,13 +1,33 @@
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 import requests
-import json
+from requests.auth import HTTPBasicAuth
+from django.conf import settings
+
 
 def index(request):
+    XERO_ACCESS_TOKEN = fetchXeroAccessToken()
     headers = {
-        'Authorization' : 'Bearer ' + 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFDQUY4RTY2NzcyRDZEQzAyOEQ2NzI2RkQwMjYxNTgxNTcwRUZDMTkiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJISy1PWm5jdGJjQW8xbkp2MENZVmdWY09fQmsifQ.eyJuYmYiOjE2NzQ1Njc5ODcsImV4cCI6MTY3NDU2OTc4NywiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS54ZXJvLmNvbSIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHkueGVyby5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiOTk4OTZDRURCNDUzNDYyRkEzM0U2RDI3N0QyNDVBM0EiLCJ4ZXJvX3VzZXJpZCI6ImM3ZDhiMzU4LTdiZTMtNGQ5Zi04Njk1LWNlMDUyZTJmMDcyMiIsImp0aSI6IkFCNTY5MTg5NTFGOTY3MEY5Qjg4MURFNEM2M0FFMDJDIiwiYXV0aGVudGljYXRpb25fZXZlbnRfaWQiOiJmYzU4OTc0Ni1jNzdkLTQ0YTQtYTAyNS0yMjE0MDg1ZjdiZTQiLCJzY29wZSI6WyJhY2NvdW50aW5nLmNvbnRhY3RzIiwiYWNjb3VudGluZy50cmFuc2FjdGlvbnMiXX0.lZnmGeZMqJ6oBvHRiR7f6pG_wBmJ3MWn7Z9bVDWeWi66xUPSn3RZAH4-ldANhzaIOqLQ0Qrge3GRHmSFtAS7y54dpMcdE0nqQQ3rMbGKNzE7G_MGiA-JL4qatYdzeAJQ7sp-VO92Hzge4-L9zUjhfcxszCAnArURtXsLxu2wAaKBxQ1v3UO4uTrBZ9SRuHQjAqEWQzRATfg97YqgYH9XHStA6BRogElXpZNWMWB270bhpIKhNlEExS8wcGOyeBTL6nJ8mwmUqZm7Kh-BQQy_N6PutJSr0GIiCTE5hp9XLAT2nmpH3yq5J5i4O2ZFtRaohHO0UIUv8e8hehQRpF5QNw',
+        'Authorization' : 'Bearer ' + XERO_ACCESS_TOKEN,
         'Accept': 'application/json'
         }
     response = requests.get("https://api.xero.com/api.xro/2.0/Invoices", headers=headers)
+    if response.status_code == 200:
+        print("All good")
+    elif response.status_code == 401:
+        if "TokenExpired" in response.text:
+            print("401 error: Token expired")
+        
     json_response = response.json()
     return JsonResponse(json_response)
+
+def fetchXeroAccessToken():
+    username = settings.XERO_CLIENT_ID
+    password = settings.XERO_CLIENT_SECRET
+    headers = {'Content-Type'  : 'application/x-www-form-urlencoded'}
+    data = {'grant_type' : 'client_credentials'}
+
+    response = requests.post("https://identity.xero.com/connect/token", headers=headers, data=data, auth=HTTPBasicAuth(username, password))
+    response_data = response.json()
+    token = response_data["access_token"]
+    return token

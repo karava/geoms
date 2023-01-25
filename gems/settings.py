@@ -149,6 +149,10 @@ DEFAULT_FILE_STORAGE = 'gems.storage_backends.MediaStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
 
+# Used to request Xero access tokens (they have an expiry of 30 minutes)
+XERO_CLIENT_ID = os.environ.get('XERO_CLIENT_ID')
+XERO_CLIENT_SECRET = os.environ.get('XERO_CLIENT_SECRET')
+
 # Configure which endpoint to send files to, and retrieve files from.
 if DEVELOPMENT_MODE is True:
     AWS_STORAGE_BUCKET_NAME = 'gems-development'
