@@ -29,8 +29,12 @@ def index(request):
 
     # Create new quote
     response = createNewQuote(quoteData=quoteData)
+    quoteID = response["Quotes"][0]["QuoteID"]
 
-    return JsonResponse(response, safe=False)
+    response = getQuotePDF(quoteID)
+
+    return HttpResponse(response, content_type='application/pdf')
+
 
 def fetchXeroAccessToken():
     username = settings.XERO_CLIENT_ID
@@ -59,11 +63,17 @@ def createNewContact(customerName):
     return response["Contacts"][0]["ContactID"]
 
 
-def prepareXeroAPICall(apiUrl, method, data=None):
+def prepareXeroAPICall(apiUrl, method, data=None, PDF=False):
+
+    if PDF:
+        contentType = 'application/pdf'
+    else:
+        contentType = 'application/json'
+
     XERO_ACCESS_TOKEN = fetchXeroAccessToken()
     headers = {
         'Authorization' : 'Bearer ' + XERO_ACCESS_TOKEN,
-        'Accept': 'application/json'
+        'Accept': contentType
     }
 
     if method == "GET":
@@ -78,7 +88,10 @@ def prepareXeroAPICall(apiUrl, method, data=None):
         if "TokenExpired" in response.text:
             print("401 error: Token expired")
 
-    return response.json()
+    if PDF:
+        return response.content
+    else:
+        return response.json()
 
 
 def createNewQuote(quoteData):
@@ -93,9 +106,11 @@ Leadtime: {quoteData["leadTime"]}"""
         bankDetails = constants.AU_BANK_DETAILS
         taxType = "OUTPUT"
         summary = summary + "\n" + f'Delivery address: {quoteData["deliveryAddress"]}' + "\n" + f'Unloading style: {quoteData["unloadingStyle"]}'
+        currencyCode = "AUD"
     else:
         bankDetails = constants.US_BANK_DETAILS
         taxType = "EXEMPTOUTPUT"
+        currencyCode = "USD"
 
     currentDateTime = datetime.now(pytz.timezone('Australia/Victoria'))
     today = str(currentDateTime.year)+"-"+str(currentDateTime.month)+"-"+str(currentDateTime.day)
@@ -120,6 +135,7 @@ Leadtime: {quoteData["leadTime"]}"""
         ],
         "Date": today,
         "ExpiryDate": expiryDate,
+        "CurrencyCode": currencyCode,
         "Title": quoteData["title"],
         "Summary": summary,
         "Tracking": [],
@@ -127,4 +143,9 @@ Leadtime: {quoteData["leadTime"]}"""
     }
 
     response = prepareXeroAPICall(apiUrl="https://api.xero.com/api.xro/2.0/Quotes", method="POST", data=data)
+    return response
+
+
+def getQuotePDF(quoteID):
+    response = prepareXeroAPICall(apiUrl=f"https://api.xero.com/api.xro/2.0/Quotes/{quoteID}", method="GET", PDF=True)
     return response
