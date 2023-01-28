@@ -30,10 +30,14 @@ def index(request):
     # Create new quote
     response = createNewQuote(quoteData=quoteData)
     quoteID = response["Quotes"][0]["QuoteID"]
+    quoteNumber = response["Quotes"][0]["QuoteNumber"]
 
     response = getQuotePDF(quoteID)
+    response = HttpResponse(response, content_type='application/pdf')
+    filename = f'{quoteID}|{quoteNumber}.pdf'
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
-    return HttpResponse(response, content_type='application/pdf')
+    return response
 
 
 def fetchXeroAccessToken():
