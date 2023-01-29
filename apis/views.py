@@ -121,9 +121,14 @@ Leadtime: {quoteData["leadTime"]}"""
     expiryDateTime = currentDateTime + timedelta(days=14)
     expiryDate = str(expiryDateTime.year)+"-"+str(expiryDateTime.month)+"-"+(str(expiryDateTime.day))
 
-    
+    if quoteData.get('quoteID', None) != None:
+        quoteID = quoteData['quoteID']
+        print("This is the quote ID: ", quoteID)
+    else:
+        quoteID = None
 
     data = {
+        "QuoteID": quoteID,
         "Terms": "Payment Terms: " + quoteData["paymentTerms"] + bankDetails + constants.QUOTE_TERMS,
         "Contact": {
             "ContactID": quoteData["contactID"],
