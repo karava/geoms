@@ -21,7 +21,7 @@ BSB  No:     063 010
 QUOTE_TERMS = """
 Quantity: Net quantities according to Packing List. Actual number of units will depend on the quantity that can be loaded to fill the container. 
 
-All other conditions as per our Standard Conditions attached.
+All other conditions as per our Standard Conditions found at: https://geosynthetics.net.au/terms-and-conditions-of-sales/
 
 Please take note of the following condition which is also found in section 3 of the conditions attached.
 
