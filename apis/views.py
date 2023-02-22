@@ -115,6 +115,8 @@ Leadtime: {quoteData["leadTime"]}"""
         bankDetails = constants.US_BANK_DETAILS
         taxType = "EXEMPTOUTPUT"
         currencyCode = "USD"
+    
+    summary = summary + "\n" + f'Delivery Disclaimer: {quoteData["deliveryDisclaimer"]}'
 
     currentDateTime = datetime.now(pytz.timezone('Australia/Victoria'))
     today = str(currentDateTime.year)+"-"+str(currentDateTime.month)+"-"+str(currentDateTime.day)
