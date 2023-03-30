@@ -8,7 +8,9 @@ from apis import constants
 from datetime import datetime,timedelta
 import pytz
 import json
-
+import io
+import os
+import fitz
 
 @csrf_exempt
 def index(request):
@@ -154,7 +156,53 @@ Leadtime: {quoteData["leadTime"]}"""
     response = prepareXeroAPICall(apiUrl="https://api.xero.com/api.xro/2.0/Quotes", method="POST", data=data)
     return response
 
-
 def getQuotePDF(quoteID):
     response = prepareXeroAPICall(apiUrl=f"https://api.xero.com/api.xro/2.0/Quotes/{quoteID}", method="GET", PDF=True)
     return response
+
+@csrf_exempt
+def sign_pdf(request):
+    if request.method == 'POST':
+        # Get the PDF bytes from the request body
+        pdf_bytes = request.body
+
+        # Open the input PDF file
+        pdf_doc = fitz.open(stream=io.BytesIO(pdf_bytes), filetype='pdf')
+
+        # Load the signature image from the server
+        signature_image_filename = 'signature.png'
+        signature_image_path = os.path.join(settings.BASE_DIR, 'apis', 'private', 'signatures', signature_image_filename)
+        with open(signature_image_path, 'rb') as f:
+            image_bytes = f.read()
+        
+        image = fitz.Pixmap(image_bytes)
+        image.shrink(4)
+
+        # Get the first page of the PDF file
+        page = pdf_doc[0]
+
+        # Get the size of the image and the page
+        image_width, image_height = image.width, image.height
+        page_width, page_height = page.mediabox.width, page.mediabox.height
+
+        # Calculate the position of the image in the bottom right corner
+        image_offset = 20
+        image_x = page_width - image_width - image_offset
+        image_y = page_height - image_height - image_offset
+
+        # Add the image to the page
+        rect = fitz.Rect(image_x, image_y, page_width - image_offset, page_height - image_offset)
+        for page in pdf_doc:
+            page.insert_image(rect, pixmap=image)
+
+        # Save the modified PDF to bytes
+        output_bytes = pdf_doc.write()
+        # pdf_doc.close()  # Close the PDF document to ensure its contents are written to output_bytes
+
+        # Create a response with the modified PDF as a file attachment
+        response = HttpResponse(output_bytes, content_type='application/pdf')
+
+        return response
+
+    # If the request method is not POST, return a 405 Method Not Allowed error
+    return HttpResponse(status=405)
