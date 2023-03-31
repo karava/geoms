@@ -162,6 +162,7 @@ def getQuotePDF(quoteID):
 
 @csrf_exempt
 def sign_pdf(request):
+    print("DEBUG: Entering the sign pdf function")
     if request.method == 'POST':
         # Get the PDF bytes from the request body
         pdf_bytes = request.body
