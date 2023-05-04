@@ -59,7 +59,7 @@ class GCL(models.Model):
     roll_width.help_text = "Unit of measure is m"
     roll_length = DecimalField(max_digits=5, decimal_places=2)
     roll_length.help_text = "Unit of measure is m"
-    bentotite_specs = models.CharField(max_length=200, blank=True)
+    bentonite_specs = models.CharField(max_length=200, blank=True)
     suggested_applications = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
