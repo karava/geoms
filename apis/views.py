@@ -212,9 +212,12 @@ def sign_pdf(request):
 def relay_trello_webhook(request):
     # Replace with your Google Apps Script Web App URL
     GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwShnBheJHJ4CmDDn2_OkaPyCgUc4Ja5nQoR6ogLvp-H3vc_EEZXrSmEg80tSsQkpQtaQ/exec'
+    print("DEBUG: Attempting to relay trello webhook to GAS")
 
     if request.method == 'POST':
         response = requests.post(GOOGLE_APPS_SCRIPT_URL, data=request.body)
+        print("DEBUG: Status code received from GAS - ", response.status_code)
+        print("DEBUG: Message - ", response.content)
 
         if response.status_code == 200:
             return JsonResponse({"status": "success"})
