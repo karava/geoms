@@ -207,3 +207,18 @@ def sign_pdf(request):
 
     # If the request method is not POST, return a 405 Method Not Allowed error
     return HttpResponse(status=405)
+
+@csrf_exempt
+def relay_trello_webhook(request):
+    # Replace with your Google Apps Script Web App URL
+    GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwShnBheJHJ4CmDDn2_OkaPyCgUc4Ja5nQoR6ogLvp-H3vc_EEZXrSmEg80tSsQkpQtaQ/exec'
+
+    if request.method == 'POST':
+        response = requests.post(GOOGLE_APPS_SCRIPT_URL, data=request.body)
+
+        if response.status_code == 200:
+            return JsonResponse({"status": "success"})
+        else:
+            return JsonResponse({"status": "error"}, status=500)
+
+    return JsonResponse({"status": "not allowed"}, status=405)

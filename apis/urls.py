@@ -6,4 +6,5 @@ app_name = 'apis'
 urlpatterns = [
     path('', views.index, name='index'),
     path('sign_pdf/', views.sign_pdf, name='sign_pdf'),
+    path('relay-trello-webhook/', views.relay_trello_webhook, name='relay_trello_webhook'),
 ]
