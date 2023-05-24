@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
@@ -228,3 +228,57 @@ def relay_trello_webhook(request):
         return HttpResponse(status=200)
 
     return JsonResponse({"status": "not allowed"}, status=405)
+
+
+def get_jaybro_branding_theme_id():
+    # Define the Xero API endpoint for branding themes
+    branding_themes_endpoint = "https://api.xero.com/api.xro/2.0/BrandingThemes"
+    
+    # Call your function to get the branding themes from Xero API
+    branding_themes = prepareXeroAPICall(branding_themes_endpoint, "GET")
+
+    # Find "Jaybro"
+    for theme in branding_themes["BrandingThemes"]:
+        if theme["Name"] == "Jaybro":
+            return theme["BrandingThemeID"]
+
+    return None
+
+
+@csrf_exempt
+def create_jaybro_invoice(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        # Retrieve the branding theme ID for "Jaybro"
+        branding_theme_id = get_jaybro_branding_theme_id()
+
+        # Update the data with the branding theme ID
+        data["BrandingThemeID"] = branding_theme_id
+
+        # Create the invoice on Xero using your Xero API wrapper
+        invoice_response = prepareXeroAPICall(
+            "https://api.xero.com/api.xro/2.0/Invoices", 
+            "POST", 
+            data
+        )
+
+        # Check if the response includes an 'Invoices' field, which indicates a successful creation
+        if 'Invoices' in invoice_response:
+            invoice_id = invoice_response['Invoices'][0]['InvoiceID']
+
+            # Get Invoice PDF
+            pdf_response = prepareXeroAPICall(
+                f"https://api.xero.com/api.xro/2.0/Invoices/{invoice_id}", 
+                "GET", 
+                PDF=True
+            )
+
+            # Send the PDF as a response
+            response = FileResponse(io.BytesIO(pdf_response), as_attachment=True, filename='invoice.pdf')
+            return response
+
+        else:
+            return JsonResponse(invoice_response)
+    else:
+        return JsonResponse({"message": "Invalid request method"}, status=405)
