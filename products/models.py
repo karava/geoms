@@ -41,7 +41,22 @@ DRAINAGE_TYPES = [
     ('sheet', 'Sheet Drain'),
 ]
 
+RESOURCE_TYPES = [
+    ('datasheet', 'Datasheet'),
+    ('brochure', 'Brochure'),
+    ('installation_guide', 'Installation Guide'),
+    ('accessory_guide', 'Accessory Guide'),
+    ('test_report', 'Test Report'),
+]
+
 # Create your models here.
+class Application(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
 class Geocell(models.Model):
     height = models.IntegerField()
     height.help_text = "Unit of measure is mm"
@@ -60,7 +75,6 @@ class GCL(models.Model):
     roll_length = DecimalField(max_digits=5, decimal_places=2)
     roll_length.help_text = "Unit of measure is m"
     bentonite_specs = models.CharField(max_length=200, blank=True)
-    suggested_applications = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         base_product = self.baseproduct
@@ -96,14 +110,38 @@ class DrainageProduct(models.Model):
     roll_width = models.IntegerField()
     roll_width.help_text = "Unit of measure is mm"
     double_cuspated = BooleanField(default=False)
+    DrainageProductSubcategory = models.ManyToManyField('DrainageProductSubcategory')
 
     def __str__(self):
         return("Type: " + self.type + ", Height: " + str(self.height) + "x" + str(self.roll_width))
 
+class GeocellSubcategory(models.Model):
+    name = models.CharField(max_length=255)
+    geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE)
+class GCLSubcategory(models.Model):
+    name = models.CharField(max_length=255)
+    gcl = models.ForeignKey(GCL, on_delete=models.CASCADE)
+class GeotextileSubcategory(models.Model):
+    name = models.CharField(max_length=255)
+    geotextile = models.ForeignKey(Geotextile, on_delete=models.CASCADE)
+
+class GeogridSubcategory(models.Model):
+    name = models.CharField(max_length=255)
+    geogrid = models.ForeignKey(Geogrid, on_delete=models.CASCADE)
+
+class DrainageProductSubcategory(models.Model):
+    name = models.CharField(max_length=255)
+    drainage_product = models.ForeignKey(DrainageProduct, on_delete=models.CASCADE)
 class BaseProduct(models.Model):
     code = models.CharField(max_length=200, blank=True)
+    title = models.CharField(max_length=200, blank=False)
     material = models.CharField(max_length=200, blank=True)
-    description = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    short_description.help_text = "This is a short concise and useful description of the product"
+    long_description = models.TextField(blank=True)
+    long_description.help_text = "This is for SEO purposes"
+    applications = models.ManyToManyField(Application, related_name="products")
+    notes = models.TextField(blank=True)
     suppliers = models.CharField(max_length=200, blank=True)
     suppliers.help_text = "Please comma separate names"
     unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
@@ -143,4 +181,21 @@ class TestingFile(models.Model):
 class ImageFile(models.Model):
     file = models.ImageField(upload_to="products/product_images/")
     image = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
+    is_default = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        # If this image is set as default, unset other default images for the product
+        if self.is_default:
+            ImageFile.objects.filter(base_product=self.base_product).update(is_default=False)
+        super().save(*args, **kwargs)
+
+class ProductResource(models.Model):
+    type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
+    file = models.FileField(upload_to="products/resources/")
+    description = models.TextField(blank=True)
+    base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='resources')
+    
+    def __str__(self):
+        return f"{self.type} for {self.base_product.code}"
+
 
