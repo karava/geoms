@@ -23,9 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key()) 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
@@ -35,10 +32,15 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split("
 # Can be used for other items to distinguish production and development
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
+# SECURITY WARNING: keep the secret key used in production secret!
+if DEVELOPMENT_MODE:
+    SECRET_KEY = 'abcdefghijklmnopqrstuvwxyz0123456789'
+else:
+    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+
 # Application definition
 
 INSTALLED_APPS = [
-    'products.apps.ProductsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'nested_admin',
+    'rest_framework',
     'apis',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +88,7 @@ WSGI_APPLICATION = 'gems.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEVELOPMENT_MODE is True:
+if DEVELOPMENT_MODE:
     DATABASES = {
             "default": {
                 "ENGINE": "django.db.backends.sqlite3",
@@ -136,14 +140,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Media files storage
-
-DEFAULT_FILE_STORAGE = 'gems.storage_backends.MediaStorage'
+if DEVELOPMENT_MODE:
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+else:
+    DEFAULT_FILE_STORAGE = 'gems.storage_backends.MediaStorage'
 
 # Used to authenticate with S3
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
@@ -154,7 +163,7 @@ XERO_CLIENT_ID = os.environ.get('XERO_CLIENT_ID')
 XERO_CLIENT_SECRET = os.environ.get('XERO_CLIENT_SECRET')
 
 # Configure which endpoint to send files to, and retrieve files from.
-if DEVELOPMENT_MODE is True:
+if DEVELOPMENT_MODE:
     AWS_STORAGE_BUCKET_NAME = 'gems-development'
 else:
     AWS_STORAGE_BUCKET_NAME = 'gems-production'

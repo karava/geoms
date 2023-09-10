@@ -1,80 +1,136 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, DatasheetFile, TestingFile, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, GeocellSubcategory, GCLSubcategory, GeotextileSubcategory, GeogridSubcategory, DrainageProductSubcategory, ProductResource, Application
-import nested_admin
 
-# Inline Inlines
-class DatasheetFileInLine(nested_admin.NestedStackedInline):
-    model = DatasheetFile
-    extra = 1
-class TestingFileInLine(nested_admin.NestedStackedInline):
-    model = TestingFile
-    extra = 1
-class ImageFileInLine(nested_admin.NestedStackedInline):
-    model = ImageFile
+from products import models as product_models
+
+
+# Price Inlines
+class DrainagePriceInline(admin.TabularInline):
+    model = product_models.DrainagePrice
+    can_delete = False
     extra = 1
 
-class PriceInLine(nested_admin.NestedTabularInline):
-    model = Price
+
+class GCLPriceInline(admin.TabularInline):
+    model = product_models.GCLPrice
+    can_delete = False
     extra = 1
 
-# Inlines
-class ProductResourceInline(nested_admin.NestedStackedInline):
-    model = ProductResource
-    extra = 1
-class BaseProductInline(nested_admin.NestedStackedInline):
-    model = BaseProduct
-    extra = 1
-    inlines = [DatasheetFileInLine, TestingFileInLine, ImageFileInLine, PriceInLine, ProductResourceInline]
-    filter_horizontal = ('applications',)
 
-# Subcategory Inlines
-class GeocellSubcategoryInline(nested_admin.NestedStackedInline):
-    model = GeocellSubcategory
+class GeoCellPriceInline(admin.TabularInline):
+    model = product_models.GeoCellPrice
+    can_delete = False
     extra = 1
 
-class GCLSubcategoryInline(nested_admin.NestedStackedInline):
-    model = GCLSubcategory
+
+class GeoGridPriceInline(admin.TabularInline):
+    model = product_models.GeoGridPrice
+    can_delete = False
     extra = 1
 
-class GeotextileSubcategoryInline(nested_admin.NestedStackedInline):
-    model = GeotextileSubcategory
+
+class GeoTextilePriceInline(admin.TabularInline):
+    model = product_models.GeoTextilePrice
+    can_delete = False
     extra = 1
 
-class GeogridSubcategoryInline(nested_admin.NestedStackedInline):
-    model = GeogridSubcategory
+
+# Image Inlines
+class DrainageImageInline(admin.TabularInline):
+    model = product_models.DrainageImage
     extra = 1
 
-class DrainageProductSubcategoryInline(nested_admin.NestedStackedInline):
-    model = DrainageProductSubcategory
+
+class GCLImageInline(admin.TabularInline):
+    model = product_models.GCLImage
     extra = 1
+
+
+class GeoCellImageInline(admin.TabularInline):
+    model = product_models.GeoCellImage
+    extra = 1
+
+
+class GeoGridImageInline(admin.TabularInline):
+    model = product_models.GeoGridImage
+    extra = 1
+
+
+class GeoTextileImageInline(admin.TabularInline):
+    model = product_models.GeoTextileImage
+    extra = 1
+
+
+# Resource Inlines
+class DrainageResourceInline(admin.TabularInline):
+    model = product_models.DrainageResource
+    extra = 1
+
+
+class GCLResourceInline(admin.TabularInline):
+    model = product_models.GCLResource
+    extra = 1
+
+
+class GeoCellResourceInline(admin.TabularInline):
+    model = product_models.GeoCellResource
+    extra = 1
+
+
+class GeoGridResourceInline(admin.TabularInline):
+    model = product_models.GeoGridResource
+    extra = 1
+
+
+class GeoTextileResourceInline(admin.TabularInline):
+    model = product_models.GeoTextileResource
+    extra = 1
+
 
 # Main
-class GeocellAdmin(nested_admin.NestedModelAdmin):
-    inlines = [GeocellSubcategoryInline, BaseProductInline]
+@admin.register(product_models.Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description_short')
+
+    @admin.display(description='Desc')
+    def description_short(self, obj):
+        return obj.description[:64] if obj.description else ''
+
+
+@admin.register(product_models.Drainage)
+class DrainageAdmin(admin.ModelAdmin):
+    list_display = ('code', 'title', 'suppliers', 'type', 'height', 'roll_width')
+    search_fields = ['type', 'code', 'title', 'suppliers']
+    inlines = [DrainagePriceInline, DrainageImageInline, DrainageResourceInline]
     save_as = True
 
-class GeotextileAdmin(nested_admin.NestedModelAdmin):
-    inlines = [GeotextileSubcategoryInline, BaseProductInline]
+
+@admin.register(product_models.GCL)
+class GCLAdmin(admin.ModelAdmin):
+    list_display = ('code', 'title', 'suppliers', 'density', 'roll_width', 'roll_length', 'bentonite_specs')
+    search_fields = ['bentonite_specs', 'code', 'title', 'suppliers']
+    inlines = [GCLPriceInline, GCLImageInline, GCLResourceInline]
     save_as = True
 
-class GCLAdmin(nested_admin.NestedModelAdmin):
-    inlines = [BaseProductInline]
+
+@admin.register(product_models.GeoCell)
+class GeocellAdmin(admin.ModelAdmin):
+    list_display = ('code', 'title', 'suppliers', 'height', 'weld_spacing', 'is_textured')
+    search_fields = ['code', 'title', 'suppliers']
+    inlines = [GeoCellPriceInline, GeoCellImageInline, GeoCellResourceInline]
     save_as = True
 
-class GeogridAdmin(nested_admin.NestedModelAdmin):
-    inlines = [BaseProductInline]
-    save_as = True
-    
-class DrainageAdmin(nested_admin.NestedModelAdmin):
-    inlines = [DrainageProductSubcategoryInline, BaseProductInline]
-    save_as = True
-    filter_horizontal = ('DrainageProductSubcategory',)
 
-# Register your models here.
-admin.site.register(Geocell, GeocellAdmin)
-admin.site.register(Geotextile, GeotextileAdmin)
-admin.site.register(GCL, GCLAdmin)
-admin.site.register(Geogrid, GeogridAdmin)
-admin.site.register(DrainageProduct, DrainageAdmin)
-admin.site.register(Application)
-admin.site.register(DrainageProductSubcategory)
+@admin.register(product_models.GeoGrid)
+class GeogridAdmin(admin.ModelAdmin):
+    list_display = ('code', 'title', 'suppliers', 'shape', 'strength_md', 'strength_td')
+    search_fields = ['shape', 'code', 'title', 'suppliers']
+    inlines = [GeoGridPriceInline, GeoGridImageInline, GeoGridResourceInline]
+    save_as = True
+
+
+@admin.register(product_models.GeoTextile)
+class GeoTextileAdmin(admin.ModelAdmin):
+    list_display = ('code', 'title', 'suppliers', 'density', 'roll_width', 'roll_length', 'type')
+    search_fields = ['type', 'code', 'title', 'suppliers']
+    inlines = [GeoTextilePriceInline, GeoTextileImageInline, GeoTextileResourceInline]
+    save_as = True

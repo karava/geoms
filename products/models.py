@@ -1,7 +1,5 @@
 from django.db import models
-from django.db.models import base
-from django.db.models.deletion import CASCADE
-from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
+
 
 # Choices
 UNITS_OF_MEASURE = [
@@ -49,153 +47,232 @@ RESOURCE_TYPES = [
     ('test_report', 'Test Report'),
 ]
 
-# Create your models here.
+
 class Application(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    description = models.TextField(blank=True)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
 
-class Geocell(models.Model):
-    height = models.IntegerField()
-    height.help_text = "Unit of measure is mm"
-    weld_spacing = models.IntegerField()
-    weld_spacing.help_text = "Unit of measure is mm"
-    is_textured = BooleanField(default=False)
 
-    def __str__(self):
-        return ("Height: " + str(self.height) + ", Weld spacing: " + str(self.weld_spacing))
-
-class GCL(models.Model):
-    density = models.IntegerField()
-    density.help_text = "Unit of measure is gsm"
-    roll_width = DecimalField(max_digits=4, decimal_places=2)
-    roll_width.help_text = "Unit of measure is m"
-    roll_length = DecimalField(max_digits=5, decimal_places=2)
-    roll_length.help_text = "Unit of measure is m"
-    bentonite_specs = models.CharField(max_length=200, blank=True)
-
-    def __str__(self):
-        base_product = self.baseproduct
-        return ("Code: " + str(base_product.code) + ", Density: " + str(self.density) + ", Roll width: " + str(self.roll_width))
-
-class Geotextile(models.Model):
-    density = models.IntegerField()
-    density.help_text = "Unit of measure is gsm"
-    roll_width = DecimalField(max_digits=4, decimal_places=2)
-    roll_width.help_text = "Unit of measure is m"
-    roll_length = DecimalField(max_digits=5, decimal_places=2)
-    roll_length.help_text = "Unit of measure is m"
-    type = models.CharField(choices=GEOTEXTILE_TYPES, max_length=200, default='woven')
-    # aperture_size do we need this?
-
-    def __str__(self):
-        return ("Density: " + str(self.density) + ", Type: " + self.type)
-class Geogrid(models.Model):
-    shape = models.CharField(choices=GEOGRID_TYPES, max_length=200) 
-    strength_md = models.IntegerField()
-    strength_md.help_text = "Strength in machine direction in kN"
-    strength_td = models.IntegerField()
-    strength_td.help_text = "Strength in transverse direction in kN"
-
-    def __str__(self):
-        return ("Shape: " + self.shape + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
-
-class DrainageProduct(models.Model):
-    type = models.CharField(choices=DRAINAGE_TYPES, max_length=200, default='strip')
-    type.help_text = "FreDrain = Strip Drain, TerraDrain = Sheet Drain"
-    height = models.IntegerField()
-    height.help_text = "Unit of measure is mm"
-    roll_width = models.IntegerField()
-    roll_width.help_text = "Unit of measure is mm"
-    double_cuspated = BooleanField(default=False)
-    DrainageProductSubcategory = models.ManyToManyField('DrainageProductSubcategory')
-
-    def __str__(self):
-        return("Type: " + self.type + ", Height: " + str(self.height) + "x" + str(self.roll_width))
-
-class GeocellSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE)
-class GCLSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    gcl = models.ForeignKey(GCL, on_delete=models.CASCADE)
-class GeotextileSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geotextile = models.ForeignKey(Geotextile, on_delete=models.CASCADE)
-
-class GeogridSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geogrid = models.ForeignKey(Geogrid, on_delete=models.CASCADE)
-
-class DrainageProductSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    drainage_product = models.ForeignKey(DrainageProduct, on_delete=models.CASCADE)
 class BaseProduct(models.Model):
-    code = models.CharField(max_length=200, blank=True)
-    title = models.CharField(max_length=200, blank=False)
-    material = models.CharField(max_length=200, blank=True)
-    short_description = models.TextField(blank=True)
-    short_description.help_text = "This is a short concise and useful description of the product"
-    long_description = models.TextField(blank=True)
-    long_description.help_text = "This is for SEO purposes"
-    applications = models.ManyToManyField(Application, related_name="products")
-    notes = models.TextField(blank=True)
-    suppliers = models.CharField(max_length=200, blank=True)
-    suppliers.help_text = "Please comma separate names"
-    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    twentygp_cap = models.IntegerField(blank=True, null=True, default=0)
-    fortygp_cap = models.IntegerField(blank=True, null=True, default=0)
-    fortyhc_cap = models.IntegerField(blank=True, null=True, default=0)
-    moq = models.IntegerField(null=True, default=0)
-    alternative_names = models.CharField(max_length=200, blank=True)
-    alternative_names.help_text = "Please comma separate names"
-    packing_description = models.CharField(blank=True, max_length=200)
-    product_detail_geocell = models.OneToOneField(Geocell, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_geotextile = models.OneToOneField(Geotextile, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_gcl = models.OneToOneField(GCL, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_geogrid = models.OneToOneField(Geogrid, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_drainage = models.OneToOneField(DrainageProduct, on_delete=models.CASCADE, null=True, blank=True, editable=False)
+    code = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=200)
+    material = models.CharField(max_length=200, null=True, blank=True)
+    short_description = models.TextField(null=True, blank=True,
+                                         help_text="This is a short concise and useful description of the product")
+    long_description = models.TextField(null=True, blank=True, help_text="This is for SEO purposes")
+    notes = models.TextField(null=True, blank=True)
+    suppliers = models.CharField(max_length=200, null=True, blank=True, help_text="Please comma separate names")
+    unit_of_measure = models.CharField(max_length=200, choices=UNITS_OF_MEASURE, default="rolls")
+    twentygp_cap = models.IntegerField(null=True, blank=True, default=0)
+    fortygp_cap = models.IntegerField(null=True, blank=True, default=0)
+    fortyhc_cap = models.IntegerField(null=True, blank=True, default=0)
+    moq = models.IntegerField(null=True, blank=True, default=0)
+    alternative_names = models.CharField(max_length=200, null=True, blank=True, help_text="Please comma separate names")
+    packing_description = models.CharField(max_length=200, null=True, blank=True)
+    sub_categories = models.JSONField()
 
-class Price(models.Model):
-    type = models.CharField(choices=PRICE_TYPES, max_length=200, default='sale')
-    date = models.DateField()
-    qty = models.IntegerField
-    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    incoterm = models.CharField(choices=INCOTERMS, max_length=200, default='cif')
-    location = models.CharField(max_length=200, blank=True, null=True)
-    currency = models.CharField(choices=CURRENCIES, max_length=200, default='usd')
-    expiry = models.DateField(blank=True, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
+    class Meta:
+        abstract = True
 
 
-# File models
-class DatasheetFile(models.Model):
-    file = models.FileField(upload_to="products/datasheets/")
-    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='datasheets')
-class TestingFile(models.Model):
-    file = models.FileField(upload_to="products/testing_reports/")
-    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='testReports')
-class ImageFile(models.Model):
-    file = models.ImageField(upload_to="products/product_images/")
-    image = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
-    is_default = models.BooleanField(default=False)
+class Drainage(BaseProduct):
+    type = models.CharField(choices=DRAINAGE_TYPES, max_length=200, default="strip",
+                            help_text="FreDrain = Strip Drain, TerraDrain = Sheet Drain")
+    height = models.IntegerField(help_text="Unit of measure is mm")
+    roll_width = models.IntegerField(help_text="Unit of measure is mm")
+    double_cuspated = models.BooleanField(default=False)
+    applications = models.ManyToManyField(Application, related_name="drainage_products")
 
-    def save(self, *args, **kwargs):
-        # If this image is set as default, unset other default images for the product
-        if self.is_default:
-            ImageFile.objects.filter(base_product=self.base_product).update(is_default=False)
-        super().save(*args, **kwargs)
-
-class ProductResource(models.Model):
-    type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
-    file = models.FileField(upload_to="products/resources/")
-    description = models.TextField(blank=True)
-    base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='resources')
-    
     def __str__(self):
-        return f"{self.type} for {self.base_product.code}"
+        return "Type: {}, Height: {}x{}".format(self.type, self.height, self.roll_width)
 
 
+class GCL(BaseProduct):
+    density = models.IntegerField(help_text="Unit of measure is gsm")
+    roll_width = models.DecimalField(max_digits=4, decimal_places=2, help_text="Unit of measure is m")
+    roll_length = models.DecimalField(max_digits=5, decimal_places=2, help_text="Unit of measure is m")
+    bentonite_specs = models.CharField(max_length=200, null=True, blank=True)
+    applications = models.ManyToManyField(Application, related_name="gcl_products")
+
+    def __str__(self):
+        return "Code: {}, Density: {}, Roll Width: {}".format(self.code, self.density, self.roll_width)
+
+
+class GeoCell(BaseProduct):
+    height = models.IntegerField(help_text="Unit of measure is mm")
+    weld_spacing = models.IntegerField(help_text="Unit of measure is mm")
+    is_textured = models.BooleanField(default=False)
+    applications = models.ManyToManyField(Application, related_name="geo_cell_products")
+
+    def __str__(self):
+        return "Height: {}, Weld spacing: {}".format(self.height, self.weld_spacing)
+
+
+class GeoGrid(BaseProduct):
+    shape = models.CharField(choices=GEOGRID_TYPES, max_length=200)
+    strength_md = models.IntegerField(help_text="Strength in machine direction in kN")
+    strength_td = models.IntegerField(help_text="Strength in transverse direction in kN")
+    applications = models.ManyToManyField(Application, related_name="geo_grid_products")
+
+    def __str__(self):
+        return "Shape: {}, Strength: {}x{}".format(self.shape, self.strength_md, self.strength_td)
+
+
+class GeoTextile(BaseProduct):
+    density = models.IntegerField(help_text="Unit of measure is gsm")
+    roll_width = models.DecimalField(max_digits=4, decimal_places=2, help_text="Unit of measure is m")
+    roll_length = models.DecimalField(max_digits=5, decimal_places=2, help_text="Unit of measure is m")
+    type = models.CharField(choices=GEOTEXTILE_TYPES, max_length=200, default="woven")
+    applications = models.ManyToManyField(Application, related_name="geo_textile_products")
+    # FIXME: aperture_size do we need this?
+
+    def __str__(self):
+        return "Density: {}, Type: {}".format(self.density, self.type)
+
+
+class BasePrice(models.Model):
+    type = models.CharField(max_length=200, choices=PRICE_TYPES, default='sale')
+    date = models.DateField()
+    qty = models.IntegerField()
+    unit_of_measure = models.CharField(max_length=200, choices=UNITS_OF_MEASURE, default="rolls")
+    incoterm = models.CharField(max_length=200, choices=INCOTERMS, default="cif")
+    location = models.CharField(max_length=200, null=True, blank=True)
+    currency = models.CharField(max_length=200, choices=CURRENCIES, default='usd')
+    expiry = models.DateField(null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+
+    class Meta:
+        abstract = True
+
+
+class DrainagePrice(BasePrice):
+    product = models.ForeignKey("Drainage", on_delete=models.CASCADE, related_name="prices")
+
+    def __str__(self):
+        return "Title: {}, Code: {}, Type: {}". format(self.product.title, self.product.code, self.type)
+
+
+class GCLPrice(BasePrice):
+    product = models.ForeignKey("GCL", on_delete=models.CASCADE, related_name='prices')
+
+    def __str__(self):
+        return "Title: {}, Code: {}, Type: {}".format(self.product.title, self.product.code, self.type)
+
+
+class GeoCellPrice(BasePrice):
+    product = models.ForeignKey("GeoCell", on_delete=models.CASCADE, related_name='prices')
+
+    def __str__(self):
+        return "Title: {}, Code: {}, Type: {}".format(self.product.title, self.product.code, self.type)
+
+
+class GeoGridPrice(BasePrice):
+    product = models.ForeignKey("GeoGrid", on_delete=models.CASCADE, related_name='prices')
+
+    def __str__(self):
+        return "Title: {}, Code: {}, Type: {}".format(self.product.title, self.product.code, self.type)
+
+
+class GeoTextilePrice(BasePrice):
+    product = models.ForeignKey("GeoTextile", on_delete=models.CASCADE, related_name='prices')
+
+    def __str__(self):
+        return "Title: {}, Code: {}, Type: {}".format(self.product.title, self.product.code, self.type)
+
+
+class BaseProductImage(models.Model):
+    is_default = models.BooleanField(default=True)  # TODO: set all others as False, but do it in views or services
+
+    class Meta:
+        abstract = True
+
+
+class DrainageImage(BaseProductImage):
+    image = models.ImageField(upload_to="products/drainage/images/", max_length=255)
+    product = models.ForeignKey("Drainage", on_delete=models.CASCADE, related_name="images")
+
+    def __str__(self):
+        return "{}: {}".format(self.product.title, self.pk)
+
+
+class GCLImage(BaseProductImage):
+    image = models.ImageField(upload_to="products/gcl/images/", max_length=255)
+    product = models.ForeignKey("GCL", on_delete=models.CASCADE, related_name="images")
+
+    def __str__(self):
+        return "{}: {}".format(self.product.title, self.pk)
+
+
+class GeoCellImage(BaseProductImage):
+    image = models.ImageField(upload_to="products/geo_cell/images/", max_length=255)
+    product = models.ForeignKey("GeoCell", on_delete=models.CASCADE, related_name="images")
+
+    def __str__(self):
+        return "{}: {}".format(self.product.title, self.pk)
+
+
+class GeoGridImage(BaseProductImage):
+    image = models.ImageField(upload_to="products/geo_grid/images/", max_length=255)
+    product = models.ForeignKey("GeoGrid", on_delete=models.CASCADE, related_name="images")
+
+    def __str__(self):
+        return "{}: {}".format(self.product.title, self.pk)
+
+
+class GeoTextileImage(BaseProductImage):
+    image = models.ImageField(upload_to="products/geo_textile/images/", max_length=255)
+    product = models.ForeignKey("GeoTextile", on_delete=models.CASCADE, related_name="images")
+
+    def __str__(self):
+        return "{}: {}".format(self.product.title, self.pk)
+
+
+class BaseResource(models.Model):
+    type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
+    description = models.TextField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+class DrainageResource(BaseResource):
+    attachment = models.FileField(upload_to="products/drainage/resources/", max_length=255)
+    product = models.ForeignKey("Drainage", on_delete=models.CASCADE, related_name="resources")
+
+    def __str__(self):
+        return f"{self.type} for {self.product.code}"
+
+
+class GCLResource(BaseResource):
+    attachment = models.FileField(upload_to="products/gcl/resources/", max_length=255)
+    product = models.ForeignKey("GCL", on_delete=models.CASCADE, related_name="resources")
+
+    def __str__(self):
+        return f"{self.type} for {self.product.code}"
+
+
+class GeoCellResource(BaseResource):
+    attachment = models.FileField(upload_to="products/geo_cell/resources/", max_length=255)
+    product = models.ForeignKey("GeoCell", on_delete=models.CASCADE, related_name="resources")
+
+    def __str__(self):
+        return f"{self.type} for {self.product.code}"
+
+
+class GeoGridResource(BaseResource):
+    attachment = models.FileField(upload_to="products/geo_grid/resources/", max_length=255)
+    product = models.ForeignKey("GeoGrid", on_delete=models.CASCADE, related_name="resources")
+
+    def __str__(self):
+        return f"{self.type} for {self.product.code}"
+
+
+class GeoTextileResource(BaseResource):
+    attachment = models.FileField(upload_to="products/geo_textile/resources/", max_length=255)
+    product = models.ForeignKey("GeoTextile", on_delete=models.CASCADE, related_name="resources")
+
+    def __str__(self):
+        return f"{self.type} for {self.product.code}"
