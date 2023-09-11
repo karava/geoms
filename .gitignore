@@ -1,3 +1,10 @@
 db.sqlite3
 *.pyc
 .env
+.venv
+.idea
+staticfiles/*
+media/*
+!media/.gitkeep
+products/drainage
+products/gcl
