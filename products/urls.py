@@ -12,5 +12,5 @@ router.register(r'geogrid', products_views.GeoGridViewSet)
 router.register(r'geotextile', products_views.GeoTextileViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'storages',
     'nested_admin',
     'rest_framework',
+    'django_filters',
     'apis',
     'products',
 ]
@@ -148,11 +149,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = '/products/api'
+
 # Media files storage
 if DEVELOPMENT_MODE:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 else:
     DEFAULT_FILE_STORAGE = 'gems.storage_backends.MediaStorage'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 # Used to authenticate with S3
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
