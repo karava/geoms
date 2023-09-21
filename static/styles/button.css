@@ -1,0 +1,45 @@
+.primary-btn {
+    display: inline-flex;
+    border-radius: 2px;
+    background: #FA6400;
+    padding: 12px 32px;
+    color: #FFF;
+    font-family: 'Instrument Sans';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.primary-btn:hover {
+    background: #EA5E00;
+}
+
+.secondary-btn {
+    display: inline-flex;
+    border-radius: 2px;
+    padding: 12px 32px;
+    border: 1px solid #FA6400;
+    background: white;
+    color: #FA6400;
+    font-family: 'Instrument Sans';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.secondary-btn:hover {
+    background: #F9F9F9;
+}
+
+.link {
+    color: #212121;
+    font-family: 'Instrument Sans';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration-line: underline;
+}
+
+.link:hover {
+    color: #FF6700;
+}
