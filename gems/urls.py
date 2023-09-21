@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('apis/', include("apis.urls")),
     # static pages
-    path('', TemplateView.as_view(template_name='static_pages/index.html'), name='home'),
+    path('', TemplateView.as_view(template_name='static_pages/index.html', extra_context=dict(page_title='Home')), name='home'),
     path('products/', include('products.urls')),
 ]

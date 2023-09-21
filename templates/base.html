@@ -17,8 +17,9 @@
   <link rel="stylesheet" href="{% static 'styles/button.css' %}">
   <link rel="stylesheet" href="{% static 'styles/normalize.css' %}">
   <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/main.css' %}">
 
-  <title>Hello, world!</title>
+  <title>{{ page_title }}</title>
 </head>
 
 <body>
@@ -61,7 +62,7 @@
                 <img src="{% static 'assets/logo.svg' %}" width="107px" alt="Logo">
               </a>
               <div class="d-flex">
-                <button class="d-block d-lg-none btn p-0">
+                <button class="d-block d-lg-none btn p-0 search-panel-toggle">
                   <img src="{% static 'assets/icons/black-search.svg' %}" alt="Search">
                 </button>
                 <div class="v-divider d-block d-lg-none"></div>
@@ -83,8 +84,12 @@
               </div>
               <ul class="navbar-nav me-lg-auto px-3 px-lg-0">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-none d-lg-block" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Products
+                  </a>
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-block d-lg-none" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     Products
                   </a>
                   <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
@@ -140,8 +145,12 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-none d-lg-block" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Applications
+                  </a>
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-block d-lg-none" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     Applications
                   </a>
                   <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
@@ -230,8 +239,12 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-none d-lg-block" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    About Us
+                  </a>
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-block d-lg-none" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     About Us
                   </a>
                   <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
@@ -263,8 +276,12 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-none d-lg-block" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Resources
+                  </a>
+                  <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium d-block d-lg-none" href="#"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     Resources
                   </a>
                   <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
@@ -297,9 +314,9 @@
                 </li>
               </ul>
               <div class="d-flex align-items-center px-3 px-lg-0 nav-actions">
-                <a href="/search" class="d-none d-lg-block">
+                <button type="button" class="d-none d-lg-block btn p-0 search-panel-toggle">
                   <img src="{% static 'assets/icons/search.svg' %}" alt="Search">
-                </a>
+                </button>
                 <div class="v-divider d-none d-lg-block"></div>
                 <button class="secondary-btn" type="button">Get Enquiry</button>
               </div>
@@ -312,6 +329,30 @@
             </div>
           </div>
         </nav>
+      </div>
+      <div class="search-panel w-100">
+        <div class="container">
+          <div class="row searh-panel-content position-relative">
+            <button type="button" class="btn p-0 search-panel-close">
+              <img src="{% static 'assets/icons/close.svg' %}" width="24px" height="24px" alt="Close">
+            </button>
+            <div class="col-12 col-lg-8 offset-lg-2">
+              <div class="search-input d-flex align-items-center mb-4">
+                <img src="{% static 'assets/icons/black-search.svg' %}" alt="search">
+                <input type="text" class="neutral-600" placeholder="Search Anything..." />
+                <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow">
+              </div>
+              <p class="fw-semibold neutral-600 mt-4 mb-0 typo-caption-2">Most Popular</p>
+              <div class="chip-wrapper">
+                <button type="button" class="btn neutral-600 typo-body-2 fw-medium chip">Geogrids</button>
+                <button type="button" class="btn neutral-600 typo-body-2 fw-medium chip">Geocell</button>
+                <button type="button" class="btn neutral-600 typo-body-2 fw-medium chip">Clay liners</button>
+                <button type="button" class="btn neutral-600 typo-body-2 fw-medium chip">Geotextiles</button>
+                <button type="button" class="btn neutral-600 typo-body-2 fw-medium chip">Drainage Systems</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   </main>

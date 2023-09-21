@@ -93,6 +93,11 @@ a {
     line-height: 15px;
 }
 
+.typo-caption-2 {
+    font-size: 14px;
+    line-height: 17px;
+}
+
 @media (min-width: 768px) {
     .typo-heading-1 {
         font-size: 55px;

@@ -4,11 +4,15 @@ const dropdownCloseButtons = document.querySelectorAll(
   ".mobile-dropdown-close"
 );
 
-dropdownCloseButtons.forEach(element => {
+dropdownCloseButtons.forEach((element) => {
   element.addEventListener("click", function () {
-    this.parentElement.parentElement.parentElement
-      .querySelector(".dropdown-toggle")
-      .click();
+    const dropdownToggleElements =
+      this.parentElement.parentElement.parentElement.querySelectorAll(
+        ".dropdown-toggle"
+      );
+    dropdownToggleElements.forEach((dropdownToggleElement) => {
+      dropdownToggleElement.click();
+    });
   });
 });
 
@@ -16,10 +20,36 @@ const navbarCloseButtons = document.querySelectorAll(
   ".dropdown-menu .navbar-toggler"
 );
 
-navbarCloseButtons.forEach(element => {
+navbarCloseButtons.forEach((element) => {
   element.addEventListener("click", function () {
-    this.parentElement.parentElement.parentElement
-      .querySelector(".dropdown-toggle")
-      .click();
+    const dropdownToggleElements =
+      this.parentElement.parentElement.parentElement.querySelectorAll(
+        ".dropdown-toggle"
+      );
+    dropdownToggleElements.forEach((dropdownToggleElement) => {
+      dropdownToggleElement.click();
+    });
   });
+});
+
+/* Search panel handler */
+
+const searchPanelElement = document.querySelector(".search-panel");
+
+const searchPanelToggleElements = document.querySelectorAll(
+  ".search-panel-toggle"
+);
+
+searchPanelToggleElements.forEach((element) => {
+  element.addEventListener("click", function () {
+    searchPanelElement.classList.add("show");
+  });
+});
+
+const searchPanelCloseButton = document.querySelector(
+  ".search-panel-close"
+);
+
+searchPanelCloseButton.addEventListener("click", function () {
+  searchPanelElement.classList.remove("show");
 });

@@ -1,0 +1,129 @@
+/* header */
+.top-contact {
+    border-bottom: 1px solid #EBEBEB;
+}
+
+header .logo.navbar-brand {
+    margin-right: 4px;
+}
+
+header .navbar {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar-nav .dropdown-menu .dropdown-item:focus {
+    color: #FF6700!important;
+    background: none;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+    padding: 8px 0;
+}
+
+.navbar-nav .dropdown-menu {
+    min-width: 276px;
+    border: none;
+}
+
+header .v-divider {
+    height: 25px;
+    margin: 0 12px;
+}
+
+.search-panel {
+    height: auto;
+    max-height: 0;
+    transition: max-height ease .5s;
+    overflow: hidden;
+    position: absolute;
+    background: #F9F9F9;
+}
+
+.search-panel.show {
+    max-height: 500px;
+    transition: max-height ease .5s;
+    overflow: auto;
+}
+
+.search-panel .searh-panel-content {
+    padding: 28px 0 36px;
+}
+
+.search-panel .search-input {
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.search-panel .search-input input {
+    appearance: none;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 150%;
+    outline: none;
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 12px;
+}
+
+.search-panel .search-input input::placeholder {
+    color: #646464;
+}
+
+.search-panel .chip-wrapper {
+    margin-top: 16px;
+}
+
+.search-panel-close {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    width: fit-content;
+}
+
+@media (max-width: 991px) {
+    header .navbar {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    header .dropdown-toggle::after {
+        background-image: url('../assets/icons/arrow-right.svg');
+        width: 32px;
+        height: 32px;
+    }
+
+    header .dropdown-toggle:hover::after {
+        content: none;
+    }
+
+    header .nav-link.dropdown-toggle,
+    header .dropdown-menu .dropdown-item {
+        font-size: 24px;
+        line-height: 29px;
+        padding: 18px 0!important;
+        border-bottom: 1px solid #EBEBEB;
+    }
+
+    header .nav-link.dropdown-toggle::after {
+        top: 17px;
+    }
+
+    header .navbar-nav .dropdown-menu.show {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .search-panel .search-input input {
+        font-size: 20px;
+    }
+    
+    .search-panel .searh-panel-content {
+        padding-top: 56px;
+        padding-bottom: 76px;
+    }
+}
