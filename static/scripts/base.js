@@ -46,10 +46,14 @@ searchPanelToggleElements.forEach((element) => {
   });
 });
 
-const searchPanelCloseButton = document.querySelector(
-  ".search-panel-close"
-);
+const searchPanelCloseButton = document.querySelector(".search-panel-close");
 
 searchPanelCloseButton.addEventListener("click", function () {
+  searchPanelElement.classList.remove("show");
+});
+
+const menuTogglerElement = document.querySelector(".menu-toggler");
+
+menuTogglerElement.addEventListener("click", function () {
   searchPanelElement.classList.remove("show");
 });

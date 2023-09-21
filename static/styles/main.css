@@ -127,3 +127,29 @@ header .v-divider {
         padding-bottom: 76px;
     }
 }
+
+/* footer */
+.footer-link-group ul {
+    list-style-type: none;
+}
+
+.footer-link-group a {
+    color: #646464;
+}
+
+.footer-link-group a:hover {
+    color: #FA6400;
+}
+
+/* content sections */
+.text-section-1 {
+    padding-top: 40px;
+    padding-bottom: 75px;
+}
+
+@media (min-width: 992px) {
+    .text-section-1 {
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
+}
