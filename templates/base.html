@@ -60,179 +60,254 @@
               <a class="navbar-brand logo d-lg-none d-block" href="#">
                 <img src="{% static 'assets/logo.svg' %}" width="107px" alt="Logo">
               </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <img src="{% static 'assets/icons/menu.svg' %}" alt="menu">
-              </button>
+              <div class="d-flex">
+                <button class="d-block d-lg-none btn p-0">
+                  <img src="{% static 'assets/icons/black-search.svg' %}" alt="Search">
+                </button>
+                <div class="v-divider d-block d-lg-none"></div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <img src="{% static 'assets/icons/menu.svg' %}" alt="menu">
+                </button>
+              </div>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <div class="d-flex d-lg-none px-3 py-3 align-items-center justify-content-between">
                 <p class="neutral-600 typo-body-2 fw-semibold mb-0">Leading Providers of Geosynthetics</p>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
                   <img src="{% static 'assets/icons/close.svg' %}" alt="close">
                 </button>
               </div>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-3 px-lg-0">
+              <ul class="navbar-nav me-lg-auto px-3 px-lg-0">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     Products
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Geocell
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Geogrids
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight"></a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Geotextiles
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Clay Liners
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Drainage Systems
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                  </ul>
+                  <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
+                    <div class="d-flex d-lg-none py-1 align-items-center justify-content-between">
+                      <button type="button" class="mobile-dropdown-close" aria-label="Back">
+                        <img src="{% static 'assets/icons/arrow-left.svg' %}" alt="back">
+                        <span class="neutral-600 typo-body-2 fw-semibold">Back</span>
+                      </button>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="{% static 'assets/icons/close.svg' %}" alt="close">
+                      </button>
+                    </div>
+                    <p class="d-block d-lg-none neutral-600 fw-semibold typo-heading-7 dropdown-menu-headline"><span
+                        class="orange-500">//</span>&nbsp;Products</p>
+                    <ul>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Geocell
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Geogrids
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight"></a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Geotextiles
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Clay Liners
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Drainage Systems
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     Applications
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Civil Construction
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Drainage Solutions
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Erosion Control
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        GCL Lining Solutions
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Landscaping
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Mining
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">Rail<img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight"></a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Renewables
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">
-                        Tunnel Drainage
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">Waterways/Coastal
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
-                      </a>
-                    </li>
-                  </ul>
+                  <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
+                    <div class="d-flex d-lg-none py-1 align-items-center justify-content-between">
+                      <button type="button" class="mobile-dropdown-close" aria-label="Back">
+                        <img src="{% static 'assets/icons/arrow-left.svg' %}" alt="back">
+                        <span class="neutral-600 typo-body-2 fw-semibold">Back</span>
+                      </button>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="{% static 'assets/icons/close.svg' %}" alt="close">
+                      </button>
+                    </div>
+                    <p class="d-block d-lg-none neutral-600 fw-semibold typo-heading-7 dropdown-menu-headline"><span
+                        class="orange-500">//</span>&nbsp;Applications</p>
+                    <ul>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Civil Construction
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Drainage Solutions
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Erosion Control
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          GCL Lining Solutions
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Landscaping
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Mining
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">Rail<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
+                            alt="ArrowTopRight"></a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Renewables
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">
+                          Tunnel Drainage
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">Waterways/Coastal
+                          <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="ArrowTopRight">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     About Us
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">About Us<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
-                          alt="ArrowTopRight"></a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">Capabilities Statement<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
-                          alt="ArrowTopRight"></a>
-                    </li>
-                  </ul>
+                  <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
+                    <div class="d-flex d-lg-none py-1 align-items-center justify-content-between">
+                      <button type="button" class="mobile-dropdown-close" aria-label="Back">
+                        <img src="{% static 'assets/icons/arrow-left.svg' %}" alt="back">
+                        <span class="neutral-600 typo-body-2 fw-semibold">Back</span>
+                      </button>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="{% static 'assets/icons/close.svg' %}" alt="close">
+                      </button>
+                    </div>
+                    <p class="d-block d-lg-none neutral-600 fw-semibold typo-heading-7 dropdown-menu-headline"><span
+                        class="orange-500">//</span>&nbsp;About Us</p>
+                    <ul>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">About Us<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
+                            alt="ArrowTopRight"></a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">Capabilities Statement<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
+                            alt="ArrowTopRight"></a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle neutral-600 typo-body-2 fw-medium" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                     Resources
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">Case Studies<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
-                          alt="ArrowTopRight"></a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">Technical Guides<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
-                          alt="ArrowTopRight"></a>
-                    </li>
-                  </ul>
+                  <div class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
+                    <div class="d-flex d-lg-none py-1 align-items-center justify-content-between">
+                      <button type="button" class="mobile-dropdown-close" aria-label="Back">
+                        <img src="{% static 'assets/icons/arrow-left.svg' %}" alt="back">
+                        <span class="neutral-600 typo-body-2 fw-semibold">Back</span>
+                      </button>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="{% static 'assets/icons/close.svg' %}" alt="close">
+                      </button>
+                    </div>
+                    <p class="d-block d-lg-none neutral-600 fw-semibold typo-heading-7 dropdown-menu-headline"><span
+                        class="orange-500">//</span>&nbsp;Resources</p>
+                    <ul>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">Case Studies<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
+                            alt="ArrowTopRight"></a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
+                          href="#">Technical Guides<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
+                            alt="ArrowTopRight"></a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
               </ul>
-              <div class="d-flex align-items-center">
-                <a href="/search">
+              <div class="d-flex align-items-center px-3 px-lg-0 nav-actions">
+                <a href="/search" class="d-none d-lg-block">
                   <img src="{% static 'assets/icons/search.svg' %}" alt="Search">
                 </a>
-                <span class="v-divider"></span>
+                <div class="v-divider d-none d-lg-block"></div>
                 <button class="secondary-btn" type="button">Get Enquiry</button>
+              </div>
+              <div class="px-3 px-lg-0 mb-4 mt-auto d-block d-lg-none">
+                <a href="tel:0386400958" class="text-decoration-none d-inline-flex align-items-center">
+                  <img src="{% static 'assets/icons/phone.svg' %}" width="32px" height="32px" class="me-2" alt="phone">
+                  <span class="neutral-600 fw-semibold typo-heading-6">03 8640 0958</span>
+                </a>
               </div>
             </div>
           </div>
@@ -246,6 +321,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <script src="{% static 'scripts/base.js' %}"></script>
 
 </body>
 

@@ -1,5 +1,7 @@
 .primary-btn {
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 2px;
     background: #FA6400;
     padding: 12px 32px;
@@ -16,6 +18,8 @@
 
 .secondary-btn {
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 2px;
     padding: 12px 32px;
     border: 1px solid #FA6400;
