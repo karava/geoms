@@ -175,8 +175,9 @@ class Price(models.Model):
 # File models
 class ImageFile(models.Model):
     file = models.ImageField(upload_to="products/product_images/")
-    image = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
     is_default = models.BooleanField(default=False)
+    is_for_website = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         # If this image is set as default, unset other default images for the product
