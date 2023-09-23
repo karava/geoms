@@ -22,5 +22,6 @@ urlpatterns = [
     path('apis/', include("apis.urls")),
     # static pages
     path('', TemplateView.as_view(template_name='static_pages/index.html', extra_context=dict(page_title='Home')), name='home'),
+    path('aboutus', TemplateView.as_view(template_name='static_pages/aboutus.html', extra_context=dict(page_title='About Us')), name='aboutus'),
     path('products/', include('products.urls')),
 ]

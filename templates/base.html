@@ -54,10 +54,10 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="w-100 d-flex flex-column flex-lg-row">
           <div class="d-flex align-items-center justify-content-between">
-            <a class="navbar-brand logo d-lg-block d-none" href="#">
+            <a class="navbar-brand logo d-lg-block d-none" href="/">
               <img src="{% static 'assets/logo.svg' %}" width="143px" alt="Logo">
             </a>
-            <a class="navbar-brand logo d-lg-none d-block" href="#">
+            <a class="navbar-brand logo d-lg-none d-block" href="/">
               <img src="{% static 'assets/logo.svg' %}" width="107px" alt="Logo">
             </a>
             <div class="d-flex">
@@ -262,7 +262,7 @@
                   <ul>
                     <li>
                       <a class="dropdown-item neutral-600 typo-body-2 fw-semibold d-inline-flex align-items-center justify-content-between"
-                        href="#">About Us<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
+                        href="/aboutus">About Us<img src="{% static 'assets/icons/arrow-top-right.svg' %}"
                           alt="ArrowTopRight"></a>
                     </li>
                     <li>
@@ -402,7 +402,7 @@
             <div class="footer-link-group-content">
               <p class="neutral-600 fw-semibold footer-link-group--headline">About Us</p>
               <ul class="ps-0">
-                <li><a href="#" class="text-decoration-none">About</a></li>
+                <li><a href="/aboutus" class="text-decoration-none">About</a></li>
                 <li><a href="#" class="text-decoration-none">Capabilities Statement</a></li>
               </ul>
               <p class="neutral-600 fw-semibold footer-link-group--headline d-none d-lg-block">Resources</p>

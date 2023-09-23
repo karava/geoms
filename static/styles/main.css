@@ -254,3 +254,125 @@ header .v-divider {
         padding-bottom: 60px;
     }
 }
+
+/* text-image-section-1 */
+.text-image-section-1 {
+    position: relative;
+}
+
+.text-image-section-1 .image-bg {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.text-image-section-1 .headline {
+    line-height: 150%;
+}
+
+.text-image-section-1 .copy {
+    margin-top: 12px;
+}
+
+.text-image-section-1 .card {
+    border-radius: 6px;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 60px 0px rgba(42, 51, 102, 0.06);
+    padding: 20px 16px 40px;
+    border: none;
+    margin-top: -59px;
+    min-height: 444px;
+}
+
+@media (min-width: 992px) {
+    .text-image-section-1 {
+        position: unset;
+    }
+
+    .text-image-section-1 .text-image-wrapper {
+        position: relative;
+        padding: 48px 0;
+    }
+
+    .text-image-section-1 .image-bg {
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .text-image-section-1.right-content .image-bg {
+        left: 0;
+        right: unset;
+    }
+
+    .text-image-section-1 .image-bg img {
+        height: 100%;
+    }
+
+    .text-image-section-1 .card {
+        width: 52.5%;
+        margin-top: 0;
+        padding: 60px 40px 98px;
+    }
+
+    .text-image-section-1.right-content .card {
+        margin-left: auto;
+    }
+
+    .text-image-section-1 .headline {
+        line-height: 125%;
+    }
+
+    .text-image-section-1 .copy {
+        margin-top: 16px;
+    }
+}
+
+/* icon-text-card-section-1 */
+.icon-text-card-section-1 {
+    padding: 48px 0;
+    background: #F9F9F9;
+}
+
+.icon-text-card-section-1 .card-wrapper {
+    padding: 12px 0;
+    grid-column: 1 / -1;
+}
+
+.icon-text-card-section-1 .icon {
+    background-color: #FA6400;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+.icon-text-card-section-1 .card {
+    padding: 20px 20px 40px;
+    border-radius: 6px;
+    border: none;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
+}
+
+.icon-text-card-section-1 .headline {
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+@media (min-width: 992px) {
+    .icon-text-card-section-1 .card {
+        height: 100%;
+    }
+
+    .icon-text-card-section-1 {
+        padding: 88px 0;
+        background: #F9F9F9;
+    }
+
+    .icon-text-card-section-1 .card-wrapper {
+        grid-column: span 4 / span 4;
+    }
+}

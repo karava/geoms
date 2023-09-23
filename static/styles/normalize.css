@@ -38,11 +38,6 @@
     left: calc(50% - 10px);
 }
 
-.v-divider {
-    width: 1px;
-    background-color: #CCC;
-}
-
 .navbar-toggler {
     padding: 0;
     border: none;

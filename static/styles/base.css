@@ -131,6 +131,14 @@ body {
     grid-column-end: auto;
 }
 
+.margin-bottom-1 {
+    margin-bottom: 60px;
+}
+
+.margin-bottom-2 {
+    margin-bottom: 60px;
+}
+
 .devGrid {
     position: fixed;
     left: 0;
@@ -171,9 +179,34 @@ body {
     margin: 4px;
 }
 
+.v-divider {
+    width: 1px;
+    background-color: #CCC;
+}
+
+.h-divider {
+    width: calc(100% - 8px);
+    height: 1px;
+    margin: 0 4px;
+    background-color: #EBEBEB;
+    margin-bottom: 35px;
+}
+
 @media (min-width: 768px) {
     .default-grid {
         grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .h-divider {
+        margin-bottom: 60px;
+    }
+
+    .margin-bottom-1 {
+        margin-bottom: 97px;
+    }
+    
+    .margin-bottom-2 {
+        margin-bottom: 100px;
     }
 }
 
