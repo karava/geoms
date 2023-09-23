@@ -1,14 +1,8 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, DatasheetFile, TestingFile, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, GeocellSubcategory, GCLSubcategory, GeotextileSubcategory, GeogridSubcategory, DrainageProductSubcategory, ProductResource, Application
+from .models import Geocell, BaseProduct, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, GeocellSubcategory, GCLSubcategory, GeotextileSubcategory, GeogridSubcategory, DrainageProductSubcategory, ProductResource, Application
 import nested_admin
 
 # Inline Inlines
-class DatasheetFileInLine(nested_admin.NestedStackedInline):
-    model = DatasheetFile
-    extra = 1
-class TestingFileInLine(nested_admin.NestedStackedInline):
-    model = TestingFile
-    extra = 1
 class ImageFileInLine(nested_admin.NestedStackedInline):
     model = ImageFile
     extra = 1
@@ -24,7 +18,7 @@ class ProductResourceInline(nested_admin.NestedStackedInline):
 class BaseProductInline(nested_admin.NestedStackedInline):
     model = BaseProduct
     extra = 1
-    inlines = [DatasheetFileInLine, TestingFileInLine, ImageFileInLine, PriceInLine, ProductResourceInline]
+    inlines = [ImageFileInLine, PriceInLine, ProductResourceInline]
     filter_horizontal = ('applications',)
 
 # Subcategory Inlines

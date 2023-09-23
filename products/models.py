@@ -26,19 +26,24 @@ PRICE_TYPES = [
     ('rrp', 'RRP'),
 ]
 
-GEOTEXTILE_TYPES = [
-    ('woven', 'Woven'),
-    ('nonwoven', 'Non-woven'),
+DRAINAGE_SUB_CATEGORIES = [
+    ('strip', 'Strip Drain'),
+    ('sheet', 'Sheet Drain'),
 ]
 
-GEOGRID_TYPES = [
+GCL_SUB_CATEGORIES = [
+    ('powder', 'Powder'),
+    ('granules', 'Granules')
+]
+
+GEOGRID_SUB_CATEGORIES = [
     ('BI', 'BIAXIAL'),
     ('TRI', 'TRIAXIAL'),
 ]
 
-DRAINAGE_TYPES = [
-    ('strip', 'Strip Drain'),
-    ('sheet', 'Sheet Drain'),
+GEOTEXTILE_SUB_CATEGORIES = [
+    ('woven', 'Woven'),
+    ('nonwoven', 'Non-woven'),
 ]
 
 RESOURCE_TYPES = [
@@ -87,24 +92,23 @@ class Geotextile(models.Model):
     roll_width.help_text = "Unit of measure is m"
     roll_length = DecimalField(max_digits=5, decimal_places=2)
     roll_length.help_text = "Unit of measure is m"
-    type = models.CharField(choices=GEOTEXTILE_TYPES, max_length=200, default='woven')
+    sub_category = models.CharField(choices=GEOTEXTILE_SUB_CATEGORIES, max_length=200)
     # aperture_size do we need this?
 
     def __str__(self):
-        return ("Density: " + str(self.density) + ", Type: " + self.type)
+        return ("Density: " + str(self.density) + ", Type: " + self.sub_cat)
 class Geogrid(models.Model):
-    shape = models.CharField(choices=GEOGRID_TYPES, max_length=200) 
+    sub_category = models.CharField(choices=GEOGRID_SUB_CATEGORIES, max_length=200) 
     strength_md = models.IntegerField()
     strength_md.help_text = "Strength in machine direction in kN"
     strength_td = models.IntegerField()
     strength_td.help_text = "Strength in transverse direction in kN"
 
     def __str__(self):
-        return ("Shape: " + self.shape + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
+        return ("Shape: " + self.sub_category + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
 
 class DrainageProduct(models.Model):
-    type = models.CharField(choices=DRAINAGE_TYPES, max_length=200, default='strip')
-    type.help_text = "FreDrain = Strip Drain, TerraDrain = Sheet Drain"
+    sub_category = models.CharField(choices=DRAINAGE_SUB_CATEGORIES, max_length=200)
     height = models.IntegerField()
     height.help_text = "Unit of measure is mm"
     roll_width = models.IntegerField()
@@ -113,7 +117,7 @@ class DrainageProduct(models.Model):
     DrainageProductSubcategory = models.ManyToManyField('DrainageProductSubcategory')
 
     def __str__(self):
-        return("Type: " + self.type + ", Height: " + str(self.height) + "x" + str(self.roll_width))
+        return("Type: " + self.sub_category + ", Height: " + str(self.height) + "x" + str(self.roll_width))
 
 class GeocellSubcategory(models.Model):
     name = models.CharField(max_length=255)
