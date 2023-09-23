@@ -132,6 +132,7 @@ class GeogridSubcategory(models.Model):
 class DrainageProductSubcategory(models.Model):
     name = models.CharField(max_length=255)
     drainage_product = models.ForeignKey(DrainageProduct, on_delete=models.CASCADE)
+
 class BaseProduct(models.Model):
     code = models.CharField(max_length=200, blank=True)
     title = models.CharField(max_length=200, blank=False)
@@ -172,12 +173,6 @@ class Price(models.Model):
 
 
 # File models
-class DatasheetFile(models.Model):
-    file = models.FileField(upload_to="products/datasheets/")
-    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='datasheets')
-class TestingFile(models.Model):
-    file = models.FileField(upload_to="products/testing_reports/")
-    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='testReports')
 class ImageFile(models.Model):
     file = models.ImageField(upload_to="products/product_images/")
     image = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
