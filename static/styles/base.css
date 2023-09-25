@@ -132,11 +132,11 @@ body {
 }
 
 .margin-bottom-1 {
-    margin-bottom: 60px;
+    margin-bottom: 60px!important;
 }
 
 .margin-bottom-2 {
-    margin-bottom: 60px;
+    margin-bottom: 60px!important;
 }
 
 .devGrid {
@@ -202,11 +202,11 @@ body {
     }
 
     .margin-bottom-1 {
-        margin-bottom: 97px;
+        margin-bottom: 97px!important;
     }
     
     .margin-bottom-2 {
-        margin-bottom: 100px;
+        margin-bottom: 100px!important;
     }
 }
 
