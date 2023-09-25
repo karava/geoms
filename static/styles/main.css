@@ -586,3 +586,30 @@ header .v-divider {
         height: 40px;
     }
 }
+
+/* hero-section-1 */
+.hero-section-1 {
+    padding-top: 107px;
+    padding-bottom: 107px;
+    background: linear-gradient(0deg, rgba(5, 8, 17, 0.46) 0%, rgba(5, 8, 17, 0.46) 100%), url('../assets/images/about-hero.jpg'), lightgray 50% / cover no-repeat;
+    background-position: center;
+    background-position-x: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hero-section-1 .eyebrow {
+    color: white;
+}
+
+.hero-section-1 .headline {
+    color: white;
+}
+
+@media (min-width: 992px) {
+    .hero-section-1 {
+        padding-top: 128px;
+        padding-bottom: 128px;
+        background-position: center;
+    }
+}
