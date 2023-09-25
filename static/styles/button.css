@@ -48,8 +48,22 @@
     font-weight: 600;
     line-height: 20px;
     text-decoration-line: underline;
+    display: inline-flex;
+    align-items: center;
 }
 
 .link:hover {
     color: #FF6700;
+}
+
+.link .icon {
+    width: 24px;
+    height: 24px;
+    background-color: #FF6700;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
 }

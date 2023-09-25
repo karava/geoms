@@ -61,6 +61,10 @@
     margin-top: 17px;
 }
 
+.lh-lg-base {
+    line-height: 150%;
+}
+
 @media (max-width: 991px) {
     header .navbar-collapse {
         position: fixed;
@@ -84,5 +88,13 @@
 
     .navbar-nav .dropdown-menu {
         margin-top: 0;
+    }
+
+    .lh-lg-base {
+        line-height: normal;
+    }
+
+    .lh-sm-base {
+        line-height: 150%!important;
     }
 }
