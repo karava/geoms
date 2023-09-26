@@ -3,6 +3,30 @@ from django.db.models import base
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
 
+# Functions
+def product_image_upload_path(instance, filename):
+    # Get the related BaseProduct instance
+    product = instance.product
+
+    # Determine the product's specific type
+    product_type = None
+    if product.product_detail_geocell:
+        product_type = 'geocell'
+    elif product.product_detail_geotextile:
+        product_type = 'geotextile'
+    elif product.product_detail_gcl:
+        product_type = 'gcl'
+    elif product.product_detail_geogrid:
+        product_type = 'geogrid'
+    elif product.product_detail_drainage:
+        product_type = 'drainageproducts'
+
+    # If the product type is determined, construct the upload path
+    if product_type:
+        return f"products/{product_type}/product_images/{filename}"
+    # Default path if product type can't be determined
+    return f"products/default/product_images/{filename}"
+
 # Choices
 UNITS_OF_MEASURE = [
     ('rolls', 'Rolls'),
@@ -178,7 +202,8 @@ class Price(models.Model):
 
 # File models
 class ImageFile(models.Model):
-    file = models.ImageField(upload_to="products/product_images/")
+    # file = models.ImageField(upload_to="products/product_images/")
+    file = models.ImageField(upload_to=product_image_upload_path)
     product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
     is_default = models.BooleanField(default=False)
     is_for_website = models.BooleanField(default=False)
@@ -186,7 +211,7 @@ class ImageFile(models.Model):
     def save(self, *args, **kwargs):
         # If this image is set as default, unset other default images for the product
         if self.is_default:
-            ImageFile.objects.filter(base_product=self.base_product).update(is_default=False)
+            ImageFile.objects.filter(product=self.product).update(is_default=False)
         super().save(*args, **kwargs)
 
 class ProductResource(models.Model):
