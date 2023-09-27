@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('apis/', include("apis.urls"))
+    path('apis/', include("apis.urls")),
+    # static pages
+    path('', TemplateView.as_view(template_name='static_pages/index.html', extra_context=dict(page_title='Home')), name='home'),
+    path('aboutus', TemplateView.as_view(template_name='static_pages/aboutus.html', extra_context=dict(page_title='About Us')), name='aboutus'),
+    path('capabilities', TemplateView.as_view(template_name='static_pages/capabilities_statement.html', extra_context=dict(page_title='Capabilities Statement')), name='capabilities_statement'),
+    path('products/', include('products.urls')),
 ]
