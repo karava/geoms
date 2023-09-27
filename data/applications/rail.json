@@ -1,0 +1,84 @@
+{
+  "title": "Rail",
+  "thumbnail": "rail_thumbnail.png",
+  "Header_title1": "Rail Infrastructure Solutions by Infratex",
+  "Header_title2": "Reinforcing the Backbone of Transportation",
+  
+  "What_is_title1": "What Is",
+  "What_is_title2": "The Importance of Geosynthetics in Rail Infrastructure",
+  "What_is_text": "Railway systems require specialized attention to manage water flow, soil stabilization, and environmental impacts. Infratex’s suite of geosynthetic products are engineered to meet these diverse needs, thereby ensuring the durability and efficiency of rail networks.",
+
+  "Overview_title1": "Geosynthetics in Rail",
+  "Overview_title2": "Tackling Rail Infrastructure Challenges",
+  "Overview_text": "The rail industry forms an integral part of any nation's transportation network, necessitating robust, reliable, and sustainable infrastructure solutions. Infratex is proud to offer a portfolio of innovative geosynthetic products—InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell—designed to meet the specific challenges of rail infrastructure.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraStrip", "InfraSheet"],
+      "headline": "Drainage for Rail Beds and Embankments",
+      "copy": "Water management is crucial in rail infrastructure to prevent soil erosion and structural damage. InfraStrip and InfraSheet excel in fast and effective drainage, offering an ideal solution for maintaining the integrity of rail beds and embankments.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraDrain"],
+      "headline": "Managing Tunnel Drainage in Rail Systems",
+      "copy": "Rail networks often include tunnels, which present unique drainage issues. Our InfraDrain system specializes in managing water flow effectively within these tunnels, minimizing the risks associated with water accumulation and soil instability.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraThread", "InfraGrid"],
+      "headline": "Enhancing the Strength of Rail Foundations",
+      "copy": "Railway foundations require strong structural reinforcement. InfraThread geotextiles and InfraGrid geogrids offer exceptional soil stabilization and reinforcement capabilities, ensuring the robustness and long-term performance of rail foundations.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraGrid"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraClay", "InfraCell"],
+      "headline": "Sustainable Erosion Control and Environmental Safety",
+      "copy": "Protecting the environment and controlling erosion are key considerations in rail infrastructure. InfraClay geosynthetic clay liners act as natural barriers for sediment control, while InfraCell Geocells provide excellent erosion control, especially on slopes and embankments.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraClay"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraCell"
+        }
+      ]
+    }
+  ],
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Why Choose Infratex for Your Rail Infrastructure Solutions",
+  "Why_text": "Infratex stands out as a provider of tailored, multi-product solutions for the rail industry. Our comprehensive approach ensures both high performance and environmental sustainability, making us the preferred choice for those in search of dependable rail infrastructure solutions.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex provides an extensive range of geosynthetic products, each designed to meet the specific challenges of rail infrastructure. From drainage to soil stabilization and environmental protection, products like InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell offer robust, sustainable solutions. Choose Infratex for your rail infrastructure needs and ensure both efficiency and sustainability."
+}

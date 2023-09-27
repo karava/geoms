@@ -1,0 +1,79 @@
+{
+  "title": "Drainage Solutions",
+  "thumbnail": "drainage_solutions_thumbnail.png",
+  "Header_title1": "Drainage Solutions by Infratex",
+  "Header_title2": "Optimized Performance for a Diverse Range of Applications",
+  "What_is_title1": "What Is",
+  "What_is_title2": "Importance of Effective Drainage Systems",
+  "What_is_text": "Effective drainage systems are critical for the longevity and performance of infrastructure such as retaining walls, shotcrete walls, and tunnels. Infratex is proud to offer cutting-edge drainage solutions featuring InfraStrip, InfraSheet, and InfraDrain, specifically designed for a wide array of applications.",
+
+  "Overview_title1": "Geosynthetics in Drainage Solutions",
+  "Overview_title2": "Why Effective Drainage Solutions Are Imperative",
+  "Overview_text": "Poor drainage can lead to water accumulation, soil erosion, and structural damage, compromising the integrity of various engineering projects. Infratex's suite of drainage products is geared to address these challenges comprehensively, making water management hassle-free.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraStrip"],
+      "headline": "The Future of Retaining Wall Drainage",
+      "copy": "Our brand InfraStrip offers an innovative approach to retaining wall drainage. These strip drains provide fast, effective drainage that prevents water accumulation behind retaining walls, thus extending their lifespan and maintaining structural integrity.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraSheet"],
+      "headline": "Shotcrete Wall Drainage Reinvented",
+      "copy": "For shotcrete walls often used in tunneling or complex constructions, InfraSheet is the optimal sheet drain solution. Engineered for efficiency, InfraSheet helps manage water flow and alleviates pressure on shotcrete walls, ensuring their long-term viability.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraDrain"],
+      "headline": "The Tunnel Drainage Specialist",
+      "copy": "Tunnel construction comes with its own set of drainage challenges. InfraDrain, our tunnel-specific drainage system, is designed to manage water flow efficiently while minimizing structural stress, making it the go-to solution for tunnel drainage applications.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraStrip", "InfraSheet", "InfraDrain"],
+      "headline": "Comprehensive Drainage Solutions: Strip Drain, Sheet Drain, and Tunnel Drain",
+      "copy": "Whether it's stripdrain for retaining walls, sheet drain for shotcrete walls, or tunnel drain for subterranean projects, Infratex provides comprehensive solutions that cater to a multitude of drainage needs. The combination of InfraStrip, InfraSheet, and InfraDrain ensures that all bases are covered.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    }
+  ],
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Why Choose Infratex for Your Drainage Solutions",
+  "Why_text": "At Infratex, we are committed to delivering tailored solutions to meet your specific drainage needs. Our expertise in geosynthetics allows us to offer products that are not just high-quality but also environmentally sustainable.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex offers an advanced range of drainage solutions designed to meet the specific requirements of retaining walls, shotcrete walls, and tunnel constructions. With products like InfraStrip, InfraSheet, and InfraDrain, we provide effective, reliable, and sustainable solutions for all your drainage challenges. Turn to Infratex for drainage systems that stand the test of time."
+}

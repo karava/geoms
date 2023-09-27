@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="hero-section-1 applications_list_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="fw-semibold typo-body-1 mb-2 eyebrow"><span class="orange-600">//</span>&nbsp;Applications</p>
+                <p class="fw-bold typo-heading-1 headline mb-0">Our Trusted Applications<br />Trough Vary Industries</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="application-grid-section">
+    <div class="container">
+        <div class="default-grid application-grid">
+            {% for item in applications %}
+            <a href="/applications/{{item.url}}" role="button" class="application-item text-decoration-none">
+                <div class="application-thumbnail">
+                    <img src="{% static subpath|add:'assets/images/' %}{{ item.thumbnail }}"
+                        alt="application-thumbnail">
+                </div>
+                <div class="application-content d-flex flex-column">
+                    <p class="title neutral-600 fw-bold mb-2">{{item.title}}</p>
+                    <p class="description neutral-500 lh-base">{{item.description}}</p>
+                    <div class="link-arrow ms-auto">
+                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" width="24px" height="24px" alt="arrow-top-right">
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-link-section-1">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12 text-center px-3">
+                <p class="neutral-600 headline mb-0">Embrace Your Journey to Success with Action</p>
+                <p class="neutral-500 copy px-3">Your Journey to Success Begins Here: Take the Next Step towards
+                    Achieving Your Goals</p>
+                <a role="button" href="#" class="primary-btn">Get Enquiry</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

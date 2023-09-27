@@ -1,0 +1,84 @@
+{
+  "title": "Mining",
+  "thumbnail": "mining_thumbnail.png",
+  "Header_title1": "Mining Solutions by Infratex",
+  "Header_title2": "Reinforcing Sustainability and Efficiency",
+  
+  "What_is_title1": "What Is",
+  "What_is_title2": "Why Effective Geosynthetic Solutions are Essential in Mining",
+  "What_is_text": "Mining operations expose the earth's surface to severe environmental impacts, including erosion, water contamination, and structural degradation. Infratex's range of geosynthetic products addresses these challenges by providing efficient, sustainable solutions.",
+
+  "Overview_title1": "Geosynthetics in Mining",
+  "Overview_title2": "Addressing Unique Mining Challenges",
+  "Overview_text": "The mining industry poses unique challenges that require innovative, robust solutions. At Infratex, we offer a suite of geosynthetic products—InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell—engineered to improve efficiency and sustainability in mining applications.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraStrip", "InfraSheet"],
+      "headline": "Optimizing Drainage in Mining Areas",
+      "copy": "Efficient drainage is crucial in mining applications, where water can hamper operations or lead to safety issues. InfraStrip and InfraSheet are specially designed for quick, effective drainage, providing a resilient solution for retaining walls and slopes in mining areas.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraDrain"],
+      "headline": "Ensuring Safe and Effective Tunnel Drainage",
+      "copy": "Underground mining often involves tunnel construction, posing unique drainage challenges. InfraDrain provides efficient water management and structural support, making it the ideal solution for tunnel drainage in mining applications.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraThread", "InfraGrid"],
+      "headline": "Strengthening Roadways and Embankments",
+      "copy": "Mining operations demand strong roadways and embankments to support heavy machinery. InfraThread geotextiles and InfraGrid geogrids offer soil stabilization and reinforcement, ensuring the long-term viability of these critical structures.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraGrid"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraClay", "InfraCell"],
+      "headline": "Environmental Protection and Erosion Control",
+      "copy": "Environmental stewardship is essential in mining. InfraClay provides a natural barrier for sediment control, while InfraCell Geocells offer a three-dimensional solution for erosion control, helping to minimize the environmental impact of mining operations.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraClay"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraCell"
+        }
+      ]
+    }
+  ],
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Why Choose Infratex for Your Mining Applications",
+  "Why_text": "Infratex offers a multi-faceted approach to meet the diverse needs of the mining sector. Our range of products provides tailored solutions that are both effective and environmentally sustainable, making us the go-to choice for mining applications.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex provides a comprehensive array of geosynthetic products tailored to the unique challenges of the mining industry. Whether it's drainage, soil stabilization, or environmental protection, our product line—InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell—delivers reliable, sustainable solutions. Choose Infratex for mining applications that prioritize both efficiency and sustainability."
+}

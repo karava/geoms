@@ -624,6 +624,11 @@ header .v-divider {
     background-position-x: center!important;
 }
 
+.hero-section-1.applications_list_hero {
+    background: linear-gradient(0deg, rgba(5, 8, 17, 0.46) 0%, rgba(5, 8, 17, 0.46) 100%), url('../assets/images/applications_hero.jpg'), lightgray 50% / cover no-repeat;
+    background-position-x: center!important;
+}
+
 .hero-section-1 .eyebrow {
     color: white;
 }
@@ -723,5 +728,72 @@ header .v-divider {
 
     .text-image-section-3 .link {
         margin-top: 40px;
+    }
+}
+
+/* application-grid */
+.application-grid-section {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.application-grid-section .application-grid {
+    row-gap: 24px;
+}
+
+.application-grid .application-item {
+    grid-column: 1 / -1;
+    border-radius: 6px;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
+}
+
+.application-grid .application-thumbnail {
+    border-radius: 6px 6px 0px 0px;
+    border-bottom: 4px solid #FF6700;
+    background: #FFF;
+    overflow: hidden;
+    aspect-ratio: 285 / 200;
+}
+
+.application-grid .application-content {
+    padding: 24px 16px;
+}
+
+.application-grid .application-thumbnail img {
+    width: 100%;
+}
+
+.application-grid .application-item .title {
+    font-size: 22px;
+    line-height: 27px;
+}
+
+.application-grid .application-item .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 16px;
+    margin-bottom: 48px;
+}
+
+@media (min-width: 992px) {
+    .application-grid-section {
+        padding-top: 60px;
+        padding-bottom: 80px;
+    }
+
+    .application-grid-section .application-grid {
+        row-gap: 32px;
+    }
+
+    .application-grid .application-item {
+        grid-column: span 3 / span 3;
+    }
+
+    .application-grid .application-item .description {
+        -webkit-line-clamp: 3;
+        margin-bottom: 24px;
     }
 }

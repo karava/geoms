@@ -1,0 +1,83 @@
+{
+  "title": "Civil Construction",
+  "thumbnail": "civil_construction_thumbnail.png",
+  "Header_title1": "Civil Construction Solutions by Infratex",
+  "Header_title2": "Building Tomorrow's Infrastructure Today",
+  "What_is_title1": "What Is",
+  "What_is_title2": "What is Civil Construction",
+  "What_is_text": "Civil construction projects are the cornerstone of modern civilization, laying the foundation for everything from transportation to utilities. At Infratex, we offer a comprehensive array of geosynthetic products—including InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell—that are specifically designed to meet the rigorous demands of civil construction.",
+
+  "Overview_title1": "Geosynthetics in Civil Construction",
+  "Overview_title2": "A Necessity for Modern Infrastructure",
+  "Overview_text": "Geosynthetic materials have become indispensable in civil construction for soil stabilization, water management, and environmental protection. Infratex's range of products offer reliable, cost-effective solutions for complex construction challenges.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraStrip", "InfraSheet"],
+      "headline": "Superior Drainage Solutions",
+      "copy": "The importance of effective drainage in civil construction cannot be overstated. InfraStrip and InfraSheet deliver unparalleled drainage capabilities that help in reducing soil erosion and waterlogging, thereby extending the lifespan of your projects.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraDrain"],
+      "headline": "For Tunnel Construction and Drainage",
+      "copy": "In tunnel construction, managing water is a critical aspect. InfraDrain ensures optimal drainage, helping to preserve the structural integrity of tunnels and reduce maintenance costs over time.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraThread", "InfraGrid"],
+      "headline": "Strengthening Roads and Foundations",
+      "copy": "Whether it's road construction or laying down the foundation for buildings, InfraThread geotextiles and InfraGrid geogrids offer unmatched soil stabilization and reinforcement. Their versatility makes them ideal for a variety of civil construction applications.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraGrid"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraClay", "InfraCell"],
+      "headline": "Ensuring Environmental Compliance",
+      "copy": "Sustainability is at the forefront of civil construction projects. InfraClay geosynthetic clay liners provide effective sealing for waste containment, while InfraCell Geocells are perfect for erosion control and slope stabilization, helping your projects meet environmental standards.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraClay"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraCell"
+        }
+      ]
+    }
+  ],  
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Why Choose Infratex for Civil Construction Solutions",
+  "Why_text": "With Infratex, you get a partner committed to innovation, quality, and sustainability. Our products, including InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell, are engineered to meet the highest industry standards, making us the trusted choice for civil construction solutions.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex offers a broad range of geosynthetic products tailor-made for the complex requirements of civil construction. From effective drainage systems to robust soil stabilization measures, our products provide the durability and performance needed for today’s most challenging construction projects. Choose Infratex for reliable, sustainable civil construction solutions that stand the test of time."
+}
