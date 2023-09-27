@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import base
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
+from datetime import date, timedelta
 
 # Functions
 def product_image_upload_path(instance, filename):
@@ -27,27 +28,18 @@ def product_image_upload_path(instance, filename):
     # Default path if product type can't be determined
     return f"products/default/product_images/{filename}"
 
+def get_expiry_date():
+    return date.today() + timedelta(days=30)
+
 # Choices
 UNITS_OF_MEASURE = [
     ('rolls', 'Rolls'),
     ('sqm', 'SQM'),
 ]
 
-INCOTERMS = [
-    ('fob', 'FOB'),
-    ('cif', 'CIF'),
-    ('ddp', 'DDP'),
-]
-
 CURRENCIES = [
     ('usd', 'USD'),
     ('aud', 'AUD'),
-]
-
-PRICE_TYPES = [
-    ('sale', 'Sale'),
-    ('cost', 'Cost'),
-    ('rrp', 'RRP'),
 ]
 
 DRAINAGE_SUB_CATEGORIES = [
@@ -104,6 +96,7 @@ class GCL(models.Model):
     roll_length = DecimalField(max_digits=5, decimal_places=2)
     roll_length.help_text = "Unit of measure is m"
     bentonite_specs = models.CharField(max_length=200, blank=True)
+    sub_category = models.CharField(choices=GCL_SUB_CATEGORIES, max_length=200)
 
     def __str__(self):
         base_product = self.baseproduct
@@ -138,28 +131,9 @@ class DrainageProduct(models.Model):
     roll_width = models.IntegerField()
     roll_width.help_text = "Unit of measure is mm"
     double_cuspated = BooleanField(default=False)
-    DrainageProductSubcategory = models.ManyToManyField('DrainageProductSubcategory')
 
     def __str__(self):
         return("Type: " + self.sub_category + ", Height: " + str(self.height) + "x" + str(self.roll_width))
-
-class GeocellSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE)
-class GCLSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    gcl = models.ForeignKey(GCL, on_delete=models.CASCADE)
-class GeotextileSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geotextile = models.ForeignKey(Geotextile, on_delete=models.CASCADE)
-
-class GeogridSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geogrid = models.ForeignKey(Geogrid, on_delete=models.CASCADE)
-
-class DrainageProductSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    drainage_product = models.ForeignKey(DrainageProduct, on_delete=models.CASCADE)
 
 class BaseProduct(models.Model):
     code = models.CharField(max_length=200, blank=True)
@@ -188,14 +162,13 @@ class BaseProduct(models.Model):
     product_detail_drainage = models.OneToOneField(DrainageProduct, on_delete=models.CASCADE, null=True, blank=True, editable=False)
 
 class Price(models.Model):
-    type = models.CharField(choices=PRICE_TYPES, max_length=200, default='sale')
-    date = models.DateField()
-    qty = models.IntegerField
-    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    incoterm = models.CharField(choices=INCOTERMS, max_length=200, default='cif')
-    location = models.CharField(max_length=200, blank=True, null=True)
+    date = models.DateField(default=date.today)
+    qty = models.IntegerField()
+    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='sqm')
+    comment = models.CharField(max_length=200, blank=True, null=True)
+    FOB_port = models.CharField(max_length=200, blank=True, null=True)
     currency = models.CharField(choices=CURRENCIES, max_length=200, default='usd')
-    expiry = models.DateField(blank=True, null=True)
+    expiry = models.DateField(blank=True, null=True, default=get_expiry_date())
     price = models.DecimalField(max_digits=7, decimal_places=2)
     base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
 
