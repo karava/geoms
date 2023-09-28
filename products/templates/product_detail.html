@@ -1,0 +1,37 @@
+{% extends "base.html" %}  {# Assuming you have a base.html to inherit from. #}
+
+{% block content %}
+    <h1>{{ model_name }}</h1>
+    <h2>{{ object.title }}</h2>
+    <p>Product Code: {{ object.code }}</p>
+    <p>Short Description: {{ object.short_description }}</p>
+    <p>Long Description: {{ object.long_description }}</p>
+    
+
+    {% if default_image %}
+        <img src="{{ default_image.file.url }}" alt="{{ object.title }}">
+    {% endif %}
+
+    
+    <h3>Website Images</h3>
+    {% for image in website_images %}
+        <img src="{{ image.file.url }}" alt="{{ object.title }}" style="width: 100px;">
+    {% endfor %}
+
+    
+    <h3>Applications</h3>
+    <ul>
+        {% for app in object.applications.all %}
+            <li>{{ app.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Resources</h3>
+    <ul>
+        {% for resource in resources %}
+            <li>
+                <a href="{{ resource.resource_file.url }}" target="_blank">{{ resource.resource_type }} - {{ resource.description }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

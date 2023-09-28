@@ -2,6 +2,25 @@ from django.db import models
 from django.db.models import base
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
+from datetime import date, timedelta
+
+# Functions
+def product_image_upload_path(instance, filename):
+    # Get the related BaseProduct instance
+    product_type = instance.base_product.get_product_detail_name()
+
+    # Construct the upload path
+    return f"products/{product_type}/images/{filename}"
+    
+def resource_file_upload_path(instance, filename):
+    # Use the get_product_detail_model method to get the product detail
+    product_type = instance.base_product.get_product_detail_name()
+
+    # Construct the upload path
+    return f"products/{product_type}/resources/{instance.resource_type}/{filename}"
+
+def get_expiry_date():
+    return date.today() + timedelta(days=30)
 
 # Choices
 UNITS_OF_MEASURE = [
@@ -9,36 +28,29 @@ UNITS_OF_MEASURE = [
     ('sqm', 'SQM'),
 ]
 
-INCOTERMS = [
-    ('fob', 'FOB'),
-    ('cif', 'CIF'),
-    ('ddp', 'DDP'),
-]
-
 CURRENCIES = [
     ('usd', 'USD'),
     ('aud', 'AUD'),
 ]
 
-PRICE_TYPES = [
-    ('sale', 'Sale'),
-    ('cost', 'Cost'),
-    ('rrp', 'RRP'),
+DRAINAGE_SUB_CATEGORIES = [
+    ('strip', 'Strip Drain'),
+    ('sheet', 'Sheet Drain'),
 ]
 
-GEOTEXTILE_TYPES = [
-    ('woven', 'Woven'),
-    ('nonwoven', 'Non-woven'),
+GCL_SUB_CATEGORIES = [
+    ('powder', 'Powder'),
+    ('granules', 'Granules')
 ]
 
-GEOGRID_TYPES = [
+GEOGRID_SUB_CATEGORIES = [
     ('BI', 'BIAXIAL'),
     ('TRI', 'TRIAXIAL'),
 ]
 
-DRAINAGE_TYPES = [
-    ('strip', 'Strip Drain'),
-    ('sheet', 'Sheet Drain'),
+GEOTEXTILE_SUB_CATEGORIES = [
+    ('woven', 'Woven'),
+    ('nonwoven', 'Non-woven'),
 ]
 
 RESOURCE_TYPES = [
@@ -75,6 +87,7 @@ class GCL(models.Model):
     roll_length = DecimalField(max_digits=5, decimal_places=2)
     roll_length.help_text = "Unit of measure is m"
     bentonite_specs = models.CharField(max_length=200, blank=True)
+    sub_category = models.CharField(choices=GCL_SUB_CATEGORIES, max_length=200)
 
     def __str__(self):
         base_product = self.baseproduct
@@ -87,51 +100,32 @@ class Geotextile(models.Model):
     roll_width.help_text = "Unit of measure is m"
     roll_length = DecimalField(max_digits=5, decimal_places=2)
     roll_length.help_text = "Unit of measure is m"
-    type = models.CharField(choices=GEOTEXTILE_TYPES, max_length=200, default='woven')
+    sub_category = models.CharField(choices=GEOTEXTILE_SUB_CATEGORIES, max_length=200)
     # aperture_size do we need this?
 
     def __str__(self):
-        return ("Density: " + str(self.density) + ", Type: " + self.type)
+        return ("Density: " + str(self.density) + ", Type: " + self.sub_cat)
 class Geogrid(models.Model):
-    shape = models.CharField(choices=GEOGRID_TYPES, max_length=200) 
+    sub_category = models.CharField(choices=GEOGRID_SUB_CATEGORIES, max_length=200) 
     strength_md = models.IntegerField()
     strength_md.help_text = "Strength in machine direction in kN"
     strength_td = models.IntegerField()
     strength_td.help_text = "Strength in transverse direction in kN"
 
     def __str__(self):
-        return ("Shape: " + self.shape + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
+        return ("Shape: " + self.sub_category + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
 
 class DrainageProduct(models.Model):
-    type = models.CharField(choices=DRAINAGE_TYPES, max_length=200, default='strip')
-    type.help_text = "FreDrain = Strip Drain, TerraDrain = Sheet Drain"
+    sub_category = models.CharField(choices=DRAINAGE_SUB_CATEGORIES, max_length=200)
     height = models.IntegerField()
     height.help_text = "Unit of measure is mm"
     roll_width = models.IntegerField()
     roll_width.help_text = "Unit of measure is mm"
     double_cuspated = BooleanField(default=False)
-    DrainageProductSubcategory = models.ManyToManyField('DrainageProductSubcategory')
 
     def __str__(self):
-        return("Type: " + self.type + ", Height: " + str(self.height) + "x" + str(self.roll_width))
+        return("Type: " + self.sub_category + ", Height: " + str(self.height) + "x" + str(self.roll_width))
 
-class GeocellSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geocell = models.ForeignKey(Geocell, on_delete=models.CASCADE)
-class GCLSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    gcl = models.ForeignKey(GCL, on_delete=models.CASCADE)
-class GeotextileSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geotextile = models.ForeignKey(Geotextile, on_delete=models.CASCADE)
-
-class GeogridSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    geogrid = models.ForeignKey(Geogrid, on_delete=models.CASCADE)
-
-class DrainageProductSubcategory(models.Model):
-    name = models.CharField(max_length=255)
-    drainage_product = models.ForeignKey(DrainageProduct, on_delete=models.CASCADE)
 class BaseProduct(models.Model):
     code = models.CharField(max_length=200, blank=True)
     title = models.CharField(max_length=200, blank=False)
@@ -158,30 +152,44 @@ class BaseProduct(models.Model):
     product_detail_geogrid = models.OneToOneField(Geogrid, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     product_detail_drainage = models.OneToOneField(DrainageProduct, on_delete=models.CASCADE, null=True, blank=True, editable=False)
 
+    def get_product_detail_model(self):
+        # Check which OneToOne relationship is set and return its associated model
+        if self.product_detail_geocell:
+            return self.product_detail_geocell
+        elif self.product_detail_geotextile:
+            return self.product_detail_geotextile
+        elif self.product_detail_gcl:
+            return self.product_detail_gcl
+        elif self.product_detail_geogrid:
+            return self.product_detail_geogrid
+        elif self.product_detail_drainage:
+            return self.product_detail_drainage
+        return None
+
+    def get_product_detail_name(self):
+        detail_model = self.get_product_detail_model()
+        if detail_model:
+            return detail_model._meta.verbose_name
+        return ""
+
 class Price(models.Model):
-    type = models.CharField(choices=PRICE_TYPES, max_length=200, default='sale')
-    date = models.DateField()
-    qty = models.IntegerField
-    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    incoterm = models.CharField(choices=INCOTERMS, max_length=200, default='cif')
-    location = models.CharField(max_length=200, blank=True, null=True)
+    date = models.DateField(default=date.today)
+    qty = models.IntegerField()
+    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='sqm')
+    comment = models.CharField(max_length=200, blank=True, null=True)
+    FOB_port = models.CharField(max_length=200, blank=True, null=True)
     currency = models.CharField(choices=CURRENCIES, max_length=200, default='usd')
-    expiry = models.DateField(blank=True, null=True)
+    expiry = models.DateField(blank=True, null=True, default=get_expiry_date())
     price = models.DecimalField(max_digits=7, decimal_places=2)
     base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
 
 
 # File models
-class DatasheetFile(models.Model):
-    file = models.FileField(upload_to="products/datasheets/")
-    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='datasheets')
-class TestingFile(models.Model):
-    file = models.FileField(upload_to="products/testing_reports/")
-    datasheet = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='testReports')
 class ImageFile(models.Model):
-    file = models.ImageField(upload_to="products/product_images/")
-    image = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
+    file = models.ImageField(upload_to=product_image_upload_path)
+    base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
     is_default = models.BooleanField(default=False)
+    is_for_website = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         # If this image is set as default, unset other default images for the product
@@ -190,12 +198,12 @@ class ImageFile(models.Model):
         super().save(*args, **kwargs)
 
 class ProductResource(models.Model):
-    type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
-    file = models.FileField(upload_to="products/resources/")
+    resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
+    resource_file = models.FileField(upload_to=resource_file_upload_path)
     description = models.TextField(blank=True)
     base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='resources')
     
     def __str__(self):
-        return f"{self.type} for {self.base_product.code}"
+        return f"{self.resource_type} for {self.base_product.code}"
 
 
