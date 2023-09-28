@@ -165,7 +165,6 @@ else:
     AWS_STORAGE_BUCKET_NAME = 'gems-production'
 
 AWS_S3_REGION_NAME = 'ap-southeast-2'
-# AWS_LOCATION = 'media'
 
 # General optimization for faster delivery
 AWS_IS_GZIPPED = True

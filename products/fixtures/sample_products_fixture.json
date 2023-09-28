@@ -57,8 +57,8 @@
     "model": "products.imagefile",
     "pk": 1,
     "fields": {
-      "file": "products/geocell/product_images/sample_image_1.jpg",
-      "product": 1,
+      "file": "products/geocell/images/sample_image1.jpg",
+      "base_product": 1,
       "is_default": true,
       "is_for_website": true
     }
@@ -67,8 +67,8 @@
     "model": "products.imagefile",
     "pk": 2,
     "fields": {
-      "file": "products/geocell/product_images/sample_image_2.jpg",
-      "product": 1,
+      "file": "products/geocell/images/sample_image2.jpg",
+      "base_product": 1,
       "is_default": false,
       "is_for_website": false
     }
@@ -77,8 +77,8 @@
     "model": "products.productresource",
     "pk": 1,
     "fields": {
-      "type": "datasheet",
-      "file": "products/resources/sample_datasheet_1.pdf",
+      "resource_type": "datasheet",
+      "resource_file": "products/resources/sample_datasheet_1.pdf",
       "description": "Datasheet for Sample Geocell A",
       "base_product": 1
     }

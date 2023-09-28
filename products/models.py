@@ -7,26 +7,17 @@ from datetime import date, timedelta
 # Functions
 def product_image_upload_path(instance, filename):
     # Get the related BaseProduct instance
-    product = instance.product
+    product_type = instance.base_product.get_product_detail_name()
 
-    # Determine the product's specific type
-    product_type = None
-    if product.product_detail_geocell:
-        product_type = 'geocell'
-    elif product.product_detail_geotextile:
-        product_type = 'geotextile'
-    elif product.product_detail_gcl:
-        product_type = 'gcl'
-    elif product.product_detail_geogrid:
-        product_type = 'geogrid'
-    elif product.product_detail_drainage:
-        product_type = 'drainageproducts'
+    # Construct the upload path
+    return f"products/{product_type}/images/{filename}"
+    
+def resource_file_upload_path(instance, filename):
+    # Use the get_product_detail_model method to get the product detail
+    product_type = instance.base_product.get_product_detail_name()
 
-    # If the product type is determined, construct the upload path
-    if product_type:
-        return f"products/{product_type}/product_images/{filename}"
-    # Default path if product type can't be determined
-    return f"products/default/product_images/{filename}"
+    # Construct the upload path
+    return f"products/{product_type}/resources/{instance.resource_type}/{filename}"
 
 def get_expiry_date():
     return date.today() + timedelta(days=30)
@@ -161,6 +152,26 @@ class BaseProduct(models.Model):
     product_detail_geogrid = models.OneToOneField(Geogrid, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     product_detail_drainage = models.OneToOneField(DrainageProduct, on_delete=models.CASCADE, null=True, blank=True, editable=False)
 
+    def get_product_detail_model(self):
+        # Check which OneToOne relationship is set and return its associated model
+        if self.product_detail_geocell:
+            return self.product_detail_geocell
+        elif self.product_detail_geotextile:
+            return self.product_detail_geotextile
+        elif self.product_detail_gcl:
+            return self.product_detail_gcl
+        elif self.product_detail_geogrid:
+            return self.product_detail_geogrid
+        elif self.product_detail_drainage:
+            return self.product_detail_drainage
+        return None
+
+    def get_product_detail_name(self):
+        detail_model = self.get_product_detail_model()
+        if detail_model:
+            return detail_model._meta.verbose_name
+        return ""
+
 class Price(models.Model):
     date = models.DateField(default=date.today)
     qty = models.IntegerField()
@@ -175,25 +186,24 @@ class Price(models.Model):
 
 # File models
 class ImageFile(models.Model):
-    # file = models.ImageField(upload_to="products/product_images/")
     file = models.ImageField(upload_to=product_image_upload_path)
-    product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
+    base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
     is_default = models.BooleanField(default=False)
     is_for_website = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         # If this image is set as default, unset other default images for the product
         if self.is_default:
-            ImageFile.objects.filter(product=self.product).update(is_default=False)
+            ImageFile.objects.filter(base_product=self.base_product).update(is_default=False)
         super().save(*args, **kwargs)
 
 class ProductResource(models.Model):
-    type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
-    file = models.FileField(upload_to="products/resources/")
+    resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
+    resource_file = models.FileField(upload_to=resource_file_upload_path)
     description = models.TextField(blank=True)
     base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='resources')
     
     def __str__(self):
-        return f"{self.type} for {self.base_product.code}"
+        return f"{self.resource_type} for {self.base_product.code}"
 
 
