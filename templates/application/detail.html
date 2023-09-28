@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<!-- right-content -->
+
 {% for product in data.Product_applications %}
 {% if forloop.counter|divisibleby:2 %}
 <div class="text-image-section-1 margin-bottom-1">
@@ -53,14 +53,14 @@
 <div class="text-image-section-1 right-content margin-bottom-1">
 {% endif %}
     <div class="image-bg w-100 d-block d-lg-none">
-        <img src="{% static 'assets/images/image4.png' %}" class="w-100" alt="image">
+        <img src="{% static subpath|add:'assets/images/' %}{% firstof product.image 'product_image1.png' %}" class="w-100" alt="image">
     </div>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="text-image-wrapper">
                     <div class="image-bg d-none d-lg-block">
-                        <img src="{% static 'assets/images/image4.png' %}" alt="image">
+                        <img src="{% static subpath|add:'assets/images/' %}{% firstof product.image 'product_image1.png' %}" alt="image">
                     </div>
                     <div class="card">
                         <p class="neutral-600 fw-bold typo-heading-4 mb-0 headline">{{ product.headline }}</p>
@@ -81,6 +81,30 @@
     </div>
 </div>
 {% endfor %}
+
+<div class="text-section-3">
+    <div class="container">
+        <div class="default-grid">
+            <div class="content">
+                <p class="neutral-500 fw-semibold typo-body-2 mb-2"><span class="orange-600">//</span>&nbsp;{{ data.Why_title1 }}</p>
+                <p class="neutral-600 fw-bold typo-heading-4 mb-0">{{ data.Why_title2 }}</p>
+                <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ data.Why_text }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-section-4">
+    <div class="container">
+        <div class="default-grid">
+            <div class="content">
+                <p class="neutral-500 fw-semibold typo-body-2 mb-2"><span class="orange-600">//</span>&nbsp;{{ data.Summary_title1 }}</p>
+                <p class="neutral-600 fw-bold typo-heading-4 mb-0">{{ data.Summary_title2 }}</p>
+                <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ data.Summary_text }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="text-link-section-1">
