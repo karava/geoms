@@ -239,6 +239,11 @@ header .v-divider {
     padding-bottom: 40px;
 }
 
+.text-section-1.same-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 @media (min-width: 992px) {
     .text-section-1 {
         padding-top: 100px;
@@ -248,6 +253,39 @@ header .v-divider {
     .text-section-1.small-padding {
         padding-top: 60px;
         padding-bottom: 60px;
+    }
+
+    .text-section-1.same-padding {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .text-section-1.padding-1 {
+        padding-top: 80px;
+        padding-bottom: 60px;
+    }
+}
+
+/* text-section-2 */
+.text-section-2 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: #F9F9F9;
+}
+
+.text-section-2 .content {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 992px) {
+    .text-section-2 {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .text-section-2 .content {
+        grid-column: span 10 / span 10;
+        grid-column-start: 2;
     }
 }
 

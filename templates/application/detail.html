@@ -7,12 +7,80 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p class="fw-semibold typo-body-1 mb-2 eyebrow"><span class="orange-600">//</span>&nbsp;Applications</p>
-                <p class="fw-bold typo-heading-1 headline mb-0">Our Trusted Applications<br />Trough Vary Industries</p>
+                <p class="fw-semibold typo-body-1 mb-2 eyebrow"><span class="orange-600">//</span>&nbsp;{{ data.Header_title1 }}</p>
+            </div>
+            <div class="col-12 col-lg-8">
+                <p class="fw-bold typo-heading-1 headline">{{ data.Header_title2 }}</p>
+                <a href="#" class="primary-btn" role="button">Get Enquiry</a>
             </div>
         </div>
     </div>
 </div>
+
+<div class="container text-section-1 same-padding">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 col-12">
+            <p class="neutral-500 fw-semibold typo-body-2 mb-2"><span class="orange-600">//</span>&nbsp;{{ data.What_is_title1 }}</p>
+            <p class="neutral-600 fw-bold typo-heading-4 mb-0">{{ data.What_is_title2 }}</p>
+            <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ data.What_is_text }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="default-grid text-section-2">
+        <div class="content">
+            <p class="neutral-500 fw-semibold typo-body-2 mb-2"><span class="orange-600">//</span>&nbsp;{{ data.Overview_title1 }}</p>
+            <p class="neutral-600 fw-bold typo-heading-4 mb-0">{{ data.Overview_title2 }}</p>
+            <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ data.Overview_text }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container text-section-1 padding-1">
+    <div class="row">
+        <div class="col-12 col-lg-8 offset-lg-2 text-center">
+            <p class="neutral-500 fw-semibold typo-body-2 mb-2"><span class="orange-600">//</span>&nbsp;{{ data.Our_solutions_title1 }}</p>
+            <p class="neutral-600 fw-bold typo-heading-3 mb-0">{{ data.Our_solutions_title2 }}</p>
+        </div>
+    </div>
+</div>
+<!-- right-content -->
+{% for product in data.Product_applications %}
+{% if forloop.counter|divisibleby:2 %}
+<div class="text-image-section-1 margin-bottom-1">
+{% else %}
+<div class="text-image-section-1 right-content margin-bottom-1">
+{% endif %}
+    <div class="image-bg w-100 d-block d-lg-none">
+        <img src="{% static 'assets/images/image4.png' %}" class="w-100" alt="image">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-image-wrapper">
+                    <div class="image-bg d-none d-lg-block">
+                        <img src="{% static 'assets/images/image4.png' %}" alt="image">
+                    </div>
+                    <div class="card">
+                        <p class="neutral-600 fw-bold typo-heading-4 mb-0 headline">{{ product.headline }}</p>
+                        <p class="neutral-500 typo-body-1 lh-base mb-0 copy">
+                            {{ product.copy }}
+                        </p>
+                        <a href="/products" class="link">
+                            View Products
+                            <div class="icon">
+                                <img src="{% static 'assets/icons/arrow-right-up-line.svg' %}"
+                                    alt="arrow-right-up-line">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
 <div class="container">
     <div class="text-link-section-1">
