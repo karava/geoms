@@ -388,6 +388,33 @@ header .v-divider {
     margin-left: 12px;
 }
 
+.text-image-section-1 .eyebrow {
+    color: #A6A6A6;
+    font-family: 'Poppins';
+    font-size: 20px;
+    line-height: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    position: relative;
+    display: inline-flex;
+    padding-left: 8px;
+}
+
+.text-image-section-1 .eyebrow::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: #15B79E;
+    top: 3px;
+    left: 0;
+}
+
+.text-image-section-1 .eyebrow + .eyebrow {
+    margin-left: 16px;
+}
+
 @media (min-width: 992px) {
     .text-image-section-1 {
         position: unset;
@@ -435,6 +462,20 @@ header .v-divider {
 
     .text-image-section-1 .link {
         margin-top: 40px;
+    }
+
+    .text-image-section-1 .eyebrow {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .text-image-section-1 .eyebrow::before {
+        top: 6px;
+        height: 24px;
+    }
+
+    .text-image-section-1 .eyebrow + .eyebrow {
+        margin-left: 24px;
     }
 }
 

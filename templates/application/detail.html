@@ -63,17 +63,26 @@
                         <img src="{% static subpath|add:'assets/images/' %}{% firstof product.image 'product_image1.png' %}" alt="image">
                     </div>
                     <div class="card">
+                        <div class="eyebrow-group">
+                            {% for eyebrow in product.eyebrow %}
+                            <span class="eyebrow">{{ eyebrow }}</span>
+                            {% endfor %}
+                        </div>
                         <p class="neutral-600 fw-bold typo-heading-4 mb-0 headline">{{ product.headline }}</p>
                         <p class="neutral-500 typo-body-1 lh-base mb-0 copy">
                             {{ product.copy }}
                         </p>
-                        <a href="/products" class="link">
-                            View Products
-                            <div class="icon">
-                                <img src="{% static 'assets/icons/arrow-right-up-line.svg' %}"
-                                    alt="arrow-right-up-line">
-                            </div>
-                        </a>
+                        <div class="d-flex flex-lg-row flex-column">
+                            {% for link in product.link %}
+                            <a href="{{ link.url }}" class="link">
+                                {{ link.label }}
+                                <div class="icon">
+                                    <img src="{% static 'assets/icons/arrow-right-up-line.svg' %}"
+                                        alt="arrow-right-up-line">
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
