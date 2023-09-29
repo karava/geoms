@@ -1,5 +1,5 @@
 from django.db import models
-from products.models import BaseProduct
+from django.template.defaultfilters import slugify
 
 # Functions for the image upload paths
 def universal_image_upload_path(instance, filename):
@@ -41,8 +41,14 @@ class CaseStudy(models.Model):
     project_description = models.TextField(blank=True, verbose_name="The Project")
     challenges = models.TextField(blank=True)
     solution = models.TextField(blank=True, verbose_name="Our Solution")
+    slug = models.SlugField(unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(CaseStudy, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

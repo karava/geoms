@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ study.title }}</h1>
+<p><strong>Project Description:</strong> {{ study.project_description }}</p>
+<p><strong>Challenges:</strong> {{ study.challenges }}</p>
+<p><strong>Our Solution:</strong> {{ study.solution }}</p>
+
+{% if study.images.exists %}
+    <h2>Images</h2>
+    {% for image in study.images.all %}
+        <img src="{{ image.image.file.url }}" alt="Image for {{ study.title }}">
+    {% endfor %}
+{% endif %}
+{% endblock %}
