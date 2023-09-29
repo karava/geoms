@@ -14,9 +14,15 @@ class ContentImage(models.Model):
 
 class TechnicalGuide(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

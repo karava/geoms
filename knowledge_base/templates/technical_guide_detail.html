@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ guide.title }}</h1>
+    {% if main_image %}
+        <img src="{{ main_image.image.file.url }}" alt="{{ guide.title }}">
+    {% endif %}
+    <p>{{ guide.content }}</p>
+    <!-- Add any other fields you wish to display -->
+{% endblock %}

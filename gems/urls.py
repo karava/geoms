@@ -29,5 +29,5 @@ urlpatterns = [
     path('technical-guides/', views.technical_guide_list, name='technical_guide_list'),
     path('case-studies/', views.case_study_list, name='case_study_list'),
     path('case-studies/<slug:case_study_slug>/', views.case_study_detail, name='case_study_detail'),
-
+    path('guides/<slug:guide_slug>/', views.technical_guide_detail, name='technical_guide_detail'),
 ]
