@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from knowledge_base import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('aboutus', TemplateView.as_view(template_name='static_pages/aboutus.html', extra_context=dict(page_title='About Us')), name='aboutus'),
     path('capabilities', TemplateView.as_view(template_name='static_pages/capabilities_statement.html', extra_context=dict(page_title='Capabilities Statement')), name='capabilities_statement'),
     path('products/', include('products.urls')),
+    path('technical-guides/', views.technical_guide_list, name='technical_guide_list'),
+    path('case-studies/', views.case_study_list, name='case_study_list'),
 ]
