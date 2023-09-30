@@ -48,9 +48,9 @@
 
 {% for product in data.Product_applications %}
 {% if forloop.counter|divisibleby:2 %}
-<div class="text-image-section-1 margin-bottom-1">
+<div class="text-image-section-1 margin-bottom-1 small-padding">
 {% else %}
-<div class="text-image-section-1 right-content margin-bottom-1">
+<div class="text-image-section-1 right-content margin-bottom-1 small-padding">
 {% endif %}
     <div class="image-bg w-100 d-block d-lg-none">
         <img src="{% static subpath|add:'assets/images/' %}{% firstof product.image 'product_image1.png' %}" class="w-100" alt="image">
@@ -72,7 +72,7 @@
                         <p class="neutral-500 typo-body-1 lh-base mb-0 copy">
                             {{ product.copy }}
                         </p>
-                        <div class="d-flex flex-lg-row flex-column">
+                        <div class="d-flex flex-lg-row flex-column link-group">
                             {% for link in product.link %}
                             <a href="{{ link.url }}" class="link">
                                 {{ link.label }}
