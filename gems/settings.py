@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'storages',
     'nested_admin',
     'apis',
+    'knowledge_base'
 ]
 
 MIDDLEWARE = [

@@ -29,4 +29,5 @@ urlpatterns = [
     path('applications', views.render_applications, name='applications'),
     path('applications/<slug:slug>/', views.render_application_detail, name='application_detail'),
     path('products/', include('products.urls')),
+    path('knowledgebase/', include('knowledge_base.urls')),
 ]
