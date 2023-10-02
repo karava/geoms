@@ -1,0 +1,26 @@
+[{
+    "title": "Geocell",
+    "url": "/geocell",
+    "description": "When it comes to erosion control and soil stabilization, InfraCell Geocells deliver unparalleled performance. Designed for a range of applications from slope stabilization to ground reinforcement, InfraCell is the go-to solution for challenging environmental conditions.",
+    "thumbnail": "product_category_geocell.png"
+}, {
+    "title": "Geogrids",
+    "url": "/geogrids",
+    "description": "InfraGrid Geogrids offer unparalleled soil stabilization and reinforcement solutions. Ideal for road construction, retaining walls, and slope stabilization, these products guarantee a strong and reliable foundation for any project.",
+    "thumbnail": "product_category_geogrids.png"
+}, {
+    "title": "Geotextiles",
+    "url": "/geotextiles",
+    "description": "Our Geotextiles, marketed as InfraThread, offer robust, multi-functional solutions for soil separation, filtration, and drainage. Made from premium materials, these geotextiles are a staple in civil and environmental engineering projects.",
+    "thumbnail": "product_category_geotextiles.png"
+}, {
+    "title": "Clay Liners",
+    "url": "/gcl",
+    "description": "Geosynthetic Clay Liners, known by our product name InfraClay, provide effective and environmentally friendly sealing solutions. Used extensively in waste management and water treatment plants, InfraClay ensures compliance with the most stringent environmental regulations.",
+    "thumbnail": "product_category_gcl.png"
+}, {
+    "title": "Drainage Systems",
+    "url": "/drainage_systems",
+    "description": "Last but not least, our Geocomposite Drains, known as InfraDrain, offer advanced drainage solutions for various applications, from roadways to retaining walls.",
+    "thumbnail": "product_category_ds.png"
+}]

@@ -1,0 +1,72 @@
+{
+  "title": "Waterways/Coastal",
+  "thumbnail": "waterways_coastal_thumbnail.png",
+  "Header_title1": "Waterway and Coastal Protection Solutions by Infratex",
+  "Header_title2": "Sustainable Solutions for Complex Challenges",
+  
+  "What_is_title1": "What Is",
+  "What_is_title2": "The Importance of Safeguarding Waterways and Coastlines",
+  "What_is_text": "In the face of increasing environmental challenges, safeguarding our waterways and coastlines is more important than ever. Infratex provides a range of meticulously engineered products that offer robust, sustainable solutions for waterway and coastal protection.",
+
+  "Overview_title1": "The Need for Waterway and Coastal Protection",
+  "Overview_title2": "Vital Natural Resources at Risk",
+  "Overview_text": "Waterways and coastlines are vital natural resources that need to be protected against erosion, sedimentation, and pollution. Proper management ensures not only the health of the aquatic ecosystem but also the longevity of nearby infrastructures.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraThread"],
+      "headline": "Geotextile Solutions for Coastal Erosion",
+      "copy": "InfraThread is our geotextile fabric engineered for superior erosion control. It is particularly effective in coastal applications, where it can prevent soil displacement and protect against water-based erosive forces, thereby maintaining the natural shoreline.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraGrid"],
+      "headline": "Reinforcing Waterway Banks",
+      "copy": "InfraGrid geogrids provide crucial soil reinforcement, especially useful for stabilizing waterway banks. The biaxial and uniaxial designs offer effective solutions to prevent soil erosion, ensuring the waterway remains navigable and ecologically vibrant.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraGrid"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraClay"],
+      "headline": "Natural Barriers for Sediment Control",
+      "copy": "In aquatic ecosystems, sediment control is essential to maintain water quality. InfraClay, our geosynthetic clay liner, can be deployed to act as a natural sediment barrier, thus ensuring a cleaner, healthier water environment.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraClay"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraCell"],
+      "headline": "Three-Dimensional Protection for Sloping Banks",
+      "copy": "For steep slopes that are vulnerable to erosion, InfraCell Geocells provide a three-dimensional solution. The cellular confinement system stabilizes the soil, making it ideal for reinforcing sloping banks near waterways or coastlines.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraCell"
+        }
+      ]
+    }
+  ],
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Combined Efficacy with Infratex’s Multi-Product Approach",
+  "Why_text": "Often, the challenges facing waterway and coastal protection are multi-faceted, requiring a multi-product approach. InfraThread, InfraGrid, InfraClay, and InfraCell can be used in conjunction to offer a holistic solution, tailored to specific environmental and structural needs.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex offers a comprehensive suite of geosynthetic products designed to provide effective, long-lasting solutions for waterway and coastal protection. Our range ensures that both human-made structures and natural ecosystems are preserved and protected. Turn to Infratex for sustainable, reliable waterway and coastal management solutions."
+}

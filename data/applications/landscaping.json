@@ -1,0 +1,84 @@
+{
+  "title": "Landscaping",
+  "thumbnail": "landscaping_thumbnail.png",
+  "Header_title1": "Landscaping Solutions by Infratex",
+  "Header_title2": "Beauty, Functionality, and Sustainability Combined",
+  
+  "What_is_title1": "What Is",
+  "What_is_title2": "The Role of Geosynthetics in Modern Landscaping",
+  "What_is_text": "In contemporary landscaping, the use of geosynthetics is crucial for effective water management, soil stabilization, and erosion control. Infratex provides a range of products that address these challenges head-on, adding longevity and resilience to your projects.",
+
+  "Overview_title1": "Geosynthetic in Landscaping",
+  "Overview_title2": "Meeting Aesthetic and Structural Needs",
+  "Overview_text": "In the landscaping industry, both aesthetic and structural integrity are essential. Infratex offers a diverse range of geosynthetic products—InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell—that meet these requirements, ensuring that your landscapes are not just visually stunning but also sustainable and long-lasting.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraStrip", "InfraSheet"],
+      "headline": "Drainage Solutions for Retaining Walls and Garden Beds",
+      "copy": "Proper drainage is vital in any landscaping project to prevent water accumulation and soil erosion. InfraStrip and InfraSheet offer excellent drainage capabilities, making them perfect for use in retaining walls and elevated garden beds.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraDrain"],
+      "headline": "Addressing Surface Water in Landscaped Areas",
+      "copy": "Standing water can ruin the aesthetic appeal of any landscape. InfraDrain, designed for superior water flow management, provides an effective drainage solution for pathways, terraces, and other landscaped surfaces.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraThread", "InfraGrid"],
+      "headline": "Structural Integrity for Paths and Driveways",
+      "copy": "Pathways and driveways in landscaped areas require robust structural support. InfraThread geotextiles and InfraGrid geogrids offer strong reinforcement, ensuring that these surfaces remain stable and durable for years to come.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraGrid"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraClay", "InfraCell"],
+      "headline": "Erosion Control and Environmental Protection",
+      "copy": "Sustainable practices are increasingly important in landscaping. InfraClay geosynthetic clay liners provide an environmentally friendly sediment control solution, while InfraCell Geocells offer advanced erosion control, particularly beneficial for sloped areas and embankments.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraClay"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraCell"
+        }
+      ]
+    }
+  ],
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Why Infratex is Your Go-To for Landscaping Solutions",
+  "Why_text": "Infratex is dedicated to providing geosynthetic solutions that are as functional as they are aesthetically pleasing. Our comprehensive product range, including InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraGrid, InfraClay, and InfraCell, ensures that all your landscaping needs are met with quality and sustainability.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex offers a full suite of geosynthetic products designed to enhance the beauty, functionality, and sustainability of your landscaping projects. From effective drainage to robust soil stabilization and eco-friendly erosion control, our products deliver on all fronts. Opt for Infratex to make your landscapes as enduring as they are beautiful."
+}

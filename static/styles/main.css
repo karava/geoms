@@ -239,6 +239,11 @@ header .v-divider {
     padding-bottom: 40px;
 }
 
+.text-section-1.same-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 @media (min-width: 992px) {
     .text-section-1 {
         padding-top: 100px;
@@ -248,6 +253,90 @@ header .v-divider {
     .text-section-1.small-padding {
         padding-top: 60px;
         padding-bottom: 60px;
+    }
+
+    .text-section-1.same-padding {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .text-section-1.padding-1 {
+        padding-top: 80px;
+        padding-bottom: 60px;
+    }
+}
+
+/* text-section-2 */
+.text-section-2 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: #F9F9F9;
+}
+
+.text-section-2 .content {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 992px) {
+    .text-section-2 {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .text-section-2 .content {
+        grid-column: span 10 / span 10;
+        grid-column-start: 2;
+    }
+}
+
+/* text-section-3 */
+.text-section-3 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: #F9F9F9;
+}
+
+.text-section-3 .content {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 992px) {
+    .text-section-3 {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .text-section-3 .content {
+        grid-column: span 10 / span 10;
+        grid-column-start: 2;
+    }
+}
+
+/* text-section-4 */
+.text-section-4 {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.text-section-4 .content {
+    grid-column: 1 / -1;
+    border-radius: 6px;
+    border-top: 6px solid #FF6700;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 60px 0px rgba(42, 51, 102, 0.06);
+    padding: 40px 16px;
+}
+
+@media (min-width: 992px) {
+    .text-section-4 {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .text-section-4 .content {
+        grid-column: span 10 / span 10;
+        grid-column-start: 2;
+        padding: 60px 40px;
     }
 }
 
@@ -299,6 +388,47 @@ header .v-divider {
     margin-left: 12px;
 }
 
+.text-image-section-1 .eyebrow-group {
+    margin-bottom: 16px;
+}
+
+.text-image-section-1 .eyebrow {
+    color: #A6A6A6;
+    font-family: 'Poppins';
+    font-size: 20px;
+    line-height: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    position: relative;
+    display: inline-flex;
+    padding-left: 8px;
+}
+
+.text-image-section-1 .eyebrow::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: #15B79E;
+    top: 3px;
+    left: 0;
+}
+
+.text-image-section-1 .eyebrow + .eyebrow {
+    margin-left: 16px;
+}
+
+.text-image-section-1 .link-group {
+    column-gap: 32px;
+    row-gap: 32px;
+    margin-top: 40px;
+}
+
+.text-image-section-1 .link-group .link {
+    margin-top: 0;
+}
+
 @media (min-width: 992px) {
     .text-image-section-1 {
         position: unset;
@@ -332,6 +462,14 @@ header .v-divider {
         min-height: 444px;
     }
 
+    .text-image-section-1.small-padding .card {
+        padding: 32px 40px 92px;
+    }
+
+    .text-image-section-1 .eyebrow-group {
+        margin-bottom: 20px;
+    }
+
     .text-image-section-1.right-content .card {
         margin-left: auto;
     }
@@ -346,6 +484,20 @@ header .v-divider {
 
     .text-image-section-1 .link {
         margin-top: 40px;
+    }
+
+    .text-image-section-1 .eyebrow {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .text-image-section-1 .eyebrow::before {
+        top: 6px;
+        height: 24px;
+    }
+
+    .text-image-section-1 .eyebrow + .eyebrow {
+        margin-left: 24px;
     }
 }
 
@@ -624,6 +776,16 @@ header .v-divider {
     background-position-x: center!important;
 }
 
+.hero-section-1.applications_list_hero {
+    background: linear-gradient(0deg, rgba(5, 8, 17, 0.46) 0%, rgba(5, 8, 17, 0.46) 100%), url('../assets/images/applications_hero.jpg'), lightgray 50% / cover no-repeat;
+    background-position-x: center!important;
+}
+
+.hero-section-1.product_categories_hero {
+    background: linear-gradient(0deg, rgba(5, 8, 17, 0.46) 0%, rgba(5, 8, 17, 0.46) 100%), url('../assets/images/product_categories_hero.jpg'), lightgray 50% / cover no-repeat;
+    background-position-x: center!important;
+}
+
 .hero-section-1 .eyebrow {
     color: white;
 }
@@ -723,5 +885,84 @@ header .v-divider {
 
     .text-image-section-3 .link {
         margin-top: 40px;
+    }
+}
+
+/* application-grid */
+.application-grid-section {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.application-grid-section .application-grid {
+    row-gap: 24px;
+}
+
+.application-grid .application-item {
+    grid-column: 1 / -1;
+    border-radius: 6px;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
+}
+
+.application-grid .application-thumbnail {
+    border-radius: 6px 6px 0px 0px;
+    border-bottom: 4px solid #FF6700;
+    background: #FFF;
+    overflow: hidden;
+    aspect-ratio: 285 / 200;
+}
+
+.application-grid .product-item .application-thumbnail {
+    aspect-ratio: 387 / 220;
+}
+
+.application-grid .application-content {
+    padding: 24px 16px;
+}
+
+.application-grid .application-thumbnail img {
+    width: 100%;
+}
+
+.application-grid .application-item .title {
+    font-size: 22px;
+    line-height: 27px;
+}
+
+.application-grid .application-item .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 16px;
+    margin-bottom: 48px;
+}
+
+.application-grid .product-item.application-item .description {
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .application-grid-section {
+        padding-top: 60px;
+        padding-bottom: 80px;
+    }
+
+    .application-grid-section .application-grid {
+        row-gap: 32px;
+    }
+
+    .application-grid .application-item {
+        grid-column: span 3 / span 3;
+    }
+
+    .application-grid .application-item.product-item {
+        grid-column: span 4 / span 4;
+    }
+
+    .application-grid .application-item .description {
+        -webkit-line-clamp: 3;
+        margin-bottom: 24px;
     }
 }

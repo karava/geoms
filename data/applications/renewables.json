@@ -1,0 +1,91 @@
+{
+  "title": "Renewables",
+  "thumbnail": "renewables_thumbnail.png",
+  "Header_title1": "Renewable Energy Applications by Infratex",
+  "Header_title2": "Harnessing Renewable Energy with Infratex's Advanced Geosynthetics",
+  
+  "What_is_title1": "What Is",
+  "What_is_title2": "The Role of Geosynthetics in Renewable Energy",
+  "What_is_text": "As the renewable energy sector in Australia surges, the role of geosynthetics in facilitating this growth is becoming increasingly crucial. Infratex, Australia’s leading geosynthetics supplier, offers a range of specialized products like InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraClay, and InfraGrid that are ideally suited for the unique challenges of wind farm and solar energy constructions.",
+
+  "Overview_title1": "Geosynthetics in Renewables",
+  "Overview_title2": "Powering the Future of Energy",
+  "Overview_text": "Infratex’s products like InfraStrip, InfraSheet, InfraDrain, InfraThread, InfraClay, and InfraGrid offer tailored solutions for the renewable energy sector, addressing concerns ranging from ground stabilization to environmental protection.",
+
+  "Our_solutions_title1": "Our Solutions",
+  "Our_solutions_title2": "Solutions For Many Needs",
+
+  "Product_applications": [
+    {
+      "eyebrow": ["InfraGrid", "InfraThread"],
+      "headline": "Ground Stabilization for Wind Farms",
+      "copy": "Wind farms require a stable base to withstand the mechanical loads from wind turbines. InfraGrid, our premium Geogrid product, is perfect for soil stabilization, offering the tensile strength needed for long-term durability. InfraThread, our non-woven Geotextile, aids in separating different soil layers, ensuring the integrity of the foundation.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraGrid"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraClay"],
+      "headline": "Contaminant Containment for Solar Farms",
+      "copy": "Solar farms often contain hazardous materials like cadmium or lead, used in photovoltaic cells. InfraClay, our advanced Geosynthetic clay liner, acts as an effective barrier to prevent these contaminants from leaching into the soil, safeguarding the surrounding environment.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraClay"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraStrip", "InfraSheet"],
+      "headline": "Optimized Drainage in Wind Farms",
+      "copy": "In wind farms, drainage is a concern due to the landscape alterations caused by the installation of turbines. InfraStrip (Strip Drain) and InfraSheet (Sheet Drain) are exceptional for managing water flow, ensuring that the soil remains stable and erosion is minimized.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraStrip"
+        },
+        {
+          "url": "https://google.com",
+          "label": "View InfraSheet"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraDrain"],
+      "headline": "Tunnel Drainage in Underground Renewable Projects",
+      "copy": "Innovative renewable projects like underground wind turbines require specialized drainage solutions. InfraDrain is engineered to handle the complexities of underground drainage, ensuring the safety and effectiveness of these energy-generating installations.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraDrain"
+        }
+      ]
+    },
+    {
+      "eyebrow": ["InfraThread"],
+      "headline": "Erosion Control in Solar Energy Constructions using Biodegradable InfraThread",
+      "copy": "Solar farms are often situated on large, open fields that are susceptible to erosion. InfraThread, our biodegradable Geotextile fabric, serves a dual role by stabilizing the soil and being eco-friendly, making it an ideal choice for sustainable energy projects.",
+      "link": [
+        {
+          "url": "https://google.com",
+          "label": "View InfraThread"
+        }
+      ]
+    }
+  ],
+
+  "Why_title1": "Why Infratex",
+  "Why_title2": "Holistic Solutions for Renewable Energy Infrastructure with Infratex",
+  "Why_text": "As renewable energy projects often require a combination of stabilization, drainage, and environmental protection, choosing a comprehensive geosynthetic solution is essential. Infratex’s range of products offers an all-encompassing solution, ensuring the long-term viability of your renewable energy initiatives.",
+
+  "Summary_title1": "Summary",
+  "Summary_title2": "In Summary",
+  "Summary_text": "Infratex’s suite of geosynthetic products provides a complete, robust solution for the renewable energy sector. From ground stabilization and drainage to environmental protection, our products ensure that your renewable energy projects not only succeed but also contribute to a sustainable future."
+}
