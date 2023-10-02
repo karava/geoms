@@ -1,25 +1,35 @@
 from django.shortcuts import get_object_or_404, render
 from .models import TechnicalGuide, CaseStudy
+from django.views.generic import ListView, DetailView
 
-def technical_guide_list(request):
-    guides = TechnicalGuide.objects.all()
-    return render(request, 'technical_guide_list.html', {'guides': guides})
+class TechnicalGuideListView(ListView):
+    model = TechnicalGuide
+    template_name = 'technical_guide_list.html'
+    context_object_name = 'guides'
 
-def case_study_list(request):
-    studies = CaseStudy.objects.all()
-    return render(request, 'case_study_list.html', {'studies': studies})
+class CaseStudyListView(ListView):
+    model = CaseStudy
+    template_name = 'case_study_list.html'
+    context_object_name = 'studies'
 
-def case_study_detail(request, case_study_slug):
-    study = get_object_or_404(CaseStudy, slug=case_study_slug)
-    return render(request, 'case_study_detail.html', {'study': study})
-
-def technical_guide_detail(request, guide_slug):
-    guide = get_object_or_404(TechnicalGuide, slug=guide_slug)
-    main_image = guide.images.filter(is_main_image=True).first()
+class CaseStudyDetailView(DetailView):
+    model = CaseStudy
+    template_name = 'case_study_detail.html'
+    context_object_name = 'study'
+    slug_url_kwarg = 'case_study_slug'
     
-    context = {
-        'guide': guide,
-        'main_image': main_image,
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['main_image'] = self.object.images.filter(is_main_image=True).first()
+        return context
+
+class TechnicalGuideDetailView(DetailView):
+    model = TechnicalGuide
+    template_name = 'technical_guide_detail.html'
+    context_object_name = 'guide'
+    slug_url_kwarg = 'guide_slug'
     
-    return render(request, 'technical_guide_detail.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['main_image'] = self.object.images.filter(is_main_image=True).first()
+        return context
