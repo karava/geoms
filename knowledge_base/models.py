@@ -44,6 +44,7 @@ class TechnicalGuideImage(models.Model):
 
 class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
+    caption = models.CharField(max_length=255, default='')
     project_description = models.TextField(blank=True, verbose_name="The Project")
     challenges = models.TextField(blank=True)
     solution = models.TextField(blank=True, verbose_name="Our Solution")
