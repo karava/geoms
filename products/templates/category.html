@@ -16,4 +16,22 @@
     </div>
 </div>
 
+<h1>{{ category }}</h1>
+
+{% for product in products %}
+    <div>
+        <h2>{{ product.title }}</h2>
+        
+        {% if product.default_image %}
+            <img src="{{ product.default_image.0.file.url }}" alt="{{ product.title }} image">
+        {% else %}
+            <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder">
+        {% endif %}
+        
+        <p>{{ product.short_description }}</p>
+        <p>{{ product.code }}</p>
+        <a href="{% url 'product_detail' product.id %}">View Details</a>
+    </div>
+{% endfor %}
+
 {% endblock %}

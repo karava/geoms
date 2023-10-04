@@ -82,5 +82,89 @@
       "description": "Datasheet for Sample Geocell A",
       "base_product": 1
     }
+  },
+  {
+    "model": "products.application",
+    "pk": 2,
+    "fields": {
+      "name": "Geocell Application B",
+      "description": "Description for Geocell Application B."
+    }
+  },
+  {
+    "model": "products.geocell",
+    "pk": 2,
+    "fields": {
+      "height": 160,
+      "weld_spacing": 210,
+      "is_textured": false
+    }
+  },
+  {
+    "model": "products.baseproduct",
+    "pk": 2,
+    "fields": {
+      "code": "GEO124",
+      "title": "Sample Geocell B",
+      "material": "Polypropylene",
+      "short_description": "This is a sample Geocell B.",
+      "long_description": "Long description of Sample Geocell B for SEO.",
+      "applications": [2],
+      "notes": "Some important notes about this Geocell B.",
+      "suppliers": "SupplierX, SupplierY",
+      "unit_of_measure": "rolls",
+      "twentygp_cap": 110,
+      "fortygp_cap": 210,
+      "fortyhc_cap": 260,
+      "moq": 20,
+      "alternative_names": "GeoC, GeoD",
+      "packing_description": "Packed securely in rolls.",
+      "product_detail_geocell": 2
+    }
+  },
+  {
+    "model": "products.price",
+    "pk": 2,
+    "fields": {
+      "date": "2023-09-28",
+      "qty": 120,
+      "unit_of_measure": "sqm",
+      "comment": "This is a sample price for B.",
+      "FOB_port": "Port B",
+      "currency": "usd",
+      "expiry": "2023-10-28",
+      "price": 16.99,
+      "base_product": 2
+    }
+  },
+  {
+    "model": "products.imagefile",
+    "pk": 3,
+    "fields": {
+      "file": "products/geocell/images/sample_image3.jpg",
+      "base_product": 2,
+      "is_default": true,
+      "is_for_website": true
+    }
+  },
+  {
+    "model": "products.imagefile",
+    "pk": 4,
+    "fields": {
+      "file": "products/geocell/images/sample_image4.jpg",
+      "base_product": 2,
+      "is_default": false,
+      "is_for_website": false
+    }
+  },
+  {
+    "model": "products.productresource",
+    "pk": 2,
+    "fields": {
+      "resource_type": "datasheet",
+      "resource_file": "products/resources/sample_datasheet_2.pdf",
+      "description": "Datasheet for Sample Geocell B",
+      "base_product": 2
+    }
   }
 ]
