@@ -19,7 +19,7 @@
     <div class="container">
         <div class="default-grid application-grid">
             {% for item in guides %}
-            <a href="/knowledgebase/case-studies/{{item.slug}}" role="button" class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
+            <a href="/knowledgebase/technical-guides/{{item.slug}}" role="button" class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                 <div class="application-thumbnail">
                     <img src="{% static subpath|add:'assets/images/' %}{{ item.thumbnail }}"
                         alt="application-thumbnail">
