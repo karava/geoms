@@ -156,7 +156,7 @@ body {
 
 .default-grid {
     display: grid;
-    column-gap: 20px;
+    column-gap: 16px;
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -194,6 +194,7 @@ body {
 
 @media (min-width: 768px) {
     .default-grid {
+        column-gap: 20px;
         grid-template-columns: repeat(12, minmax(0, 1fr));
     }
 

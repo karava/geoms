@@ -1,6 +1,6 @@
 [{
     "title": "Geocell",
-    "url": "/geocell",
+    "url": "/geocells",
     "description": "When it comes to erosion control and soil stabilization, InfraCell Geocells deliver unparalleled performance. Designed for a range of applications from slope stabilization to ground reinforcement, InfraCell is the go-to solution for challenging environmental conditions.",
     "thumbnail": "product_category_geocell.png"
 }, {
@@ -15,7 +15,7 @@
     "thumbnail": "product_category_geotextiles.png"
 }, {
     "title": "Clay Liners",
-    "url": "/gcl",
+    "url": "/gcls",
     "description": "Geosynthetic Clay Liners, known by our product name InfraClay, provide effective and environmentally friendly sealing solutions. Used extensively in waste management and water treatment plants, InfraClay ensures compliance with the most stringent environmental regulations.",
     "thumbnail": "product_category_gcl.png"
 }, {

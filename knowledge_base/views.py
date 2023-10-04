@@ -11,6 +11,24 @@ class CaseStudyListView(ListView):
     model = CaseStudy
     template_name = 'case_study_list.html'
     context_object_name = 'studies'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        new_context = []
+        
+        for item in context['studies']:
+            main_image = item.images.filter(is_main_image=True).first()
+            new_context.append({
+                'title': item.title,
+                'caption': item.caption,
+                'description': item.project_description,
+                'slug': item.slug,
+                'thumbnail': main_image.image.file.name if main_image else None
+            })
+
+        context['studies'] = new_context
+
+        return context
 
 class CaseStudyDetailView(DetailView):
     model = CaseStudy
