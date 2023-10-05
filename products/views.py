@@ -1,9 +1,10 @@
 import os, json
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ImageFile
 from django.db.models import Prefetch
+from .forms import ProductEnquiryForm
 
 # Create your views here.
 
@@ -66,4 +67,15 @@ class ProductDetailView(DetailView):
         context['model_name'] = self.object.get_product_detail_name()
         context['resources'] = self.object.resources.all()
         return context
+    
+def product_enquiry(request):
+    if request.method == 'POST':
+        form = ProductEnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to a 'thank you' page or similar after submission
+            return redirect('contact')
+    else:
+        form = ProductEnquiryForm()
+    return render(request, 'contact.html', {'form': form})
 
