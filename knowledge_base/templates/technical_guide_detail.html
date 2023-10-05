@@ -1,10 +1,49 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>{{ guide.title }}</h1>
-    {% if main_image %}
-        <img src="{{ main_image.image.file.url }}" alt="{{ guide.title }}">
-    {% endif %}
-    <p>{{ guide.content }}</p>
-    <!-- Add any other fields you wish to display -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumbs">
+                <a href="/knowledgebase/technical-guides/"
+                    class="typo-caption neutral-600 fw-medium text-decoration-none">Technical Guides</a>
+                <img src="{% static 'assets/icons/arrow-down-s-line.svg' %}" width="20px" height="20px"
+                    alt="arrow-down-line">
+                <span class="typo-caption neutral-500 fw-medium">{{ guide.title }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container article-section mt-5 margin-bottom-2">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 col-12">
+            <p class="fw-semibold typo-body-1 mb-2 eyebrow neutral-500"><span class="orange-600">//</span>&nbsp;Technical Guides&nbsp;&bull;
+                {{guide.created_at|date:"m/d/Y"}}
+            </p>
+            <p class="typo-heading-2 fw-bold title">{{ guide.title }}</p>
+            {% if main_image %}
+            <img src="{{ main_image.image.file.url }}" alt="Main Image for {{ guide.title }}" style="width:100%;">
+            {% endif %}
+            <div class="article-content-block">
+                <p class="typo-heading-5 neutral-600 fw-bold">About {{ guide.title }}</p>
+                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ guide.content }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-link-section-1">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12 text-center px-3">
+                <p class="neutral-600 headline mb-0">Embrace Your Journey to Success with Action</p>
+                <p class="neutral-500 copy px-3">Your Journey to Success Begins Here: Take the Next Step towards
+                    Achieving Your Goals</p>
+                <a role="button" href="#" class="primary-btn">Get Enquiry</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

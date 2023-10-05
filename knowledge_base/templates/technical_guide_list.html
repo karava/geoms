@@ -21,13 +21,13 @@
             {% for item in guides %}
             <a href="/knowledgebase/technical-guides/{{item.slug}}" role="button" class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                 <div class="application-thumbnail">
-                    <img src="{% static subpath|add:'assets/images/' %}{{ item.thumbnail }}"
+                    <img src="{{ item.thumbnail }}"
                         alt="application-thumbnail">
                 </div>
                 <div class="application-content d-flex flex-column flex-fill">
                     <p class="title neutral-600 fw-bold mb-2 mb-lg-3">{{item.title}}</p>
                     <div class="d-flex align-items-center mt-auto">
-                        <p class="caption typo-caption neutral-500 mb-0">{{item.caption}}</p>
+                        <p class="caption typo-caption neutral-500 mb-0">{{item.created_at|date:"m/d/Y"}}</p>
                         <div class="link-arrow ms-auto">
                             <img src="{% static 'assets/icons/arrow-top-right.svg' %}" width="24px" height="24px" alt="arrow-top-right">
                         </div>

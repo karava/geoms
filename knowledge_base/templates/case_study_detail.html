@@ -1,20 +1,73 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>{{ study.title }}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumbs">
+                <a href="/knowledgebase/case-studies/"
+                    class="typo-caption neutral-600 fw-medium text-decoration-none">Case Studies</a>
+                <img src="{% static 'assets/icons/arrow-down-s-line.svg' %}" width="20px" height="20px"
+                    alt="arrow-down-line">
+                <span class="typo-caption neutral-500 fw-medium">{{ study.title }}</span>
+            </div>
+        </div>
+    </div>
+</div>
 
-{% if main_image %}
-    <img src="{{ main_image.image.file.url }}" alt="Main Image for {{ study.title }}" style="width:100%;">
+<div class="container article-section mt-5">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 col-12">
+            <p class="fw-semibold typo-body-1 mb-2 eyebrow neutral-500"><span class="orange-600">//</span>&nbsp;Case
+                Studies&nbsp;&bull;
+                {{study.caption}}
+            </p>
+            <p class="typo-heading-2 fw-bold title">{{ study.title }}</p>
+            {% if main_image %}
+            <img src="{{ main_image.image.file.url }}" alt="Main Image for {{ study.title }}" style="width:100%;">
+            {% endif %}
+            <div class="article-content-block">
+                <p class="typo-heading-5 neutral-600 fw-bold">The Project</p>
+                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ study.project_description }}</p>
+            </div>
+            <div class="article-content-block">
+                <p class="typo-heading-5 neutral-600 fw-bold">Challenges</p>
+                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ study.challenges }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-section-4 article">
+    <div class="container">
+        <div class="default-grid">
+            <div class="content">
+                <p class="neutral-600 fw-bold typo-heading-5 mb-2"><span class="orange-600">//</span>&nbsp;Our Solution
+                </p>
+                <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ study.solution }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if gallery_images %}
+<div class="project-gallery">
+    <div class="container">
+        <div class="default-grid">
+            <div class="col-span-full title">
+                <p class="fw-semibold typo-body-2 mb-2 eyebrow neutral-500"><span class="orange-600">//</span>&nbsp;Project Gallery
+                </p>
+                <p class="fw-bold typo-heading-4 neutral-600 mb-0">Discover Our Work</p>
+            </div>
+        </div>
+        <div class="default-grid project-grid">
+            {% for image in gallery_images %}
+            <div class="project-gallery-item"><img src="{{ image }}" alt="Image for {{ study.title }}"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endif %}
 
-<p><strong>Project Description:</strong> {{ study.project_description }}</p>
-<p><strong>Challenges:</strong> {{ study.challenges }}</p>
-<p><strong>Our Solution:</strong> {{ study.solution }}</p>
-
-{% if study.images.exists %}
-    <h2>Images</h2>
-    {% for image in study.images.all %}
-        <img src="{{ image.image.file.url }}" alt="Image for {{ study.title }}">
-    {% endfor %}
-{% endif %}
 {% endblock %}

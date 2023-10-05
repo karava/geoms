@@ -131,6 +131,10 @@ body {
     grid-column-end: auto;
 }
 
+.mt-60 {
+    margin-top: 60px!important;
+}
+
 .margin-bottom-1 {
     margin-bottom: 60px!important;
 }
@@ -192,6 +196,18 @@ body {
     margin-bottom: 35px;
 }
 
+.breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 16px 0;
+    overflow-wrap: break-word;
+}
+
+.breadcrumbs img {
+    margin: 0 6px;
+}
+
 @media (min-width: 768px) {
     .default-grid {
         column-gap: 20px;
@@ -215,5 +231,9 @@ body {
     .container {
         padding: 0 120px;
         max-width: 1440px;
+    }
+
+    .breadcrumbs {
+        padding: 20px 0;
     }
 }
