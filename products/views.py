@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ImageFile
 from django.db.models import Prefetch
 from .forms import ProductEnquiryForm
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -72,7 +73,29 @@ def product_enquiry(request):
     if request.method == 'POST':
         form = ProductEnquiryForm(request.POST)
         if form.is_valid():
-            form.save()
+            enquiry = form.save()
+            
+            # Sending email:
+            subject = 'New Product Enquiry'
+            message = f"""
+Name: {enquiry.full_name}
+Email: {enquiry.email}
+Phone: {enquiry.phone}
+Existing Customer: {'Yes' if enquiry.existing_customer else 'No'}
+Product Interested In: {enquiry.product_interested_in}
+Estimated Quantity: {enquiry.estimated_quantity}
+Specifications: {enquiry.specifications}
+Project Based: {enquiry.project_based}
+Needed By: {enquiry.needed_by}
+"""
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL, # Sender's email
+                ['your_email@example.com'], # Replace with your receiving email
+            )
+
             # Redirect to a 'thank you' page or similar after submission
             return redirect('contact')
     else:
