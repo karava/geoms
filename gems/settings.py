@@ -170,6 +170,7 @@ else:
     STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_S3_REGION_NAME = 'ap-southeast-2'
+AWS_QUERYSTRING_AUTH = False
 
 # General optimization for faster delivery
 AWS_IS_GZIPPED = True
