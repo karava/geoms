@@ -1130,13 +1130,13 @@ header .v-divider {
     height: auto;
     max-height: 0;
     overflow: hidden;
-    transition: all .8s ease-out;
+    transition: all .5s ease-out;
 }
 
 .faq-item.opened .faq-item-body {
     max-height: 30rem;
     padding-top: 16px;
-    transition: all .8s ease-out;
+    transition: all .5s ease-out;
 }
 
 .faq-item .faq-item-header {
