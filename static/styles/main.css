@@ -327,6 +327,10 @@ header .v-divider {
     padding: 40px 16px;
 }
 
+.text-section-4.product-category-summary {
+    background: #F9F9F9;
+}
+
 @media (min-width: 992px) {
     .text-section-4 {
         padding-top: 100px;
