@@ -1,11 +1,13 @@
 from django.shortcuts import get_object_or_404, render
 from .models import TechnicalGuide, CaseStudy
 from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class TechnicalGuideListView(ListView):
     model = TechnicalGuide
     template_name = 'technical_guide_list.html'
     context_object_name = 'guides'
+    paginate_by = 10    # default items per page
     
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
@@ -25,10 +27,45 @@ class TechnicalGuideListView(ListView):
 
         return context
 
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get('pagesize', self.paginate_by)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        page = self.request.GET.get('page')
+        paginator = Paginator(queryset, self.get_paginate_by(queryset))
+
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            queryset = paginator.page(1)
+        except EmptyPage:
+            queryset = paginator.page(paginator.num_pages)
+
+        return queryset
+
 class CaseStudyListView(ListView):
     model = CaseStudy
     template_name = 'case_study_list.html'
     context_object_name = 'studies'
+    paginate_by = 10    # default items per page
+
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get('pagesize', self.paginate_by)
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        page = self.request.GET.get('page')
+        paginator = Paginator(queryset, self.get_paginate_by(queryset))
+
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            queryset = paginator.page(1)
+        except EmptyPage:
+            queryset = paginator.page(paginator.num_pages)
+        
+        return queryset
     
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)

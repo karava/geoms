@@ -205,5 +205,18 @@ class ProductResource(models.Model):
     
     def __str__(self):
         return f"{self.resource_type} for {self.base_product.code}"
+    
+class ProductEnquiry(models.Model):
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    existing_customer = models.BooleanField(default=False)
+    product_interested_in = models.CharField(max_length=200)
+    estimated_quantity = models.CharField(max_length=50)
+    specifications = models.TextField(blank=True)
+    project_based = models.TextField(blank=True)
+    needed_by = models.CharField(max_length=50)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
 
 

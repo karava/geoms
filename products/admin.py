@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, ProductResource, Application
+from .models import Geocell, BaseProduct, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, ProductResource, Application, ProductEnquiry
 import nested_admin
 
 # Inline Inlines
@@ -49,3 +49,4 @@ admin.site.register(GCL, GCLAdmin)
 admin.site.register(Geogrid, GeogridAdmin)
 admin.site.register(DrainageProduct, DrainageAdmin)
 admin.site.register(Application)
+admin.site.register(ProductEnquiry)
