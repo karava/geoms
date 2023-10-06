@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'storages',
     'nested_admin',
     'apis',
-    'knowledge_base'
+    'knowledge_base',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -181,3 +182,6 @@ EMAIL_PORT = 587  # Commonly used port for TLS
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your_email@example.com'
 EMAIL_HOST_PASSWORD = 'your_email_password'
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')

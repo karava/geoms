@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{{ form.media }}
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
