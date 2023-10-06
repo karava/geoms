@@ -46,11 +46,24 @@ def category(request, slug):
     default_images = ImageFile.objects.filter(is_default=True)
     products = products.prefetch_related(Prefetch('images', queryset=default_images, to_attr='default_image'))
 
+    # Get category information from product json
+    path = os.path.join(settings.BASE_DIR, 'data')
+
+    file_name = "products.json"
+    json_url = "%s/%s" % (path, file_name)
+    items = json.load(open(json_url))
+    category_detail = None
+    
+    for item in items:
+        if item['url'] == ('/' + slug):
+            category_detail = item
+
     context = {
         'products': products,
-        'category': related_model._meta.verbose_name_plural.title()
+        'category': related_model._meta.verbose_name_plural.title(),
+        'detail': category_detail
     }
-    
+
     return render(request, 'category.html', context)
 
 
