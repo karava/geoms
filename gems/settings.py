@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'storages',
     'nested_admin',
     'apis',
-    'knowledge_base'
+    'knowledge_base',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,15 @@ AWS_IS_GZIPPED = True
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+
+# Change console to smtp when ready for production
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'webmaster@example.com'
+EMAIL_HOST = 'your-smtp-server.com' 
+EMAIL_PORT = 587  # Commonly used port for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_email@example.com'
+EMAIL_HOST_PASSWORD = 'your_email_password'
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
