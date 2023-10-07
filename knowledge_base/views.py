@@ -24,6 +24,7 @@ class TechnicalGuideListView(ListView):
             })
 
         context['guides'] = new_context
+        context['page_title'] = 'Technical Guides'
 
         return context
 
@@ -82,6 +83,7 @@ class CaseStudyListView(ListView):
             })
 
         context['studies'] = new_context
+        context['page_title'] = 'Case Studies'
 
         return context
 
@@ -99,6 +101,7 @@ class CaseStudyDetailView(DetailView):
         for item in gallery_image_items:
             gallery_images.append(item.image.file.url)
         context['gallery_images'] = gallery_images
+        context['page_title'] = self.object.title
         return context
 
 class TechnicalGuideDetailView(DetailView):
@@ -110,4 +113,5 @@ class TechnicalGuideDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['main_image'] = self.object.images.filter(is_main_image=True).first()
+        context['page_title'] = self.object.title
         return context

@@ -1173,3 +1173,117 @@ header .v-divider {
         padding-bottom: 24px;
     }
 }
+
+/* product-detail-section */
+.product-detail-section .product-detail-block-wrapper {
+    padding-top: 28px;
+    padding-bottom: 56px;
+}
+
+.product-detail-section .image-wrapper {
+    width: 100%;
+}
+
+.product-detail-section .main-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.product-detail-section .main-image img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-detail-section .other-image-thumbnail {
+    border-radius: 4px;
+    aspect-ratio: 131 / 92;
+    overflow: hidden;
+}
+
+.product-detail-section .other-image-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-detail-section .other-images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+}
+
+.product-detail-section .title {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.product-detail-section .product-detail-block {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.product-detail-section .nav-pills {
+    margin-top: 20px;
+}
+
+.product-detail-section .nav-pills .nav-link {
+    padding: 16px;
+    background-color: transparent;
+}
+
+.product-detail-section .nav-pills .nav-link.active {
+    border-bottom: 4px solid #FA6400;
+}
+
+.product-resource {
+    padding: 12px 0;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.product-resource .download-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 2px;
+    border: 1px solid #FA6400;
+    background: white;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.product-resource .download-link:hover {
+    background: #F9F9F9;
+}
+
+@media (min-width: 992px) {
+    .product-detail-section .image-wrapper {
+        width: calc(100% - 35px);
+    }
+
+    .product-detail-section .title {
+        margin-top: 12px;
+        margin-bottom: 20px;
+    }
+
+    .product-detail-section .nav-pills {
+        margin-top: 80px;
+    }
+
+    .product-detail-section .product-detail-block {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .product-detail-section .product-detail-block-wrapper {
+        padding-top: 40px;
+        padding-bottom: 80px;
+    }
+
+    .product-resource {
+        padding: 16px 0;
+    }
+}
