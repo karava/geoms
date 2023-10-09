@@ -19,7 +19,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -132,24 +131,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Media files storage
-
-DEFAULT_FILE_STORAGE = 'gems.storage_backends.MediaStorage'
 
 # Used to authenticate with S3
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
@@ -159,13 +145,32 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
 XERO_CLIENT_ID = os.environ.get('XERO_CLIENT_ID')
 XERO_CLIENT_SECRET = os.environ.get('XERO_CLIENT_SECRET')
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+AWS_STORAGE_BUCKET_NAME = 'infratex-gems-assets'
+AWS_LOCATION = 'static'
+
+# Media files storage
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
 # Configure which endpoint to send files to, and retrieve files from.
 if DEVELOPMENT_MODE is True:
-    AWS_STORAGE_BUCKET_NAME = 'gems-development'
+    AWS_MEDIA_LOCATION = 'dev/media'
 else:
-    AWS_STORAGE_BUCKET_NAME = 'gems-production'
+    AWS_MEDIA_LOCATION = 'prod/media'
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_S3_REGION_NAME = 'ap-southeast-2'
+AWS_QUERYSTRING_AUTH = False
 
 # General optimization for faster delivery
 AWS_IS_GZIPPED = True
