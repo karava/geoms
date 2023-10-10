@@ -16,22 +16,92 @@
     </div>
 </div>
 
-<h1>{{ category }}</h1>
-
-{% for product in products %}
-    <div>
-        <h2>{{ product.title }}</h2>
-        
-        {% if product.default_image %}
-            <img src="{{ product.default_image.0.file.url }}" alt="{{ product.title }} image">
-        {% else %}
-            <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder">
-        {% endif %}
-        
-        <p>{{ product.short_description }}</p>
-        <p>{{ product.code }}</p>
-        <a href="{% url 'product_detail' product.id %}">View Details</a>
+<div class="container">
+    <div class="default-grid">
+        <div class="product-category-header col-span-full d-flex align-items-end justify-content-between">
+            <p class="mb-3 mb-lg-0 neutral-600 typo-heading-8 fw-bold">{{ category }}&nbsp;<span
+                    class="neutral-500">({{products|length}})</span></p>
+        </div>
     </div>
-{% endfor %}
+</div>
+
+<div class="application-grid-section product-category-grid-section">
+    <div class="container">
+        <div class="default-grid application-grid">
+            {% for product in products %}
+            <a href="{% url 'product_detail' product.id %}" role="button"
+                class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
+                <div class="application-thumbnail">
+                    {% if product.default_image %}
+                    <img src="{{ product.default_image.0.file.url }}" alt="{{ product.title }} image">
+                    {% else %}
+                    <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder">
+                    {% endif %}
+                </div>
+                <div class="application-content d-flex flex-column flex-fill">
+                    <p class="title neutral-600 fw-bold mb-2 mb-lg-3">{{product.title}}</p>
+                    <div class="d-flex align-items-center mt-auto">
+                        <p class="caption typo-caption neutral-500 mb-0">{{product.code}}</p>
+                        <div class="link-arrow ms-auto">
+                            <img src="{% static 'assets/icons/arrow-top-right.svg' %}" width="24px" height="24px"
+                                alt="arrow-top-right">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="faq-section">
+    <div class="container">
+        <div class="default-grid">
+            <div class="faq-content">
+                <p class="fw-semibold typo-body-1 mb-2 eyebrow"><span class="orange-600">//</span>&nbsp;Frequently Asked
+                    Questions</p>
+                <p class="typo-heading-5 neutral-600 fw-bold">Get More Details About {{category}}</p>
+                {% for item in detail.faq %}
+                <div class="faq-item">
+                    <button type="button" class="faq-item-header">
+                        <p class="neutral-600 mb-0 fw-bold">{{item.question}}</p>
+                        <img src="{% static 'assets/icons/add-line.svg' %}" class="plus-icon" width="24px" height="24px" alt="add-line">
+                        <img src="{% static 'assets/icons/subtract-line.svg' %}" class="minus-icon" width="24px" height="24px"
+                            alt="subtract-line">
+                    </button>
+                    <div class="faq-item-body">
+                        <p class="neutral-500 typo-body-1 lh-base mb-0">{{item.answer}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-section-4 product-category-summary margin-bottom-2">
+    <div class="container">
+        <div class="default-grid">
+            <div class="content">
+                <p class="neutral-500 fw-semibold typo-body-2 mb-2"><span class="orange-600">//</span>&nbsp;Summary</p>
+                <p class="neutral-600 fw-bold typo-heading-4 mb-0">In Summary</p>
+                <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ detail.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-link-section-1">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12 text-center px-3">
+                <p class="neutral-600 headline mb-0">Embrace Your Journey to Success with Action</p>
+                <p class="neutral-500 copy px-3">Your Journey to Success Begins Here: Take the Next Step towards
+                    Achieving Your Goals</p>
+                <a role="button" href="#" class="primary-btn">Get Enquiry</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

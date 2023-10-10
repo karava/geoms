@@ -22,8 +22,9 @@
             {% for item in studies %}
             <a href="/knowledgebase/case-studies/{{item.slug}}" role="button" class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                 <div class="application-thumbnail">
-                    <img src="{% static subpath|add:'assets/images/' %}{{ item.thumbnail }}"
-                        alt="application-thumbnail">
+                    {% if item.thumbnail %}
+                    <img src="{{ item.thumbnail }}" alt="application-thumbnail">
+                    {% endif %}
                 </div>
                 <div class="application-content d-flex flex-column flex-fill">
                     <p class="title neutral-600 fw-bold mb-2 mb-lg-3">{{item.title}}</p>

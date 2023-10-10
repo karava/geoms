@@ -3,12 +3,112 @@
 
 {% block content %}
 
-{{ form.media }}
+<div class="container contact-section margin-bottom-2">
+    <div class="default-grid">
+        <div class="col-span-full col-lg-span-6 pr-lg-4">
+            <p class="fw-semibold neutral-500 typo-body-1 mb-2"><span class="orange-600">//</span>&nbsp;Contact Us</p>
+            <p class="fw-bold typo-heading-3 neutral-600 mb-4">Get Infratex Enquiry</p>
+            <p class="typo-body-1 neutral-500 lh-base mb-0">When you contact Geosynthetics Australia we strive to give
+                you
+                the best customer service possible. Our business is built on trust. We seek to provide the best possible
+                advice and deliver the best possible solution for our client’s needs.</p>
+            <div class="contact-information">
+                <div class="contact-information-row">
+                    <img src="{% static 'assets/icons/phone.svg' %}" alt="phone">
+                    <span class="typo-body-2 neutral-600 fw-semibold">03 8640 0958</span>
+                </div>
+                <div class="contact-information-row">
+                    <img src="{% static 'assets/icons/mail-fill.svg' %}" alt="mail">
+                    <span class="typo-body-2 neutral-600 fw-semibold">sales@infratex.net.au</span>
+                </div>
+                <div class="contact-information-row">
+                    <img src="{% static 'assets/icons/abn-fill.svg' %}" alt="abn">
+                    <span class="typo-body-2 neutral-600 fw-semibold">49 650 876 387</span>
+                </div>
+                <div class="contact-information-row">
+                    <img src="{% static 'assets/icons/time-fill.svg' %}" alt="time">
+                    <span class="typo-body-2 neutral-600 fw-semibold">Mon – Fri (09:00 – 17:00)</span>
+                </div>
+            </div>
+            <div class="h-divider-2"></div>
+            <div class="our-clients-block">
+                <p class="fw-semibold neutral-500 typo-body-1 title"><span class="orange-600">//</span>&nbsp;Our Clients
+                </p>
+                <div class="supplier-grid">
+                    <div class="supplier-block">
+                        <img src="{% static 'assets/images/supplier-1.png' %}" alt="supplier">
+                    </div>
+                    <div class="supplier-block">
+                        <img src="{% static 'assets/images/supplier-2.png' %}" alt="supplier">
+                    </div>
+                    <div class="supplier-block">
+                        <img src="{% static 'assets/images/supplier-3.png' %}" alt="supplier">
+                    </div>
+                    <div class="supplier-block">
+                        <img src="{% static 'assets/images/supplier-4.png' %}" alt="supplier">
+                    </div>
+                    <div class="supplier-block">
+                        <img src="{% static 'assets/images/supplier-5.png' %}" alt="supplier">
+                    </div>
+                    <div class="supplier-block">
+                        <img src="{% static 'assets/images/supplier-6.png' %}" alt="supplier">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-full col-lg-span-6">
+            <div class="contact-form">
+                <p class="typo-heading-7 neutral-600 fw-bold">Product Enquiry Form</p>
+                {{ form.media }}
+                <form method="post">
+                    {% csrf_token %}
+                    {% for error in form.non_field_errors %}
+                    <li>{{error}}</li>
+                    {% endfor %}
+                    <div class="row">
+                        {% for field in form %}
+                        <div class="col-12" id="{{ field.auto_id }}-row">
+                            <div class="my-2">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Get Enquiry" class="primary-btn btn w-100">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Get Enquiry">
-</form>
+<div class="location-section bg-neutral-300 margin-bottom-2">
+    <div class="container">
+        <div class="default-grid">
+            <div class="col-span-full">
+                <p class="fw-semibold neutral-500 typo-body-1 mb-2"><span class="orange-600">//</span>&nbsp;Our Offices
+                </p>
+                <p class="fw-bold typo-heading-3 neutral-600 mb-4">Find Us Here</p>
+            </div>
+            <div class="col-span-full col-lg-span-6"></div>
+            <div class="col-span-full col-lg-span-6"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-link-section-1">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12 text-center px-3">
+                <p class="neutral-600 headline mb-0">Embrace Your Journey to Success with Action</p>
+                <p class="neutral-500 copy px-3">Your Journey to Success Begins Here: Take the Next Step towards
+                    Achieving Your Goals</p>
+                <a role="button" href="#" class="primary-btn">Get Enquiry</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,37 +1,134 @@
-{% extends "base.html" %}  {# Assuming you have a base.html to inherit from. #}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h1>{{ model_name }}</h1>
-    <h2>{{ object.title }}</h2>
-    <p>Product Code: {{ object.code }}</p>
-    <p>Short Description: {{ object.short_description }}</p>
-    <p>Long Description: {{ object.long_description }}</p>
-    
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumbs">
+                <a href="/products/" class="typo-caption neutral-600 fw-medium text-decoration-none">Categories</a>
+                <img src="{% static 'assets/icons/arrow-down-s-line.svg' %}" width="20px" height="20px"
+                    alt="arrow-down-line">
+                <a href="/products/"
+                    class="typo-caption neutral-600 fw-medium text-decoration-none text-capitalize">{{model_name}}</a>
+                <img src="{% static 'assets/icons/arrow-down-s-line.svg' %}" width="20px" height="20px"
+                    alt="arrow-down-line">
+                <span class="typo-caption neutral-500 fw-medium">{{ object.title }}</span>
+            </div>
+        </div>
+    </div>
+</div>
 
-    {% if default_image %}
-        <img src="{{ default_image.file.url }}" alt="{{ object.title }}">
-    {% endif %}
+<div class="container product-detail-section">
+    <div class="default-grid">
+        <div class="col-span-full col-md-span-6 d-md-block d-none">
+            <div class="image-wrapper">
+                <div class="main-image">
+                    {% if default_image %}
+                    <img src="{{ default_image.file.url }}" alt="{{ object.title }}">
+                    {% endif %}
+                </div>
+                <div class="other-images">
+                    {% for image in website_images %}
+                    <div class="other-image-thumbnail">
+                        <img src="{{ image.file.url }}" alt="{{ object.title }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-span-full col-md-span-6">
+            <div>
+                <span class="chip-2 text-capitalize neutral-500 fw-bold typo-body-2">{{ model_name }}</span>
+            </div>
+            <p class="neutral-600 fw-bold neutral-600 typo-heading-2 title">{{ object.title }}</p>
+            <p class="neutral-500 fw-bold typo-body-2 mb-md-0">SKU: {{ object.code }}</p>
+            <div class="image-wrapper d-block d-md-none">
+                <div class="main-image">
+                    {% if default_image %}
+                    <img src="{{ default_image.file.url }}" alt="{{ object.title }}">
+                    {% endif %}
+                </div>
+                <div class="other-images">
+                    {% for image in website_images %}
+                    <div class="other-image-thumbnail">
+                        <img src="{{ image.file.url }}" alt="{{ object.title }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="h-divider-2"></div>
+            <p class="neutral-500 typo-body-1 lh-base mb-0">{{ object.short_description }}</p>
+        </div>
+        <div class="col-span-full">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active typo-body-2 fw-semibold neutral-500" aria-current="page"
+                        href="#description">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#applications">Applications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#resources">Resources</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="product-detail-section bg-neutral-300 margin-bottom-2">
+    <div class="container product-detail-block-wrapper">
+        <div class="default-grid">
+            <div id="description" class="col-span-full col-lg-span-10 product-detail-block">
+                <p class="neutral-600 fw-bold typo-heading-6">Description</p>
+                <p class="neutral-500 lh-base typo-body-1 mb-0">{{ object.long_description }}</p>
+            </div>
+            <div class="col-span-full">
+                <div class="h-divider-2"></div>
+            </div>
+            <div id="applications" class="col-span-full product-detail-block">
+                <p class="neutral-600 fw-bold typo-heading-6">Applications</p>
+                <ul>
+                    {% for app in object.applications.all %}
+                    <li>{{ app.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-span-full">
+                <div class="h-divider-2"></div>
+            </div>
+            <div id="resources" class="col-span-full col-lg-span-10 product-detail-block">
+                <p class="neutral-600 fw-bold typo-heading-6">Resources&nbsp;<span
+                        class="neutral-500">({{resources|length}})</span></p>
+                <ul class="p-0 mb-0">
+                    {% for resource in resources %}
+                    <li class="product-resource d-flex justify-content-between align-items-center">
+                        <span class="neutral-500 fw-semibold typo-heading-8 text-capitalize">{{ resource.resource_type }}</span>
+                        <a href="{{ resource.resource_file.url }}" target="_blank" class="download-link orange-500 text-decoration-none">
+                            <img src="{% static 'assets/icons/download-cloud-fill.svg' %}" alt="download-cloud-fill">
+                            Download
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-span-full">
+                <div class="h-divider-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="text-link-section-1">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12 text-center px-3">
+                <p class="neutral-600 headline mb-0">Embrace Your Journey to Success with Action</p>
+                <p class="neutral-500 copy px-3">Your Journey to Success Begins Here: Take the Next Step towards
+                    Achieving Your Goals</p>
+                <a role="button" href="#" class="primary-btn">Get Enquiry</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    
-    <h3>Website Images</h3>
-    {% for image in website_images %}
-        <img src="{{ image.file.url }}" alt="{{ object.title }}" style="width: 100px;">
-    {% endfor %}
-
-    
-    <h3>Applications</h3>
-    <ul>
-        {% for app in object.applications.all %}
-            <li>{{ app.name }}</li>
-        {% endfor %}
-    </ul>
-
-    <h3>Resources</h3>
-    <ul>
-        {% for resource in resources %}
-            <li>
-                <a href="{{ resource.resource_file.url }}" target="_blank">{{ resource.resource_type }} - {{ resource.description }}</a>
-            </li>
-        {% endfor %}
-    </ul>
 {% endblock %}
