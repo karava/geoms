@@ -609,7 +609,17 @@ header .v-divider {
 .video-hero-section {
     position: relative;
     padding-top: 60px;
-    /* background: linear-gradient(0deg, rgba(5, 8, 17, 0.36) 0%, rgba(5, 8, 17, 0.36) 100%), lightgray 0px -66px / 100% 122.872% no-repeat; */
+}
+
+.video-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(5, 8, 17, 0.36) 0%, rgba(5, 8, 17, 0.36) 100%), lightgray 0px -66px / 100% 122.872% no-repeat;
+    z-index: -1;
+    opacity: .6;
 }
 
 .video-hero-section .video-block {
@@ -619,7 +629,7 @@ header .v-divider {
     bottom: 0;
     right: 0;
     overflow: hidden;
-    z-index: -1;
+    z-index: -2;
     display: flex;
     align-items: center;
     justify-content: center;
