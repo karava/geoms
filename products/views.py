@@ -82,6 +82,16 @@ class ProductDetailView(DetailView):
         context['model_name'] = self.object.get_product_detail_name()
         context['resources'] = self.object.resources.all()
         context['page_title'] = self.object.title
+
+        # Getting the related products
+        detail_model = self.object.get_product_detail_model()
+        if detail_model:
+           related_products = BaseProduct.objects.filter(
+            id__in=type(detail_model).objects.exclude(id=detail_model.id).values('baseproduct__id')).exclude(id=self.object.id)  # Exclude the current product
+           context['related_products'] = related_products
+        else:
+            context['related_products'] = BaseProduct.objects.none()
+
         return context
     
 def product_enquiry(request):
