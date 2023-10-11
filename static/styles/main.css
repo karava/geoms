@@ -1293,7 +1293,7 @@ header .v-divider {
     border-radius: 6px;
     background: #FFF;
     box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
-    padding: 40px 32px;
+    padding: 32px 16px;
 }
 
 .contact-form label {
@@ -1322,7 +1322,17 @@ header .v-divider {
     color: #808080;
 }
 
+@media (min-width: 992px) {
+    .contact-form {
+        padding: 40px 32px;
+    }
+}
+
 /* contact-section */
+.contact-section {
+    padding-top: 40px;
+}
+
 .contact-section .supplier-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1340,13 +1350,18 @@ header .v-divider {
     }
 }
 
+@media (min-width: 992px) {
+    .contact-section {
+        padding-top: 78px;
+    }
+}
 /* contact-information */
 .contact-information {
     display: grid;
-    grid-template-columns: auto 1fr;
-    row-gap: 24px;
-    margin-top: 40px;
-    margin-bottom: 43px;
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .contact-information-row {
@@ -1359,6 +1374,15 @@ header .v-divider {
     margin-right: 12px;
 }
 
+@media (min-width: 768px) {
+    .contact-information {
+        grid-template-columns: auto 1fr;
+        margin-top: 40px;
+        margin-bottom: 43px;
+        row-gap: 24px;
+    }
+}
+
 /* our-clients-block */
 .our-clients-block {
     margin-top: 37px;
@@ -1366,4 +1390,57 @@ header .v-divider {
 
 .our-clients-block .title {
     margin-bottom: 20px;
+}
+
+/* location-section */
+.location-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.location-section .default-grid {
+    row-gap: 24px;
+}
+
+.location-map-item {
+    border-radius: 6px;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
+    overflow: hidden;
+}
+
+.location-map-item .location-map {
+    aspect-ratio: 590 / 260;
+    border-radius: 6px 6px 0px 0px;
+    border-bottom: 4px solid #FF6700;
+    overflow: hidden;
+}
+
+.location-map-item .location-content {
+    padding: 24px 16px;
+}
+
+.location-map-item .title {
+    font-size: 22px;
+    line-height: 27px;
+}
+
+.location-map-item .location-map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    .location-section {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .location-section .default-grid {
+        row-gap: 40px;
+    }
+
+    .location-map-item .location-content {
+        padding: 24px 20px 20px;
+    }
 }
