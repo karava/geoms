@@ -106,7 +106,7 @@ def product_enquiry(request):
 Name: {enquiry.full_name}
 Email: {enquiry.email}
 Phone: {enquiry.phone}
-Existing Customer: {'Yes' if enquiry.existing_customer else 'No'}
+Existing Customer: {enquiry.existing_customer}
 Product Interested In: {enquiry.product_interested_in}
 Estimated Quantity: {enquiry.estimated_quantity}
 Specifications: {enquiry.specifications}
