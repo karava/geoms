@@ -1343,12 +1343,21 @@ label[for="id_existing_customer_0"] {
     list-style-type: none;
 }
 
+#id_existing_customer input {
+    margin-right: 10px;
+}
+
 #id_email-row, #id_phone-row {
     width: 50%!important;
 }
 
 #id_existing_customer li {
     display: inline-flex;
+    align-items: center;
+}
+
+#id_existing_customer li label {
+    display: flex;
     align-items: center;
 }
 
@@ -1381,10 +1390,6 @@ label[for="id_existing_customer_0"] {
 @media (min-width: 992px) {
     .contact-form {
         padding: 40px 32px;
-    }
-
-    label[for="id_existing_customer_0"] {
-        float: left;
     }
 }
 
