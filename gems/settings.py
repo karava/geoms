@@ -157,7 +157,6 @@ STATICFILES_DIRS = [
 ]
 
 AWS_STORAGE_BUCKET_NAME = 'infratex-gems-assets'
-AWS_LOCATION = 'static'
 
 # Media files storage
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
@@ -167,7 +166,6 @@ if DEVELOPMENT_MODE is True:
     AWS_MEDIA_LOCATION = 'dev/media'
 else:
     AWS_MEDIA_LOCATION = 'prod/media'
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_S3_REGION_NAME = 'ap-southeast-2'
 AWS_QUERYSTRING_AUTH = False
