@@ -72,6 +72,9 @@
                 <li class="nav-item">
                     <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#resources">Resources</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#options_available">Options Available</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -115,29 +118,37 @@
             <div class="col-span-full">
                 <div class="h-divider-2"></div>
             </div>
+            <div id="options_available" class="col-span-full product-detail-block">
+                <p class="neutral-600 fw-bold typo-heading-6">Options Available&nbsp;<span
+                    class="neutral-500">({{related_products|length}})</span></p>
+                <div class="default-grid application-grid">
+                    {% for product in related_products %}
+                    <a href="{% url 'product_detail' product.id %}" role="button"
+                        class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
+                        <div class="application-thumbnail">
+                            {% if product.default_image %}
+                            <img src="{{ product.default_image.0.file.url }}" alt="{{ product.title }} image">
+                            {% else %}
+                            <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder">
+                            {% endif %}
+                        </div>
+                        <div class="application-content d-flex flex-column flex-fill">
+                            <p class="title neutral-600 fw-bold mb-2 mb-lg-3">{{product.title}}</p>
+                            <div class="d-flex align-items-center mt-auto">
+                                <p class="caption typo-caption neutral-500 mb-0">{{product.code}}</p>
+                                <div class="link-arrow ms-auto">
+                                    <img src="{% static 'assets/icons/arrow-top-right.svg' %}" width="24px" height="24px"
+                                        alt="arrow-top-right">
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
-{% if related_products %}
-<div class="container mt-5">
-    <h3 class="neutral-600 fw-bold typo-heading-4 mb-4">Related Products</h3>
-    <div class="row">
-        {% for related_product in related_products %}
-        <div class="col-md-3 mb-4">
-            <a href="{% url 'product_detail' related_product.id %}">
-                {% if related_product.default_image %}
-                <img src="{{ related_product.default_image.0.file.url }}" alt="{{ related_product.title }}" class="img-fluid mb-2">
-                {% else %}
-                <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder" class="img-fluid mb-2">
-                {% endif %}
-                <p class="neutral-600">{{ related_product.title }}</p>
-                <p class="neutral-500">{{ related_product.code }}</p>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
 <div class="container">
     <div class="text-link-section-1">
         <div class="row">

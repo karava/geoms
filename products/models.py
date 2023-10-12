@@ -197,6 +197,7 @@ class ImageFile(models.Model):
             ImageFile.objects.filter(base_product=self.base_product).update(is_default=False)
         super().save(*args, **kwargs)
 
+
 class ProductResource(models.Model):
     resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
     resource_file = models.FileField(upload_to=resource_file_upload_path)
@@ -205,12 +206,17 @@ class ProductResource(models.Model):
     
     def __str__(self):
         return f"{self.resource_type} for {self.base_product.code}"
-    
+
+
 class ProductEnquiry(models.Model):
+    CHOICES = (
+        ('YES', 'Yes'),
+        ('NO', 'No'),
+    )
     full_name = models.CharField(max_length=200)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
-    existing_customer = models.BooleanField(default=False)
+    existing_customer = models.CharField(choices=CHOICES, max_length=15)
     product_interested_in = models.CharField(max_length=200)
     estimated_quantity = models.CharField(max_length=50)
     specifications = models.TextField(blank=True)

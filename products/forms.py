@@ -5,7 +5,16 @@ from captcha.widgets import ReCaptchaV2Checkbox
 
 class ProductEnquiryForm(forms.ModelForm):
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
-    
+    CHOICES = [
+        ('YES', 'Yes'),
+        ('NO', 'No'),
+    ]
+
+    existing_customer = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        choices=CHOICES, 
+    )
+
     def __init__(self, *args, **kwargs):
         super(ProductEnquiryForm, self).__init__(*args, **kwargs)
         self.label_suffix = ""

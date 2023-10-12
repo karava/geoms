@@ -607,8 +607,37 @@ header .v-divider {
 
 /* video-hero-section */
 .video-hero-section {
+    position: relative;
     padding-top: 60px;
-    background: linear-gradient(0deg, rgba(5, 8, 17, 0.36) 0%, rgba(5, 8, 17, 0.36) 100%), lightgray 0px -66px / 100% 122.872% no-repeat;
+}
+
+.video-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* background: linear-gradient(0deg, rgba(5, 8, 17, 0.36) 0%, rgba(5, 8, 17, 0.36) 100%), lightgray 0px -66px / 100% 122.872% no-repeat; */
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+    z-index: -1;
+    opacity: .5;
+}
+
+.video-hero-section .video-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    z-index: -2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-hero-section .video-block video {
+    height: 100%;
 }
 
 .video-hero-section .eyebrow {
@@ -652,6 +681,11 @@ header .v-divider {
 @media (min-width: 992px) {
     .video-hero-section {
         padding-top: 130px;
+    }
+
+    .video-hero-section .video-block video {
+        height: auto;
+        width: 100%;
     }
 
     .video-hero-section .headline {
@@ -1293,7 +1327,29 @@ header .v-divider {
     border-radius: 6px;
     background: #FFF;
     box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
-    padding: 40px 32px;
+    padding: 32px 16px;
+}
+
+label[for="id_existing_customer_0"] {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    height: 20px;
+}
+
+#id_existing_customer {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+#id_email-row, #id_phone-row {
+    width: 50%!important;
+}
+
+#id_existing_customer li {
+    display: inline-flex;
+    align-items: center;
 }
 
 .contact-form label {
@@ -1322,7 +1378,21 @@ header .v-divider {
     color: #808080;
 }
 
+@media (min-width: 992px) {
+    .contact-form {
+        padding: 40px 32px;
+    }
+
+    label[for="id_existing_customer_0"] {
+        float: left;
+    }
+}
+
 /* contact-section */
+.contact-section {
+    padding-top: 40px;
+}
+
 .contact-section .supplier-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1340,13 +1410,18 @@ header .v-divider {
     }
 }
 
+@media (min-width: 992px) {
+    .contact-section {
+        padding-top: 78px;
+    }
+}
 /* contact-information */
 .contact-information {
     display: grid;
-    grid-template-columns: auto 1fr;
-    row-gap: 24px;
-    margin-top: 40px;
-    margin-bottom: 43px;
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .contact-information-row {
@@ -1359,6 +1434,15 @@ header .v-divider {
     margin-right: 12px;
 }
 
+@media (min-width: 768px) {
+    .contact-information {
+        grid-template-columns: auto 1fr;
+        margin-top: 40px;
+        margin-bottom: 43px;
+        row-gap: 24px;
+    }
+}
+
 /* our-clients-block */
 .our-clients-block {
     margin-top: 37px;
@@ -1366,4 +1450,57 @@ header .v-divider {
 
 .our-clients-block .title {
     margin-bottom: 20px;
+}
+
+/* location-section */
+.location-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.location-section .default-grid {
+    row-gap: 24px;
+}
+
+.location-map-item {
+    border-radius: 6px;
+    background: #FFF;
+    box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
+    overflow: hidden;
+}
+
+.location-map-item .location-map {
+    aspect-ratio: 590 / 260;
+    border-radius: 6px 6px 0px 0px;
+    border-bottom: 4px solid #FF6700;
+    overflow: hidden;
+}
+
+.location-map-item .location-content {
+    padding: 24px 16px;
+}
+
+.location-map-item .title {
+    font-size: 22px;
+    line-height: 27px;
+}
+
+.location-map-item .location-map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    .location-section {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .location-section .default-grid {
+        row-gap: 40px;
+    }
+
+    .location-map-item .location-content {
+        padding: 24px 20px 20px;
+    }
 }
