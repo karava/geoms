@@ -53,14 +53,14 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="w-100 d-flex flex-column flex-lg-row">
-          <div class="d-flex align-items-center justify-content-between">
-            <a class="navbar-brand logo d-lg-block d-none" href="/">
+          <div class="d-flex justify-content-between">
+            <a class="navbar-brand logo p-0 d-lg-block d-none" href="/">
               <img src="{% static 'assets/logo.svg' %}" width="143px" alt="Logo">
             </a>
             <a class="navbar-brand logo d-lg-none d-block" href="/">
               <img src="{% static 'assets/logo.svg' %}" width="107px" alt="Logo">
             </a>
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
               <button class="d-block d-lg-none btn p-0 search-panel-toggle">
                 <img src="{% static 'assets/icons/black-search.svg' %}" alt="Search">
               </button>
@@ -316,7 +316,7 @@
                 <img src="{% static 'assets/icons/search.svg' %}" alt="Search">
               </button>
               <div class="v-divider d-none d-lg-block"></div>
-              <button class="secondary-btn" type="button">Get Enquiry</button>
+              <a href="/products/contact" class="secondary-btn" role="button">Get Enquiry</a>
             </div>
             <div class="px-3 px-lg-0 mb-4 mt-auto d-block d-lg-none">
               <a href="tel:0386400958" class="text-decoration-none d-inline-flex align-items-center">
