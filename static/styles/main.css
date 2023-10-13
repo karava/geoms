@@ -39,6 +39,7 @@ header .v-divider {
     overflow: hidden;
     position: absolute;
     background: #F9F9F9;
+    z-index: 9;
 }
 
 .search-panel.show {
