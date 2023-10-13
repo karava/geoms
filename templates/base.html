@@ -23,7 +23,7 @@
 </head>
 
 <body>
-  <div class="devGrid w-100 container">
+  {% comment %} <div class="devGrid w-100 container"> {% endcomment %}
     <div class="default-grid h-100">
       <div class="col col-span-1"></div>
       <div class="col col-span-1"></div>
@@ -38,7 +38,7 @@
       <div class="col col-span-1"></div>
       <div class="col col-span-1"></div>
     </div>
-  </div>
+  {% comment %} </div> {% endcomment %}
 
   <header>
     <div class="top-contact d-none d-lg-block">
@@ -366,7 +366,9 @@
         <div class="col-12 col-lg-9 footer-link-group-wrapper">
           <div class="footer-link-group">
             <div class="footer-link-group-content">
-              <p class="neutral-600 fw-semibold footer-link-group--headline">Applications</p>
+              <a href="/applications">
+                <p class="neutral-600 fw-semibold footer-link-group--headline">Applications</p>
+              </a>
               <ul class="ps-0">
                 <li><a href="/applications/civil_construction" class="text-decoration-none">Civil Construction</a></li>
                 <li><a href="/applications/drainage_solutions" class="text-decoration-none">Drainage Solutions</a></li>
@@ -383,7 +385,9 @@
           </div>
           <div class="footer-link-group">
             <div class="footer-link-group-content">
-              <p class="neutral-600 fw-semibold footer-link-group--headline">Products</p>
+              <a href="/products">
+                <p class="neutral-600 fw-semibold footer-link-group--headline">Products</p>
+              </a>
               <ul class="ps-0">
                 <li><a href="/products/category/drainage_systems" class="text-decoration-none">Drainage Systems</a></li>
                 <li><a href="/products/category/geocell" class="text-decoration-none">Geocell</a></li>
@@ -415,7 +419,9 @@
           <div class="d-block d-lg-none"></div>
           <div class="footer-link-group">
             <div class="footer-link-group-content">
-              <p class="neutral-600 fw-semibold footer-link-group--headline">Contact Us</p>
+              <a href="/contactus">
+                <p class="neutral-600 fw-semibold footer-link-group--headline">Contact Us</p>
+              </a>
               <a href="tel:0386400958" class="text-decoration-none d-inline-flex align-items-center">
                 <img src="{% static 'assets/icons/phone.svg' %}" class="me-2" alt="phone">
                 <span class="neutral-600 fw-semibold typo-caption">03 8640 0958</span>
