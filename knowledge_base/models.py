@@ -1,16 +1,20 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from storage_backends import PublicMediaStorage
 
 # Functions for the image upload paths
 def universal_image_upload_path(instance, filename):
     return f"content_images/{filename}"
 
 class ContentImage(models.Model):
-    file = models.ImageField(upload_to=universal_image_upload_path)  # default path
+    file = models.ImageField(upload_to=universal_image_upload_path, storage=PublicMediaStorage())  # default path
     created_at = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Image {self.id}"
+        # return f"Image {self.id}"
+        return self.file.name.split("/")[-1]
 
 class TechnicalGuide(models.Model):
     title = models.CharField(max_length=255)
