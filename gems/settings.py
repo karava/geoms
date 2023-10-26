@@ -74,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -149,24 +150,30 @@ XERO_CLIENT_SECRET = os.environ.get('XERO_CLIENT_SECRET')
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-AWS_STORAGE_BUCKET_NAME = 'infratex-gems-assets'
+## Media files storage
+# https://docs.djangoproject.com/en/4.2/topics/files/
 
-# Media files storage
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-# Configure which endpoint to send files to, and retrieve files from.
-if DEVELOPMENT_MODE is True:
-    AWS_MEDIA_LOCATION = 'dev/media'
-else:
-    AWS_MEDIA_LOCATION = 'prod/media'
+AWS_PUBLIC_STORAGE_BUCKET_NAME = 'infratex-public-assets'
+AWS_PRIVATE_STORAGE_BUCKET_NAME = 'infratex-private-assets'
 
+# Configure which endpoint to send files to, and retrieve files from.
+if DEVELOPMENT_MODE:
+    FOLDER_NAME = 'dev'
+    MEDIA_URL = f'https://{AWS_PUBLIC_STORAGE_BUCKET_NAME}.s3.amazonaws.com/' # Set's the url so it can be accessed in the django templates
+else:
+    FOLDER_NAME = 'prod'
+    MEDIA_URL = f'https://{AWS_PUBLIC_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+
+# AWS general settings
 AWS_S3_REGION_NAME = 'ap-southeast-2'
 AWS_QUERYSTRING_AUTH = False
 

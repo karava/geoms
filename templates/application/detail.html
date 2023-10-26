@@ -53,14 +53,26 @@
 <div class="text-image-section-1 right-content margin-bottom-1 small-padding">
 {% endif %}
     <div class="image-bg w-100 d-block d-lg-none">
-        <img src="{% static subpath|add:'assets/images/' %}{% firstof product.image 'product_image1.png' %}" class="w-100" alt="image">
+        {% if product.image %}
+            <!-- If product.image exists, attempt to load it -->
+            <img src="{{ MEDIA_URL }}{{ product.image }}" class="w-100" alt="image" onerror="this.onerror=null; this.src='{% static 'assets/images/product_image1.png' %}'">
+        {% else %}
+            <!-- If product.image doesn't exist, load the default image -->
+            <img src="{% static 'assets/images/product_image1.png' %}" class="w-100" alt="image">
+        {% endif %}
     </div>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="text-image-wrapper">
                     <div class="image-bg d-none d-lg-block">
-                        <img src="{% static subpath|add:'assets/images/' %}{% firstof product.image 'product_image1.png' %}" alt="image">
+                        {% if product.image %}
+                            <!-- If product.image exists, attempt to load it -->
+                            <img src="{{ MEDIA_URL }}{{ product.image }}" class="w-100" alt="image" onerror="this.onerror=null; this.src='{% static 'assets/images/product_image1.png' %}'">
+                        {% else %}
+                            <!-- If product.image doesn't exist, load the default image -->
+                            <img src="{% static 'assets/images/product_image1.png' %}" class="w-100" alt="image">
+                        {% endif %}
                     </div>
                     <div class="card">
                         <div class="eyebrow-group">
