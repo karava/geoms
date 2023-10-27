@@ -3,6 +3,8 @@ from django.db.models import base
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
 from datetime import date, timedelta
+from django.contrib.contenttypes.fields import GenericRelation
+from knowledge_base.models import ModelImageRelation
 
 # Functions
 def product_image_upload_path(instance, filename):
@@ -145,6 +147,7 @@ class BaseProduct(models.Model):
     moq = models.IntegerField(null=True, default=0)
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
+    images = GenericRelation(ModelImageRelation)
     packing_description = models.CharField(blank=True, max_length=200)
     product_detail_geocell = models.OneToOneField(Geocell, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     product_detail_geotextile = models.OneToOneField(Geotextile, on_delete=models.CASCADE, null=True, blank=True, editable=False)

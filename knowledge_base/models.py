@@ -1,6 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from storage_backends import PublicMediaStorage
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
 # Functions for the image upload paths
 def universal_image_upload_path(instance, filename):
@@ -16,12 +18,34 @@ class ContentImage(models.Model):
         # return f"Image {self.id}"
         return self.file.name.split("/")[-1]
 
+class ModelImageRelation(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    
+    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
+    is_main_image = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
+    
+    class Meta:
+        ordering = ['order']
+
+    def save(self, *args, **kwargs):
+        if self.is_main_image:
+            # Unset other main images for the related object (CaseStudy, TechnicalGuide, etc.)
+            ModelImageRelation.objects.filter(
+                content_type=self.content_type,
+                object_id=self.object_id
+            ).exclude(id=self.id).update(is_main_image=False)
+        super().save(*args, **kwargs)
+
 class TechnicalGuide(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
+    images = GenericRelation(ModelImageRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -30,21 +54,6 @@ class TechnicalGuide(models.Model):
 
     def __str__(self):
         return self.title
-
-class TechnicalGuideImage(models.Model):
-    technical_guide = models.ForeignKey(TechnicalGuide, on_delete=models.CASCADE, related_name='images')
-    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
-    is_main_image = models.BooleanField(default=False)
-    order = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        ordering = ['order']
-
-    def save(self, *args, **kwargs):
-        if self.is_main_image:
-            # Unset other main images for this TechnicalGuide
-            TechnicalGuideImage.objects.filter(technical_guide=self.technical_guide).update(is_main_image=False)
-        super().save(*args, **kwargs)
 
 class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
@@ -55,6 +64,7 @@ class CaseStudy(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    images = GenericRelation(ModelImageRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -63,18 +73,3 @@ class CaseStudy(models.Model):
 
     def __str__(self):
         return self.title
-
-class CaseStudyImage(models.Model):
-    case_study = models.ForeignKey(CaseStudy, on_delete=models.CASCADE, related_name='images')
-    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
-    is_main_image = models.BooleanField(default=False)
-    order = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        ordering = ['order']
-
-    def save(self, *args, **kwargs):
-        if self.is_main_image:
-            # Unset other main images for this CaseStudy
-            CaseStudyImage.objects.filter(case_study=self.case_study).update(is_main_image=False)
-        super().save(*args, **kwargs)
