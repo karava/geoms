@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apis',
     'knowledge_base',
     'captcha',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
