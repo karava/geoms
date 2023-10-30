@@ -46,13 +46,13 @@
             <div class="image-wrapper d-block d-md-none">
                 <div class="main-image">
                     {% if default_image %}
-                    <img src="{{ default_image.file.url }}" alt="{{ object.title }}">
+                    <img src="{{ default_image.image.file.url }}" alt="{{ object.title }}">
                     {% endif %}
                 </div>
                 <div class="other-images">
                     {% for image in website_images %}
                     <div class="other-image-thumbnail">
-                        <img src="{{ image.file.url }}" alt="{{ object.title }}">
+                        <img src="{{ image.image.file.url }}" alt="{{ object.title }}">
                     </div>
                     {% endfor %}
                 </div>
@@ -127,7 +127,7 @@
                         class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                         <div class="application-thumbnail">
                             {% if product.default_image %}
-                            <img src="{{ product.default_image.0.file.url }}" alt="{{ product.title }} image">
+                            <img src="{{ product.default_image.image.file.url }}" alt="{{ product.title }} image">
                             {% else %}
                             <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder">
                             {% endif %}
