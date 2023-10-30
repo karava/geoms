@@ -25,13 +25,13 @@
             <div class="image-wrapper">
                 <div class="main-image">
                     {% if default_image %}
-                    <img src="{{ default_image.file.url }}" alt="{{ object.title }}">
+                    <img src="{{ default_image.image.file.url }}" alt="{{ object.title }}">
                     {% endif %}
                 </div>
                 <div class="other-images">
                     {% for image in website_images %}
                     <div class="other-image-thumbnail">
-                        <img src="{{ image.file.url }}" alt="{{ object.title }}">
+                        <img src="{{ image.image.file.url }}" alt="{{ object.title }}">
                     </div>
                     {% endfor %}
                 </div>
@@ -84,7 +84,7 @@
         <div class="default-grid">
             <div id="description" class="col-span-full col-lg-span-10 product-detail-block">
                 <p class="neutral-600 fw-bold typo-heading-6">Description</p>
-                <p class="neutral-500 lh-base typo-body-1 mb-0">{{ object.long_description }}</p>
+                <p class="neutral-500 lh-base typo-body-1 mb-0">{{ object.long_description|safe }}</p>
             </div>
             <div class="col-span-full">
                 <div class="h-divider-2"></div>
