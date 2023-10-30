@@ -2,7 +2,7 @@ import os, json
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ImageFile
+from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ProductModelImageRelation
 from django.db.models import Prefetch
 from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
@@ -18,10 +18,6 @@ def index(request):
 
     context = {'categories': items, 'page_title': 'Product Categories'}
     return render(request, 'index.html', context)
-
-# def category(request, slug):
-#     context = {}
-#     return render(request, 'category.html', context)
 
 def category(request, slug):
     # Map slugs to their respective models and OneToOneField names in BaseProduct
@@ -45,8 +41,8 @@ def category(request, slug):
     products = BaseProduct.objects.filter(**{f"{related_field_name}__isnull": False})
 
     # Prefetch related default images
-    default_images = ImageFile.objects.filter(is_default=True)
-    products = products.prefetch_related(Prefetch('images', queryset=default_images, to_attr='default_image'))
+    default_image = ProductModelImageRelation.objects.filter(is_default=True)
+    products = products.prefetch_related(Prefetch('images', queryset=default_image, to_attr='default_image'))
 
     # Get category information from product json
     path = os.path.join(settings.BASE_DIR, 'data')
@@ -78,7 +74,7 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['default_image'] = self.object.images.filter(is_default=True).first()
-        context['website_images'] = self.object.images.filter(is_for_website=True)
+        context['website_images'] = self.object.images.all()
         context['model_name'] = self.object.get_product_detail_name()
         context['resources'] = self.object.resources.all()
         context['page_title'] = self.object.title

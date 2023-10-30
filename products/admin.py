@@ -1,19 +1,17 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, ProductResource, Application, ProductEnquiry
+from .models import Geocell, BaseProduct, ProductModelImageRelation, Price, Geotextile, GCL, DrainageProduct, Geogrid, ProductResource, Application, ProductEnquiry
 import nested_admin
 from tinymce.widgets import TinyMCE
 from django.db import models
-from knowledge_base.admin import ImageInline
-from knowledge_base.models import ModelImageRelation
 
 # Inline Inlines
 # class ImageFileInLine(nested_admin.NestedStackedInline):
 #     model = ImageFile
 #     extra = 1
 
-class ImageFileInLine(nested_admin.NestedStackedInline):
-     model = ModelImageRelation
-     extra = 1
+class ProductImageRelationInline(nested_admin.NestedStackedInline):
+    model = ProductModelImageRelation
+    extra = 1
 
 class PriceInLine(nested_admin.NestedTabularInline):
     model = Price
@@ -26,7 +24,7 @@ class ProductResourceInline(nested_admin.NestedStackedInline):
 class BaseProductInline(nested_admin.NestedStackedInline):
     model = BaseProduct
     extra = 1
-    inlines = [ImageInline, PriceInLine, ProductResourceInline]
+    inlines = [ProductImageRelationInline, PriceInLine, ProductResourceInline]
     filter_horizontal = ('applications',)
 
     def formfield_for_dbfield(self, db_field, **kwargs):

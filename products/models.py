@@ -4,7 +4,7 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
 from datetime import date, timedelta
 from django.contrib.contenttypes.fields import GenericRelation
-from knowledge_base.models import ModelImageRelation
+from knowledge_base.models import ContentImage
 
 # Functions
 def product_image_upload_path(instance, filename):
@@ -147,7 +147,6 @@ class BaseProduct(models.Model):
     moq = models.IntegerField(null=True, default=0)
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
-    images = GenericRelation(ModelImageRelation)
     packing_description = models.CharField(blank=True, max_length=200)
     product_detail_geocell = models.OneToOneField(Geocell, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     product_detail_geotextile = models.OneToOneField(Geotextile, on_delete=models.CASCADE, null=True, blank=True, editable=False)
@@ -186,20 +185,20 @@ class Price(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
 
-
-# File models
-class ImageFile(models.Model):
-    file = models.ImageField(upload_to=product_image_upload_path)
-    base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
+class ProductModelImageRelation(models.Model):
+    product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
+    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
     is_default = models.BooleanField(default=False)
-    is_for_website = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        ordering = ['order']
+    
     def save(self, *args, **kwargs):
-        # If this image is set as default, unset other default images for the product
         if self.is_default:
-            ImageFile.objects.filter(base_product=self.base_product).update(is_default=False)
+            # Unset other main images for this product
+            ProductModelImageRelation.objects.filter(product=self.product).update(is_default=False)
         super().save(*args, **kwargs)
-
 
 class ProductResource(models.Model):
     resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
