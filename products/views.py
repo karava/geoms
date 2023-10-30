@@ -87,7 +87,6 @@ class ProductDetailView(DetailView):
            context['related_products'] = related_products
         else:
             context['related_products'] = BaseProduct.objects.none()
-
         return context
     
 def product_enquiry(request):
