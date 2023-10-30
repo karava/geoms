@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 
 # Create your views here.
 
+# This views lists an overview of the generic categories
 def index(request):
     path = os.path.join(settings.BASE_DIR, 'data')
 
@@ -19,7 +20,7 @@ def index(request):
     context = {'categories': items, 'page_title': 'Product Categories'}
     return render(request, 'index.html', context)
 
-def category(request, slug):
+def CategoryListView(request, slug):
     # Map slugs to their respective models and OneToOneField names in BaseProduct
     slug_to_model = {
         'geocells': (Geocell, 'product_detail_geocell'),
@@ -74,7 +75,7 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['default_image'] = self.object.images.filter(is_default=True).first()
-        context['website_images'] = self.object.images.all()
+        context['product_images'] = self.object.images.all()
         context['model_name'] = self.object.get_product_detail_name()
         context['resources'] = self.object.resources.all()
         context['page_title'] = self.object.title

@@ -29,9 +29,9 @@
                     {% endif %}
                 </div>
                 <div class="other-images">
-                    {% for image in website_images %}
+                    {% for product_image in product_images %}
                     <div class="other-image-thumbnail">
-                        <img src="{{ image.image.file.url }}" alt="{{ object.title }}">
+                        <img src="{{ product_image.image.file.url }}" alt="{{ object.title }}">
                     </div>
                     {% endfor %}
                 </div>
@@ -50,9 +50,9 @@
                     {% endif %}
                 </div>
                 <div class="other-images">
-                    {% for image in website_images %}
+                    {% for product_image in product_images %}
                     <div class="other-image-thumbnail">
-                        <img src="{{ image.image.file.url }}" alt="{{ object.title }}">
+                        <img src="{{ product_image.image.file.url }}" alt="{{ object.title }}">
                     </div>
                     {% endfor %}
                 </div>
