@@ -64,7 +64,7 @@ def CategoryListView(request, slug):
         'page_title': related_model._meta.verbose_name_plural.title()
     }
 
-    return render(request, 'category.html', context)
+    return render(request, 'category_list.html', context)
 
 
 class ProductDetailView(DetailView):
