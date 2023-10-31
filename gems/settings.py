@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apis',
     'knowledge_base',
     'captcha',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -168,10 +169,10 @@ AWS_PRIVATE_STORAGE_BUCKET_NAME = 'infratex-private-assets'
 # Configure which endpoint to send files to, and retrieve files from.
 if DEVELOPMENT_MODE:
     FOLDER_NAME = 'dev'
-    MEDIA_URL = f'https://{AWS_PUBLIC_STORAGE_BUCKET_NAME}.s3.amazonaws.com/' # Set's the url so it can be accessed in the django templates
+    MEDIA_URL = f'https://{AWS_PUBLIC_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{FOLDER_NAME}/' # Set's the url so it can be accessed in the django templates
 else:
     FOLDER_NAME = 'prod'
-    MEDIA_URL = f'https://{AWS_PUBLIC_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+    MEDIA_URL = f'https://{AWS_PUBLIC_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{FOLDER_NAME}/'
 
 # AWS general settings
 AWS_S3_REGION_NAME = 'ap-southeast-2'
