@@ -2,7 +2,7 @@ import os, json
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ProductModelImageRelation
+from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ProductMediaRelation
 from django.db.models import Prefetch
 from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
@@ -42,8 +42,8 @@ def CategoryListView(request, slug):
     products = BaseProduct.objects.filter(**{f"{related_field_name}__isnull": False})
 
     # Prefetch related default images
-    default_image = ProductModelImageRelation.objects.filter(is_default=True)
-    products = products.prefetch_related(Prefetch('images', queryset=default_image, to_attr='default_image'))
+    default_image = ProductMediaRelation.objects.filter(is_default=True, resource_type='product_image')
+    products = products.prefetch_related(Prefetch('media', queryset=default_image, to_attr='default_image'))
 
     # Get category information from product json
     path = os.path.join(settings.BASE_DIR, 'data')
@@ -74,10 +74,10 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['default_image'] = self.object.images.filter(is_default=True).first()
-        context['product_images'] = self.object.images.all()
+        context['default_image'] = self.object.media.filter(is_default=True, resource_type='product_image').first()
+        context['product_images'] = self.object.media.filter(resource_type='product_image').all()
         context['model_name'] = self.object.get_product_detail_name()
-        context['resources'] = self.object.resources.all()
+        context['resources'] = self.object.media.exclude(resource_type='product_image').all()
         context['page_title'] = self.object.title
 
         # Getting the related products

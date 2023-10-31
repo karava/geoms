@@ -6,10 +6,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 
 # Functions for the image upload paths
 def universal_image_upload_path(instance, filename):
-    return f"content_images/{filename}"
+    return f"media/{filename}"
 
-class ContentImage(models.Model):
-    file = models.ImageField(upload_to=universal_image_upload_path, storage=PublicMediaStorage())  # default path
+class Media(models.Model):
+    file = models.FileField(upload_to=universal_image_upload_path, storage=PublicMediaStorage())  # default path
     created_at = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
@@ -17,26 +17,30 @@ class ContentImage(models.Model):
     def __str__(self):
         # return f"Image {self.id}"
         return self.file.name.split("/")[-1]
+    
+    class Meta:
+        verbose_name_plural = "Media"
 
-class ModelImageRelation(models.Model):
+class MediaRelation(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
+    media_type = models.CharField(max_length=10, choices=(('image', 'Image'), ('document', 'Document')), default='image')
     
-    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
-    is_main_image = models.BooleanField(default=False)
+    image = models.ForeignKey(Media, on_delete=models.CASCADE)
+    is_default = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
     
     class Meta:
         ordering = ['order']
 
     def save(self, *args, **kwargs):
-        if self.is_main_image:
+        if self.is_default:
             # Unset other main images for the related object (CaseStudy, TechnicalGuide, etc.)
-            ModelImageRelation.objects.filter(
+            MediaRelation.objects.filter(
                 content_type=self.content_type,
                 object_id=self.object_id
-            ).exclude(id=self.id).update(is_main_image=False)
+            ).exclude(id=self.id).update(is_default=False)
         super().save(*args, **kwargs)
 
 class TechnicalGuide(models.Model):
@@ -45,7 +49,7 @@ class TechnicalGuide(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
-    images = GenericRelation(ModelImageRelation)
+    images = GenericRelation(MediaRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -64,7 +68,7 @@ class CaseStudy(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    images = GenericRelation(ModelImageRelation)
+    images = GenericRelation(MediaRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -73,3 +77,6 @@ class CaseStudy(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name_plural = "Case Studies"

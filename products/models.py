@@ -4,23 +4,10 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
 from datetime import date, timedelta
 from django.contrib.contenttypes.fields import GenericRelation
-from knowledge_base.models import ContentImage
+from knowledge_base.models import Media
+from storage_backends import PublicMediaStorage
 
 # Functions
-def product_image_upload_path(instance, filename):
-    # Get the related BaseProduct instance
-    product_type = instance.base_product.get_product_detail_name()
-
-    # Construct the upload path
-    return f"products/{product_type}/images/{filename}"
-    
-def resource_file_upload_path(instance, filename):
-    # Use the get_product_detail_model method to get the product detail
-    product_type = instance.base_product.get_product_detail_name()
-
-    # Construct the upload path
-    return f"products/{product_type}/resources/{instance.resource_type}/{filename}"
-
 def get_expiry_date():
     return date.today() + timedelta(days=30)
 
@@ -56,6 +43,7 @@ GEOTEXTILE_SUB_CATEGORIES = [
 ]
 
 RESOURCE_TYPES = [
+    ('product_image', 'Product Image'),
     ('datasheet', 'Datasheet'),
     ('brochure', 'Brochure'),
     ('installation_guide', 'Installation Guide'),
@@ -136,7 +124,7 @@ class BaseProduct(models.Model):
     short_description.help_text = "This is a short concise and useful description of the product"
     long_description = models.TextField(blank=True)
     long_description.help_text = "This is for SEO purposes"
-    applications = models.ManyToManyField(Application, related_name="products")
+    applications = models.ManyToManyField(Application, related_name="products", blank=True)
     notes = models.TextField(blank=True)
     suppliers = models.CharField(max_length=200, blank=True)
     suppliers.help_text = "Please comma separate names"
@@ -185,9 +173,11 @@ class Price(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
 
-class ProductModelImageRelation(models.Model):
-    product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='images')
-    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
+class ProductMediaRelation(models.Model):
+    product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='media')
+    resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
+    media_type = models.CharField(max_length=10, choices=(('image', 'Image'), ('document', 'Document')), default='image')
+    media = models.ForeignKey(Media, on_delete=models.CASCADE)
     is_default = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
 
@@ -197,17 +187,11 @@ class ProductModelImageRelation(models.Model):
     def save(self, *args, **kwargs):
         if self.is_default:
             # Unset other main images for this product
-            ProductModelImageRelation.objects.filter(product=self.product).update(is_default=False)
+            ProductMediaRelation.objects.filter(product=self.product).update(is_default=False)
         super().save(*args, **kwargs)
-
-class ProductResource(models.Model):
-    resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
-    resource_file = models.FileField(upload_to=resource_file_upload_path)
-    description = models.TextField(blank=True)
-    base_product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='resources')
     
     def __str__(self):
-        return f"{self.resource_type} for {self.base_product.code}"
+        return f"{self.resource_type} for {self.product.code}"
 
 
 class ProductEnquiry(models.Model):
@@ -225,6 +209,9 @@ class ProductEnquiry(models.Model):
     project_based = models.TextField(blank=True)
     needed_by = models.CharField(max_length=50)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Product Enquiries"
 
 
 

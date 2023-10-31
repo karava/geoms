@@ -14,7 +14,7 @@ class TechnicalGuideListView(ListView):
         new_context = []
         
         for item in context['guides']:
-            main_image = item.images.filter(is_main_image=True).first()
+            main_image = item.images.filter(is_default=True).first()
             new_context.append({
                 'title': item.title,
                 'created_at': item.created_at,
@@ -73,7 +73,7 @@ class CaseStudyListView(ListView):
         new_context = []
         
         for item in context['studies']:
-            main_image = item.images.filter(is_main_image=True).first()
+            main_image = item.images.filter(is_default=True).first()
             new_context.append({
                 'title': item.title,
                 'caption': item.caption,
@@ -95,8 +95,8 @@ class CaseStudyDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['main_image'] = self.object.images.filter(is_main_image=True).first()
-        gallery_image_items = self.object.images.filter(is_main_image=False)
+        context['main_image'] = self.object.images.filter(is_default=True).first()
+        gallery_image_items = self.object.images.filter(is_default=False)
         gallery_images = []
         for item in gallery_image_items:
             gallery_images.append(item.image.file.url)
@@ -112,6 +112,6 @@ class TechnicalGuideDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['main_image'] = self.object.images.filter(is_main_image=True).first()
+        context['main_image'] = self.object.images.filter(is_default=True).first()
         context['page_title'] = self.object.title
         return context
