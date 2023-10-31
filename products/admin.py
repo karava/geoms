@@ -1,25 +1,27 @@
 from django.contrib import admin
-from .models import Geocell, BaseProduct, ImageFile, Price, Geotextile, GCL, DrainageProduct, Geogrid, ProductResource, Application, ProductEnquiry
+from .models import Geocell, BaseProduct, ProductMediaRelation, Price, Geotextile, GCL, DrainageProduct, Geogrid,Application, ProductEnquiry
 import nested_admin
+from tinymce.widgets import TinyMCE
+from django.db import models
 
-# Inline Inlines
-class ImageFileInLine(nested_admin.NestedStackedInline):
-    model = ImageFile
+class ProductRelationInline(nested_admin.NestedTabularInline):
+    model = ProductMediaRelation
     extra = 1
 
 class PriceInLine(nested_admin.NestedTabularInline):
     model = Price
     extra = 1
 
-# Inlines
-class ProductResourceInline(nested_admin.NestedStackedInline):
-    model = ProductResource
-    extra = 1
 class BaseProductInline(nested_admin.NestedStackedInline):
     model = BaseProduct
     extra = 1
-    inlines = [ImageFileInLine, PriceInLine, ProductResourceInline]
+    inlines = [ProductRelationInline, PriceInLine]
     filter_horizontal = ('applications',)
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name == 'long_description':
+            kwargs['widget'] = TinyMCE(attrs={'cols': 80, 'rows': 30})
+        return super().formfield_for_dbfield(db_field, **kwargs)
 
 # Main
 class GeocellAdmin(nested_admin.NestedModelAdmin):

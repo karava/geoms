@@ -1,13 +1,15 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from storage_backends import PublicMediaStorage
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
 # Functions for the image upload paths
 def universal_image_upload_path(instance, filename):
-    return f"content_images/{filename}"
+    return f"media/{filename}"
 
-class ContentImage(models.Model):
-    file = models.ImageField(upload_to=universal_image_upload_path, storage=PublicMediaStorage())  # default path
+class Media(models.Model):
+    file = models.FileField(upload_to=universal_image_upload_path, storage=PublicMediaStorage())  # default path
     created_at = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
@@ -15,6 +17,31 @@ class ContentImage(models.Model):
     def __str__(self):
         # return f"Image {self.id}"
         return self.file.name.split("/")[-1]
+    
+    class Meta:
+        verbose_name_plural = "Media"
+
+class MediaRelation(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    media_type = models.CharField(max_length=10, choices=(('image', 'Image'), ('document', 'Document')), default='image')
+    
+    image = models.ForeignKey(Media, on_delete=models.CASCADE)
+    is_default = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
+    
+    class Meta:
+        ordering = ['order']
+
+    def save(self, *args, **kwargs):
+        if self.is_default:
+            # Unset other main images for the related object (CaseStudy, TechnicalGuide, etc.)
+            MediaRelation.objects.filter(
+                content_type=self.content_type,
+                object_id=self.object_id
+            ).exclude(id=self.id).update(is_default=False)
+        super().save(*args, **kwargs)
 
 class TechnicalGuide(models.Model):
     title = models.CharField(max_length=255)
@@ -22,6 +49,7 @@ class TechnicalGuide(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
+    images = GenericRelation(MediaRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -30,21 +58,6 @@ class TechnicalGuide(models.Model):
 
     def __str__(self):
         return self.title
-
-class TechnicalGuideImage(models.Model):
-    technical_guide = models.ForeignKey(TechnicalGuide, on_delete=models.CASCADE, related_name='images')
-    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
-    is_main_image = models.BooleanField(default=False)
-    order = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        ordering = ['order']
-
-    def save(self, *args, **kwargs):
-        if self.is_main_image:
-            # Unset other main images for this TechnicalGuide
-            TechnicalGuideImage.objects.filter(technical_guide=self.technical_guide).update(is_main_image=False)
-        super().save(*args, **kwargs)
 
 class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
@@ -55,6 +68,7 @@ class CaseStudy(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    images = GenericRelation(MediaRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -63,18 +77,6 @@ class CaseStudy(models.Model):
 
     def __str__(self):
         return self.title
-
-class CaseStudyImage(models.Model):
-    case_study = models.ForeignKey(CaseStudy, on_delete=models.CASCADE, related_name='images')
-    image = models.ForeignKey(ContentImage, on_delete=models.CASCADE)
-    is_main_image = models.BooleanField(default=False)
-    order = models.PositiveIntegerField(default=0)
-
+    
     class Meta:
-        ordering = ['order']
-
-    def save(self, *args, **kwargs):
-        if self.is_main_image:
-            # Unset other main images for this CaseStudy
-            CaseStudyImage.objects.filter(case_study=self.case_study).update(is_main_image=False)
-        super().save(*args, **kwargs)
+        verbose_name_plural = "Case Studies"

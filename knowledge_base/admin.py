@@ -1,20 +1,17 @@
 from django.contrib import admin
-from .models import TechnicalGuide, CaseStudy, ContentImage, TechnicalGuideImage, CaseStudyImage
+from .models import TechnicalGuide, CaseStudy, Media, MediaRelation
+from django.contrib.contenttypes.admin import GenericTabularInline
 
-class TechnicalGuideImageInline(admin.TabularInline):  # You can also use admin.StackedInline for a different layout
-    model = TechnicalGuideImage
+class ImageInline(GenericTabularInline):  # You can also use admin.StackedInline for a different layout
+    model = MediaRelation
     extra = 1  # By default, provide 1 empty form
 
 class TechnicalGuideAdmin(admin.ModelAdmin):
-    inlines = [TechnicalGuideImageInline]
-
-class CaseStudyImageInline(admin.TabularInline):
-    model = CaseStudyImage
-    extra = 1
+    inlines = [ImageInline]
 
 class CaseStudyAdmin(admin.ModelAdmin):
-    inlines = [CaseStudyImageInline]
+    inlines = [ImageInline]
 
 admin.site.register(TechnicalGuide, TechnicalGuideAdmin)
 admin.site.register(CaseStudy, CaseStudyAdmin)
-admin.site.register(ContentImage)
+admin.site.register(Media)
