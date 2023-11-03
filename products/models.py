@@ -94,7 +94,7 @@ class Geotextile(models.Model):
     # aperture_size do we need this?
 
     def __str__(self):
-        return ("Density: " + str(self.density) + ", Type: " + self.sub_cat)
+        return ("Density: " + str(self.density) + ", Type: " + self.sub_category)
 class Geogrid(models.Model):
     sub_category = models.CharField(choices=GEOGRID_SUB_CATEGORIES, max_length=200) 
     strength_md = models.IntegerField()
