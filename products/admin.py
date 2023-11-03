@@ -18,10 +18,10 @@ class BaseProductInline(nested_admin.NestedStackedInline):
     inlines = [ProductRelationInline, PriceInLine]
     filter_horizontal = ('applications',)
 
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        if db_field.name == 'long_description':
-            kwargs['widget'] = TinyMCE(attrs={'cols': 80, 'rows': 30})
-        return super().formfield_for_dbfield(db_field, **kwargs)
+    # def formfield_for_dbfield(self, db_field, **kwargs):
+    #     if db_field.name == 'long_description':
+    #         kwargs['widget'] = TinyMCE(attrs={'cols': 80, 'rows': 30}, mce_attrs=mce_attrs)
+    #     return super().formfield_for_dbfield(db_field, **kwargs)
 
 # Main
 class GeocellAdmin(nested_admin.NestedModelAdmin):
