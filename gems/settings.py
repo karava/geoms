@@ -37,6 +37,7 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 # Application definition
 
 INSTALLED_APPS = [
+    'gems',
     'products.apps.ProductsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

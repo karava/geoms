@@ -161,6 +161,10 @@ class BaseProduct(models.Model):
         if detail_model:
             return detail_model._meta.verbose_name
         return ""
+    
+    def get_default_image(self):
+        default_media = self.media.filter(is_default=True, resource_type='product_image').first()
+        return default_media.media if default_media else None
 
 class Price(models.Model):
     date = models.DateField(default=date.today)

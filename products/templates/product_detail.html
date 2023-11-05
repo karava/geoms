@@ -126,10 +126,10 @@
                     <a href="{% url 'product_detail' product.id %}" role="button"
                         class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                         <div class="application-thumbnail">
-                            {% if product.default_image %}
-                            <img src="{{ product.default_image.image.file.url }}" alt="{{ product.title }} image">
+                            {% if product.get_default_image %}
+                            <img src="{{ product.get_default_image.file.url }}" alt="{{ product.title }} image">
                             {% else %}
-                            <img src="{% static 'default_placeholder_image.jpg' %}" alt="Default placeholder">
+                            <img src="{% static 'default_placeholder_image.jpg' %}/test" alt="Default placeholder">
                             {% endif %}
                         </div>
                         <div class="application-content d-flex flex-column flex-fill">
