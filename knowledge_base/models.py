@@ -42,6 +42,18 @@ class MediaRelation(models.Model):
                 object_id=self.object_id
             ).exclude(id=self.id).update(is_default=False)
         super().save(*args, **kwargs)
+    
+    def __str__(self):
+        # Get the related object's class name to determine the type
+        related_object_type = self.content_type.model_class().__name__
+
+        # Access the 'title' attribute for TechnicalGuide and CaseStudy
+        if related_object_type in ['TechnicalGuide', 'CaseStudy']:
+            title = getattr(self.content_object, 'title', 'Unknown')
+            return f"{self.media_type} for {related_object_type} '{title}' (Order: {self.order})"
+
+        # Fallback for any other types
+        return f"{self.media_type} related to {related_object_type} (ID: {self.object_id})"
 
 class TechnicalGuide(models.Model):
     title = models.CharField(max_length=255)
