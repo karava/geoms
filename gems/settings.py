@@ -166,6 +166,7 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_PUBLIC_STORAGE_BUCKET_NAME = 'infratex-public-assets'
 AWS_PRIVATE_STORAGE_BUCKET_NAME = 'infratex-private-assets'
+MEDIA_FOLDER_NAME = 'media'
 
 # Configure which endpoint to send files to, and retrieve files from.
 if DEVELOPMENT_MODE:
