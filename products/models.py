@@ -67,7 +67,7 @@ class Geocell(models.Model):
     is_textured = BooleanField(default=False)
 
     def __str__(self):
-        return ("Height: " + str(self.height) + ", Weld spacing: " + str(self.weld_spacing))
+        return("Code: " + str(self.baseproduct.code))
 
 class GCL(models.Model):
     density = models.IntegerField()
@@ -80,8 +80,7 @@ class GCL(models.Model):
     sub_category = models.CharField(choices=GCL_SUB_CATEGORIES, max_length=200)
 
     def __str__(self):
-        base_product = self.baseproduct
-        return ("Code: " + str(base_product.code) + ", Density: " + str(self.density) + ", Roll width: " + str(self.roll_width))
+        return("Code: " + str(self.baseproduct.code))
 
 class Geotextile(models.Model):
     density = models.IntegerField()
@@ -94,7 +93,7 @@ class Geotextile(models.Model):
     # aperture_size do we need this?
 
     def __str__(self):
-        return ("Density: " + str(self.density) + ", Type: " + self.sub_category)
+        return("Code: " + str(self.baseproduct.code))
 class Geogrid(models.Model):
     sub_category = models.CharField(choices=GEOGRID_SUB_CATEGORIES, max_length=200) 
     strength_md = models.IntegerField()
@@ -103,7 +102,7 @@ class Geogrid(models.Model):
     strength_td.help_text = "Strength in transverse direction in kN"
 
     def __str__(self):
-        return ("Shape: " + self.sub_category + ", Strength: " + str(self.strength_md) + "x" + str(self.strength_td))
+        return("Code: " + str(self.baseproduct.code))
 
 class DrainageProduct(models.Model):
     sub_category = models.CharField(choices=DRAINAGE_SUB_CATEGORIES, max_length=200)
@@ -114,7 +113,7 @@ class DrainageProduct(models.Model):
     double_cuspated = BooleanField(default=False)
 
     def __str__(self):
-        return("Type: " + self.sub_category + ", Height: " + str(self.height) + "x" + str(self.roll_width))
+        return("Code: " + str(self.baseproduct.code))
 
 class BaseProduct(models.Model):
     code = models.CharField(max_length=200, blank=True)
