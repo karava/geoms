@@ -29,7 +29,7 @@
     <div class="container">
         <div class="default-grid application-grid">
             {% for product in products %}
-            <a href="{% url 'product_detail' product.id %}" role="button"
+            <a href="{% url 'product_detail' product.code %}" role="button"
                 class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                 <div class="application-thumbnail">
                     {% if product.default_image %}

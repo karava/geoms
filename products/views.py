@@ -6,6 +6,7 @@ from .models import BaseProduct, ProductMediaRelation
 from django.db.models import Prefetch
 from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -70,6 +71,11 @@ class ProductDetailView(DetailView):
     model = BaseProduct
     template_name = "product_detail.html"
     context_object_name = "product"
+
+    def get_object(self, queryset=None):
+        # Use the product_code from the URL to get the product
+        product_code = self.kwargs.get('product_code')
+        return get_object_or_404(BaseProduct, code=product_code)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
