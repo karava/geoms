@@ -22,6 +22,26 @@ CURRENCIES = [
     ('aud', 'AUD'),
 ]
 
+CATEGORIES = [
+    ('geocell', 'Geocell'),
+    ('geotextile', 'Geotextile'),
+    ('gcl', 'GCL'),
+    ('geogrid', 'Geogrid'),
+    ('drainage', 'Drainage'),
+]
+
+SUB_CATEGORIES = [
+    ('strip', 'Drainage - Strip Drain'),
+    ('sheet', 'Drainage - Sheet Drain'),
+    ('powder', 'GCL - Powder'),
+    ('granules', 'GCL - Granules'),
+    ('biaxial', 'Geogrid - Biaxial'),
+    ('triaxial', 'Geogrid - Triaxial'),
+    ('composite', 'Geogrid - Composite Biaxial'),
+    ('woven', 'Geotextiel - Woven'),
+    ('nonwoven', 'Geotextile - Non-woven'),
+]
+
 DRAINAGE_SUB_CATEGORIES = [
     ('strip', 'Strip Drain'),
     ('sheet', 'Sheet Drain'),
@@ -116,7 +136,16 @@ class DrainageProduct(models.Model):
         return("Code: " + str(self.baseproduct.code))
 
 class BaseProduct(models.Model):
+    category = models.CharField(choices=CATEGORIES, max_length=200, blank=True)
+    sub_category = models.CharField(choices=SUB_CATEGORIES, max_length=200, blank=True)
     code = models.CharField(max_length=200, blank=True)
+
+    # Common fields across product categories
+    width = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
+    length = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
+    heigth = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm, this is for geocells and drainage products")
+    density = models.IntegerField(null=True, blank=True, help_text="Unit of measure is gsm, this is for geotextiles and GCL(Need to decide if this is for overall density or bentonite density)")
+
     title = models.CharField(max_length=200, blank=False)
     material = models.CharField(max_length=200, blank=True)
     short_description = models.TextField(blank=True)
