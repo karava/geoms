@@ -2,7 +2,7 @@ import os, json
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from .models import BaseProduct, Geocell, Geogrid, Geotextile, GCL, DrainageProduct, ProductMediaRelation
+from .models import BaseProduct, ProductMediaRelation
 from django.db.models import Prefetch
 from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
@@ -21,25 +21,24 @@ def index(request):
     return render(request, 'index.html', context)
 
 def CategoryListView(request, slug):
-    # Map slugs to their respective models and OneToOneField names in BaseProduct
-    slug_to_model = {
-        'geocells': (Geocell, 'product_detail_geocell'),
-        'gcls': (GCL, 'product_detail_gcl'),
-        'geotextiles': (Geotextile, 'product_detail_geotextile'),
-        'geogrids': (Geogrid, 'product_detail_geogrid'),
-        'drainage_systems': (DrainageProduct, 'product_detail_drainage'),
+    # Mapping slugs to their corresponding categories
+    slug_to_category = {
+        'geocells': 'geocell',
+        'gcls': 'gcl',
+        'geotextiles': 'geotextile',
+        'geogrids': 'geogrid',
+        'drainage_systems': 'drainage',
     }
 
     # Check if the provided slug is valid
-    if slug not in slug_to_model:
+    if slug not in slug_to_category:
         # Handle invalid slugs (you can render an error page or raise a 404)
         return render(request, 'error_page.html', {'message': 'Invalid category.'})
+    
+    category = slug_to_category[slug]
 
-    # Fetch the related model and its field name in BaseProduct
-    related_model, related_field_name = slug_to_model[slug]
-
-    # Get all base products that have the related model set
-    products = BaseProduct.objects.filter(**{f"{related_field_name}__isnull": False})
+    # Get all the products in the category
+    products = BaseProduct.objects.filter(category=category)
 
     # Prefetch related default images
     default_image = ProductMediaRelation.objects.filter(is_default=True, resource_type='product_image')
@@ -59,9 +58,9 @@ def CategoryListView(request, slug):
 
     context = {
         'products': products,
-        'category': related_model._meta.verbose_name_plural.title(),
+        'category': slug.title().replace('_', ' '),
         'detail': category_detail,
-        'page_title': related_model._meta.verbose_name_plural.title()
+        'page_title': slug.title().replace('_', ' ')
     }
 
     return render(request, 'category_list.html', context)
@@ -76,18 +75,13 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['default_image'] = self.object.media.filter(is_default=True, resource_type='product_image').first()
         context['product_images'] = self.object.media.filter(resource_type='product_image').all()
-        context['model_name'] = self.object.get_product_detail_name()
         context['resources'] = self.object.media.exclude(resource_type='product_image').all()
         context['page_title'] = self.object.title
 
-        # Getting the related products
-        detail_model = self.object.get_product_detail_model()
-        if detail_model:
-            related_products = BaseProduct.objects.filter(
-            id__in=type(detail_model).objects.exclude(id=detail_model.id).values('baseproduct__id')).exclude(id=self.object.id)  # Exclude the current product
-            context['related_products'] = related_products
-        else:
-            context['related_products'] = BaseProduct.objects.none()
+        # Getting the related products based on category
+        related_products = BaseProduct.objects.filter(category=self.object.category).exclude(id=self.object.id)
+        context['related_products'] = related_products
+        
         return context
     
 def product_enquiry(request):
