@@ -21,7 +21,7 @@ def index(request):
     context = {'categories': items, 'page_title': 'Product Categories'}
     return render(request, 'index.html', context)
 
-def CategoryListView(request, slug):
+def CategoryListView(request, category_slug):
     # Mapping slugs to their corresponding categories
     slug_to_category = {
         'geocells': 'geocell',
@@ -32,11 +32,11 @@ def CategoryListView(request, slug):
     }
 
     # Check if the provided slug is valid
-    if slug not in slug_to_category:
+    if category_slug not in slug_to_category:
         # Handle invalid slugs (you can render an error page or raise a 404)
         return render(request, 'error_page.html', {'message': 'Invalid category.'})
     
-    category = slug_to_category[slug]
+    category = slug_to_category[category_slug]
 
     # Get all the products in the category
     products = BaseProduct.objects.filter(category=category)
@@ -54,14 +54,15 @@ def CategoryListView(request, slug):
     category_detail = None
     
     for item in items:
-        if item['url'] == ('/' + slug):
+        if item['url'] == ('/' + category_slug):
             category_detail = item
 
     context = {
         'products': products,
-        'category': slug.title().replace('_', ' '),
+        'category': category_slug.title().replace('_', ' '),
+        'category_slug': category_slug,
         'detail': category_detail,
-        'page_title': slug.title().replace('_', ' ')
+        'page_title': category_slug.title().replace('_', ' ')
     }
 
     return render(request, 'category_list.html', context)
@@ -87,6 +88,7 @@ class ProductDetailView(DetailView):
         # Getting the related products based on category
         related_products = BaseProduct.objects.filter(category=self.object.category).exclude(id=self.object.id)
         context['related_products'] = related_products
+        context['category_slug'] = self.kwargs.get('category_slug')
         
         return context
     

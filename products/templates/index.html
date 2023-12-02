@@ -20,7 +20,7 @@
     <div class="container">
         <div class="default-grid application-grid">
             {% for item in categories %}
-            <a href="/products/category{{item.url}}" role="button" class="application-item product-item text-decoration-none d-flex flex-column">
+            <a href="/products{{item.url}}" role="button" class="application-item product-item text-decoration-none d-flex flex-column">
                 <div class="application-thumbnail">
                     <img src="{% static subpath|add:'assets/images/' %}{{ item.thumbnail }}"
                         alt="application-thumbnail">

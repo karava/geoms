@@ -9,8 +9,8 @@
                 <a href="/products/" class="typo-caption neutral-600 fw-medium text-decoration-none">Categories</a>
                 <img src="{% static 'assets/icons/arrow-down-s-line.svg' %}" width="20px" height="20px"
                     alt="arrow-down-line">
-                <a href="/products/"
-                    class="typo-caption neutral-600 fw-medium text-decoration-none text-capitalize">{{object.category}}</a>
+                <a href="/products/{{ category_slug}}"
+                    class="typo-caption neutral-600 fw-medium text-decoration-none text-capitalize">{{ category_slug|title|replace:"_":" " }}</a>
                 <img src="{% static 'assets/icons/arrow-down-s-line.svg' %}" width="20px" height="20px"
                     alt="arrow-down-line">
                 <span class="typo-caption neutral-500 fw-medium">{{ object.title }}</span>
@@ -123,7 +123,7 @@
                     class="neutral-500">({{related_products|length}})</span></p>
                 <div class="default-grid application-grid">
                     {% for product in related_products %}
-                    <a href="{% url 'product_detail' product.id %}" role="button"
+                    <a href="{% url 'product_detail' product.code %}" role="button"
                         class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                         <div class="application-thumbnail">
                             {% if product.get_default_image %}
