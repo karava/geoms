@@ -28,7 +28,7 @@ def CategoryListView(request, category_slug):
         'gcls': 'gcl',
         'geotextiles': 'geotextile',
         'geogrids': 'geogrid',
-        'drainage_systems': 'drainage',
+        'drainage-systems': 'drainage',
     }
 
     # Check if the provided slug is valid
