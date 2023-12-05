@@ -22,24 +22,24 @@ CURRENCIES = [
     ('aud', 'AUD'),
 ]
 
-DRAINAGE_SUB_CATEGORIES = [
-    ('strip', 'Strip Drain'),
-    ('sheet', 'Sheet Drain'),
+CATEGORIES = [
+    ('geocell', 'Geocell'),
+    ('geotextile', 'Geotextile'),
+    ('gcl', 'GCL'),
+    ('geogrid', 'Geogrid'),
+    ('drainage', 'Drainage'),
 ]
 
-GCL_SUB_CATEGORIES = [
-    ('powder', 'Powder'),
-    ('granules', 'Granules')
-]
-
-GEOGRID_SUB_CATEGORIES = [
-    ('BI', 'BIAXIAL'),
-    ('TRI', 'TRIAXIAL'),
-]
-
-GEOTEXTILE_SUB_CATEGORIES = [
-    ('woven', 'Woven'),
-    ('nonwoven', 'Non-woven'),
+SUB_CATEGORIES = [
+    ('strip', 'Drainage - Strip Drain'),
+    ('sheet', 'Drainage - Sheet Drain'),
+    ('powder', 'GCL - Powder'),
+    ('granules', 'GCL - Granules'),
+    ('biaxial', 'Geogrid - Biaxial'),
+    ('triaxial', 'Geogrid - Triaxial'),
+    ('composite', 'Geogrid - Composite Biaxial'),
+    ('woven', 'Geotextiel - Woven'),
+    ('nonwoven', 'Geotextile - Non-woven'),
 ]
 
 RESOURCE_TYPES = [
@@ -59,64 +59,17 @@ class Application(models.Model):
     def __str__(self):
         return self.name
 
-class Geocell(models.Model):
-    height = models.IntegerField()
-    height.help_text = "Unit of measure is mm"
-    weld_spacing = models.IntegerField()
-    weld_spacing.help_text = "Unit of measure is mm"
-    is_textured = BooleanField(default=False)
-
-    def __str__(self):
-        return("Code: " + str(self.baseproduct.code))
-
-class GCL(models.Model):
-    density = models.IntegerField()
-    density.help_text = "Unit of measure is gsm"
-    roll_width = DecimalField(max_digits=4, decimal_places=2)
-    roll_width.help_text = "Unit of measure is m"
-    roll_length = DecimalField(max_digits=5, decimal_places=2)
-    roll_length.help_text = "Unit of measure is m"
-    bentonite_specs = models.CharField(max_length=200, blank=True)
-    sub_category = models.CharField(choices=GCL_SUB_CATEGORIES, max_length=200)
-
-    def __str__(self):
-        return("Code: " + str(self.baseproduct.code))
-
-class Geotextile(models.Model):
-    density = models.IntegerField()
-    density.help_text = "Unit of measure is gsm"
-    roll_width = DecimalField(max_digits=4, decimal_places=2)
-    roll_width.help_text = "Unit of measure is m"
-    roll_length = DecimalField(max_digits=5, decimal_places=2)
-    roll_length.help_text = "Unit of measure is m"
-    sub_category = models.CharField(choices=GEOTEXTILE_SUB_CATEGORIES, max_length=200)
-    # aperture_size do we need this?
-
-    def __str__(self):
-        return("Code: " + str(self.baseproduct.code))
-class Geogrid(models.Model):
-    sub_category = models.CharField(choices=GEOGRID_SUB_CATEGORIES, max_length=200) 
-    strength_md = models.IntegerField()
-    strength_md.help_text = "Strength in machine direction in kN"
-    strength_td = models.IntegerField()
-    strength_td.help_text = "Strength in transverse direction in kN"
-
-    def __str__(self):
-        return("Code: " + str(self.baseproduct.code))
-
-class DrainageProduct(models.Model):
-    sub_category = models.CharField(choices=DRAINAGE_SUB_CATEGORIES, max_length=200)
-    height = models.IntegerField()
-    height.help_text = "Unit of measure is mm"
-    roll_width = models.IntegerField()
-    roll_width.help_text = "Unit of measure is mm"
-    double_cuspated = BooleanField(default=False)
-
-    def __str__(self):
-        return("Code: " + str(self.baseproduct.code))
-
 class BaseProduct(models.Model):
+    category = models.CharField(choices=CATEGORIES, max_length=200, blank=True)
+    sub_category = models.CharField(choices=SUB_CATEGORIES, max_length=200, blank=True)
     code = models.CharField(max_length=200, blank=True)
+
+    # Common fields across product categories
+    width = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
+    length = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
+    heigth = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm, this is for geocells and drainage products")
+    density = models.IntegerField(null=True, blank=True, help_text="Unit of measure is gsm, this is for geotextiles and GCL(Need to decide if this is for overall density or bentonite density)")
+
     title = models.CharField(max_length=200, blank=False)
     material = models.CharField(max_length=200, blank=True)
     short_description = models.TextField(blank=True)
@@ -135,35 +88,14 @@ class BaseProduct(models.Model):
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
     packing_description = models.CharField(blank=True, max_length=200)
-    product_detail_geocell = models.OneToOneField(Geocell, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_geotextile = models.OneToOneField(Geotextile, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_gcl = models.OneToOneField(GCL, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_geogrid = models.OneToOneField(Geogrid, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-    product_detail_drainage = models.OneToOneField(DrainageProduct, on_delete=models.CASCADE, null=True, blank=True, editable=False)
-
-    def get_product_detail_model(self):
-        # Check which OneToOne relationship is set and return its associated model
-        if self.product_detail_geocell:
-            return self.product_detail_geocell
-        elif self.product_detail_geotextile:
-            return self.product_detail_geotextile
-        elif self.product_detail_gcl:
-            return self.product_detail_gcl
-        elif self.product_detail_geogrid:
-            return self.product_detail_geogrid
-        elif self.product_detail_drainage:
-            return self.product_detail_drainage
-        return None
-
-    def get_product_detail_name(self):
-        detail_model = self.get_product_detail_model()
-        if detail_model:
-            return detail_model._meta.verbose_name
-        return ""
     
     def get_default_image(self):
         default_media = self.media.filter(is_default=True, resource_type='product_image').first()
         return default_media.media if default_media else None
+    
+    def __str__(self):
+        return self.code
+    
 
 class Price(models.Model):
     date = models.DateField(default=date.today)
