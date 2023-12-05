@@ -116,7 +116,7 @@ Needed By: {enquiry.needed_by}
                 subject,
                 message,
                 settings.DEFAULT_FROM_EMAIL, # Sender's email
-                ['your_email@example.com'], # Replace with your receiving email
+                ['support@geosynthetics.net.au'], # Replace with your receiving email
             )
 
             # Redirect to a 'thank you' page or similar after submission
