@@ -123,7 +123,7 @@
                     class="neutral-500">({{related_products|length}})</span></p>
                 <div class="default-grid application-grid">
                     {% for product in related_products %}
-                    <a href="{% url 'product_detail' product.code %}" role="button"
+                    <a href="{% url 'product_detail' category_slug product.code %}" role="button"
                         class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
                         <div class="application-thumbnail">
                             {% if product.get_default_image %}
