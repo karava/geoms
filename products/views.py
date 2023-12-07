@@ -2,7 +2,7 @@ import os, json
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from .models import BaseProduct, ProductMediaRelation
+from .models import Product, ProductMediaRelation
 from django.db.models import Prefetch
 from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
@@ -39,7 +39,7 @@ def CategoryListView(request, category_slug):
     category = slug_to_category[category_slug]
 
     # Get all the products in the category
-    products = BaseProduct.objects.filter(category=category)
+    products = Product.objects.filter(category=category)
 
     # Prefetch related default images
     default_image = ProductMediaRelation.objects.filter(is_default=True, resource_type='product_image')
@@ -69,14 +69,14 @@ def CategoryListView(request, category_slug):
 
 
 class ProductDetailView(DetailView):
-    model = BaseProduct
+    model = Product
     template_name = "product_detail.html"
     context_object_name = "product"
 
     def get_object(self, queryset=None):
         # Use the product_code from the URL to get the product
         product_code = self.kwargs.get('product_code')
-        return get_object_or_404(BaseProduct, code=product_code)
+        return get_object_or_404(Product, code=product_code)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,7 +86,7 @@ class ProductDetailView(DetailView):
         context['page_title'] = self.object.title
 
         # Getting the related products based on category
-        related_products = BaseProduct.objects.filter(category=self.object.category).exclude(id=self.object.id)
+        related_products = Product.objects.filter(category=self.object.category).exclude(id=self.object.id)
         context['related_products'] = related_products
         context['category_slug'] = self.kwargs.get('category_slug')
         

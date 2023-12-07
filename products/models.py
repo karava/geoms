@@ -59,8 +59,8 @@ class Application(models.Model):
     def __str__(self):
         return self.name
 
-class BaseProduct(models.Model):
-    category = models.CharField(choices=CATEGORIES, max_length=200, blank=True)
+class Product(models.Model):
+    category = models.CharField(choices=CATEGORIES, max_length=200, blank=False)
     sub_category = models.CharField(choices=SUB_CATEGORIES, max_length=200, blank=True)
     code = models.CharField(max_length=200, blank=True)
 
@@ -96,6 +96,8 @@ class BaseProduct(models.Model):
     def __str__(self):
         return self.code
     
+    def get_latest_price(self):
+        return self.prices.order_by('-date').first()
 
 class Price(models.Model):
     date = models.DateField(default=date.today)
@@ -106,10 +108,10 @@ class Price(models.Model):
     currency = models.CharField(choices=CURRENCIES, max_length=200, default='usd')
     expiry = models.DateField(blank=True, null=True, default=get_expiry_date())
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    base_product = models.ForeignKey(BaseProduct, on_delete=CASCADE, related_name='price')
+    base_product = models.ForeignKey(Product, on_delete=CASCADE, related_name='prices')
 
 class ProductMediaRelation(models.Model):
-    product = models.ForeignKey(BaseProduct, on_delete=models.CASCADE, related_name='media')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='media')
     resource_type = models.CharField(choices=RESOURCE_TYPES, max_length=255)
     media_type = models.CharField(max_length=10, choices=(('image', 'Image'), ('document', 'Document')), default='image')
     media = models.ForeignKey(Media, on_delete=models.CASCADE)
