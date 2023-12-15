@@ -755,6 +755,32 @@ header .v-divider {
     justify-content: center;
 }
 
+/* Start of hover effect styles */
+.product-wrapper .overlay-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 165, 0, 0.9); /* Orange background with some opacity */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* So that the link is still clickable */
+    padding: 15px; /* Add padding if needed */
+    box-sizing: border-box;
+    font-weight: bold; /* Example style */
+    text-align: center; /* Centers text vertically and horizontally */
+}
+
+.product-wrapper:hover .overlay-text {
+    opacity: 1;
+}
+/* End of hover effect styles */
+
 .product-arrow {
     width: 44px;
     height: 44px;
