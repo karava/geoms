@@ -110,7 +110,7 @@ class CaseStudy(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title)[:50]
         super(CaseStudy, self).save(*args, **kwargs)
 
     def __str__(self):
