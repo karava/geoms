@@ -91,7 +91,7 @@ class TechnicalGuide(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)[:50]
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -103,14 +103,14 @@ class CaseStudy(models.Model):
     project_description = models.TextField(blank=True, verbose_name="The Project")
     challenges = models.TextField(blank=True)
     solution = models.TextField(blank=True, verbose_name="Our Solution")
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     images = GenericRelation(MediaRelation)
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)[:50]
+            self.slug = slugify(self.title)
         super(CaseStudy, self).save(*args, **kwargs)
 
     def __str__(self):
