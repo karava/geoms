@@ -2,4 +2,4 @@ staticfiles/
 db.sqlite3
 *.pyc
 .env*
-
+env

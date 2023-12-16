@@ -719,6 +719,7 @@ header .v-divider {
     margin-bottom: 24px;
 }
 
+
 .product-wrapper .product-bg {
     width: 100%;
     height: 100%;
@@ -738,12 +739,19 @@ header .v-divider {
     bottom: 16px;
 }
 
+
 .product-wrapper .product-name {
     color: white;
     font-size: 28px;
     line-height: 34px;
-    width: 50%;
+    width: 50%;  
+    opacity: 1;
+  
 }
+
+.product-wrapper :hover .product-name {
+    opacity: 0;
+} 
 
 .product-wrapper .product-arrow {
     background-color: rgba(5, 8, 17, 0.40);
@@ -755,6 +763,12 @@ header .v-divider {
     justify-content: center;
 }
 
+
+.product-wrapper :hover .product-arrow{
+    background-color: rgba(255, 100, 0);
+}
+
+
 .product-arrow {
     width: 44px;
     height: 44px;
@@ -764,6 +778,54 @@ header .v-divider {
     width: 36px;
     height: 36px;
 }
+
+.product-wrapper:hover .product-arrow img {
+    /* Invert the colors to make the arrow white */
+    filter: brightness(0) invert(1);
+}
+
+.product-wrapper .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:  rgb(255, 100, 0);
+    color: white;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-wrapper:hover .hover-overlay {
+    opacity: 1;
+}
+
+.product-wrapper .hover-content {
+    text-align: center;
+}
+
+.product-wrapper .hover-title {
+    position: relative;
+    font-size: 24px;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-weight: bold;
+    padding-top: 0%;
+   
+}
+.product-wrapper .hover-description {
+    text-align: left;
+    font-size: 18px;
+    /* margin-top: 30px; */
+    margin-bottom: 10px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
 
 @media (min-width: 992px) {
     .product-grid-section .product-grid {
@@ -1510,3 +1572,5 @@ label[for="id_existing_customer_0"] {
         padding: 24px 20px 20px;
     }
 }
+
+

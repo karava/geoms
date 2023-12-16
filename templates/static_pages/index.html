@@ -2,6 +2,19 @@
 {% load static %}
 
 {% block content %}
+<script>
+
+function toggleProductName(hide) {
+    var productName = document.getElementById("productName");
+    if (hide) {
+        productName.style.visibility = "hidden";
+    } else {
+        productName.style.visibility = "visible";
+    }
+}
+
+</script>
+
 
 <div class="video-hero-section">
     <div class="video-hero-overlay"></div>
@@ -89,69 +102,99 @@
         </div>
     </div>
     <div class="default-grid product-grid">
-        <div class="product-wrapper">
+        <div class="product-wrapper" >
             <a href="/products/geogrids/">
-                <div class="product-bg">
-                    <img src="{% static 'assets/images/product1.png' %}" class="img-fluid" alt="product">
-                </div>
-                <div class="d-flex justify-content-between align-items-end product-info">
-                    <p class="fw-semibold typo-heading-5 mb-0 product-name">Geogrids</p>
-                    <div class="product-arrow">
-                        <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow-top-right">
+                <div class="product-bg" >
+                    <img src="{% static 'assets/images/product1.png' %}" class="img-fluid" alt="product" >                   
+                    <div class="hover-overlay">
+                        <div class="hover-content">
+                            <h3 class="hover-title">Geogrids</h3>
+                            <p class="hover-description">InfraGrid Geogrids offer unparalleled soil stabilization and reinforcement solutions. Ideal for road construction, retaining walls, and slope stabilization, these products guarantee a strong and reliable foundation for any project.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                    <div class="d-flex justify-content-between align-items-end product-info">                       
+                       <p class="fw-semibold typo-heading-5 mb-0 product-name">Geogrids</p>                    
+                        <div class="product-arrow">
+                            <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow-top-right">
+                        </div>
+                    </div>  
+                </div>                                       
+               </a>
         </div>
         <div class="product-wrapper">
             <a href="/products/gcls/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product2.png' %}" class="img-fluid" alt="product">
-                </div>
+                    <div class="hover-overlay">
+                        <div class="hover-content">
+                            <h3 class="hover-title">Clay Liners</h3>
+                            <p class="hover-description">Geosynthetic Clay Liners, known by our product name InfraClay, provide effective and environmentally friendly sealing solutions. Used extensively in waste management and water treatment plants, InfraClay ensures compliance with the most stringent environmental regulations.</p>
+                        </div>
+                    </div>               
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Clay Liners</p>
                     <div class="product-arrow">
                         <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow-top-right">
                     </div>
                 </div>
+               </div> 
             </a>
         </div>
         <div class="product-wrapper">
             <a href="/products/geocells/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product3.png' %}" class="img-fluid" alt="product">
-                </div>
+                    <div class="hover-overlay">
+                        <div class="hover-content">
+                            <h3 class="hover-title">Geocells</h3>
+                            <p class="hover-description">When it comes to erosion control and soil stabilization, InfraCell Geocells deliver unparalleled performance. Designed for a range of applications from slope stabilization to ground reinforcement, InfraCell is the go-to solution for challenging environmental conditions.</p>
+                        </div>
+                    </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Geocells</p>
                     <div class="product-arrow">
                         <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow-top-right">
                     </div>
                 </div>
+             </div>
             </a>
         </div>
         <div class="product-wrapper">
             <a href="/products/geotextiles/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product4.png' %}" class="img-fluid" alt="product">
-                </div>
+                    <div class="hover-overlay">
+                        <div class="hover-content">
+                            <h3 class="hover-title">Geotextiles</h3>
+                            <p class="hover-description">Our Geotextiles, marketed as InfraThread, offer robust, multi-functional solutions for soil separation, filtration, and drainage. Made from premium materials, these geotextiles are a staple in civil and environmental engineering projects.</p>
+                        </div>    
+                    </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Geotextiles</p>
                     <div class="product-arrow">
                         <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow-top-right">
                     </div>
                 </div>
+            </div>    
             </a>
         </div>
         <div class="product-wrapper">
             <a href="/products/drainage-systems/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product5.png' %}" class="img-fluid" alt="product">
-                </div>
+                    <div class="hover-overlay">
+                        <div class="hover-content">
+                            <h3 class="hover-title">Drainage Systems</h3>
+                            <p class="hover-description">Last but not least, our Geocomposite Drains, known as InfraDrain, offer advanced drainage solutions for various applications, from roadways to retaining walls.</p>
+                        </div>     
+                    </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Drainage Systems</p>
                     <div class="product-arrow">
                         <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow-top-right">
                     </div>
                 </div>
+              </div>  
             </a>
         </div>
     </div>
