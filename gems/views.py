@@ -1,8 +1,9 @@
 import os, json
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import ProductEnquiryForm
+from django.core.mail import send_mail
 
 # Create your views here.
 

@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from .models import Product, ProductMediaRelation
 from django.db.models import Prefetch
-from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
