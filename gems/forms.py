@@ -1,5 +1,5 @@
 from django import forms
-from .models import ProductEnquiry
+from products.models import ProductEnquiry
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 

@@ -2,6 +2,7 @@ import os, json
 from django.conf import settings
 from django.shortcuts import render
 from django.urls import reverse
+from .forms import ProductEnquiryForm
 
 # Create your views here.
 
@@ -47,3 +48,37 @@ def render_application_detail(request, slug):
 
     context = {'data': application, 'page_title': application['title']}
     return render(request, 'application/detail.html', context)
+
+def product_enquiry(request):
+    print("------we've arrived here-----")
+    if request.method == 'POST':
+        form = ProductEnquiryForm(request.POST)
+        if form.is_valid():
+            enquiry = form.save()
+            
+            # Sending email:
+            subject = 'New Product Enquiry'
+            message = f"""
+Name: {enquiry.full_name}
+Email: {enquiry.email}
+Phone: {enquiry.phone}
+Existing Customer: {enquiry.existing_customer}
+Product Interested In: {enquiry.product_interested_in}
+Estimated Quantity: {enquiry.estimated_quantity}
+Specifications: {enquiry.specifications}
+Project Based: {enquiry.project_based}
+Needed By: {enquiry.needed_by}
+"""
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL, # Sender's email
+                ['support@geosynthetics.net.au'], # Replace with your receiving email
+            )
+
+            # Redirect to a 'thank you' page or similar after submission
+            return redirect('contact')
+    else:
+        form = ProductEnquiryForm()
+    return render(request, 'static_pages/contact.html', {'form': form, 'page_title': 'Contact Us'})
