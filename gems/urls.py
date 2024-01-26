@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from django.views.static import serve
+from django.conf import settings
 
 from . import views
 
@@ -32,4 +34,5 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('knowledgebase/', include('knowledge_base.urls')),
     path('tinymce/', include('tinymce.urls')),
+    path('sitemap.xml', serve, {'path': 'assets/sitemap.xml', 'document_root': settings.STATIC_ROOT}),
 ]
