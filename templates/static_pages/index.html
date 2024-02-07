@@ -95,7 +95,7 @@
                     <img src="{{ MEDIA_URL }}media/product_geogrid_image_1.jpg" class="img-fluid" alt="product">
                     <!-- Overlay Text Container -->
                     <div class="overlay-text">
-                        <p>Advanced drainage solutions for various applications, from roadways to retaining walls.</p>
+                        <p>{{ products.geogrids.description }}</p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
@@ -110,6 +110,10 @@
             <a href="/products/gcls/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product2.png' %}" class="img-fluid" alt="product">
+                    <!-- Overlay Text Container -->
+                    <div class="overlay-text">
+                        <p>{{ products.clay_liners.description }}</p>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Clay Liners</p>
@@ -123,6 +127,10 @@
             <a href="/products/geocells/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product5.png' %}" class="img-fluid" alt="product">
+                    <!-- Overlay Text Container -->
+                    <div class="overlay-text">
+                        <p>{{ products.geocells.description }}</p>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Geocells</p>
@@ -136,6 +144,10 @@
             <a href="/products/geotextiles/">
                 <div class="product-bg">
                     <img src="{% static 'assets/images/product3.png' %}" class="img-fluid" alt="product">
+                    <!-- Overlay Text Container -->
+                    <div class="overlay-text">
+                        <p>{{ products.geotextiles.description }}</p>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Geotextiles</p>
@@ -148,7 +160,11 @@
         <div class="product-wrapper">
             <a href="/products/drainage-systems/">
                 <div class="product-bg">
-                    <img src="{% static 'assets/images/product_category_ds.png' %}" class="img-fluid" alt="product">                    
+                    <img src="{% static 'assets/images/product_category_ds.png' %}" class="img-fluid" alt="product">
+                    <!-- Overlay Text Container -->
+                    <div class="overlay-text">
+                        <p>{{ products.drainage_systems.description }}</p>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end product-info">
                     <p class="fw-semibold typo-heading-5 mb-0 product-name">Drainage Systems</p>

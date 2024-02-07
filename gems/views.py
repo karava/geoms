@@ -6,6 +6,18 @@ from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
 
 # Create your views here.
+def index(request):
+    with open(settings.BASE_DIR / 'data/products.json') as f:
+        products = json.load(f)
+    
+    products_dict = {}
+    
+    for product in products:
+        products_dict[product['title'].lower().replace(' ', '_')] = product
+    
+    context = {'products': products_dict, 'page_title': 'Home'}
+
+    return render(request, 'static_pages/index.html', context)
 
 def render_applications(request):
     path = os.path.join(settings.BASE_DIR, 'data', 'applications')
