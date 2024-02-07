@@ -2,6 +2,21 @@
 {% load static %}
 
 {% block content %}
+
+<script>
+    function replaceMainImage(thumbnailSrc, altText) 
+    {
+        // Get the main image element by its ID
+        var mainImage = document.getElementById("defaultImage");
+
+        // Replace the source attribute with the thumbnail image URL
+        mainImage.src = thumbnailSrc;
+
+        // Update alt text
+        mainImage.alt = altText;
+    }
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -25,13 +40,13 @@
             <div class="image-wrapper">
                 <div class="main-image">
                     {% if default_image %}
-                    <img src="{{ default_image.media.file.url }}" alt="{{ object.title }}">
+                    <img id="defaultImage" src="{{ default_image.media.file.url }}" alt="{{ object.title }}">
                     {% endif %}
                 </div>
                 <div class="other-images">
                     {% for product_image in product_images %}
                     <div class="other-image-thumbnail">
-                        <img src="{{ product_image.media.file.url }}" alt="{{ object.title }}">
+                        <img id="otherImage" src="{{ product_image.media.file.url }}" alt="{{ object.title }}" onclick="replaceMainImage('{{ product_image.media.file.url }}', '{{ object.title }}')">
                     </div>
                     {% endfor %}
                 </div>
@@ -124,7 +139,7 @@
                 <div class="default-grid application-grid">
                     {% for product in related_products %}
                     <a href="{% url 'product_detail' category_slug product.code %}" role="button"
-                        class="d-inline-flex flex-column application-item casestudy-item text-decoration-none">
+                        class="d-inline-flex flex-column application-item casestudy-item text-decoration-none mb-3">
                         <div class="application-thumbnail">
                             {% if product.get_default_image %}
                             <img src="{{ product.get_default_image.file.url }}" alt="{{ product.title }} image">
