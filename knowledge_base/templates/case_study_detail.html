@@ -29,11 +29,11 @@
             {% endif %}
             <div class="article-content-block">
                 <p class="typo-heading-5 neutral-600 fw-bold">The Project</p>
-                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ study.project_description }}</p>
+                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ study.project_description|safe }}</p>
             </div>
             <div class="article-content-block">
                 <p class="typo-heading-5 neutral-600 fw-bold">Challenges</p>
-                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ study.challenges }}</p>
+                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ study.challenges|safe }}</p>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
             <div class="content">
                 <p class="neutral-600 fw-bold typo-heading-5 mb-2"><span class="orange-600">//</span>&nbsp;Our Solution
                 </p>
-                <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ study.solution }}</p>
+                <p class="neutral-500 typo-body-1 mt-3 lh-base mb-0">{{ study.solution|safe }}</p>
             </div>
         </div>
     </div>
