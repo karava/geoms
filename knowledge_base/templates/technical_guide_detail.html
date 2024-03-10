@@ -28,7 +28,7 @@
             {% endif %}
             <div class="article-content-block">
                 <p class="typo-heading-5 neutral-600 fw-bold">About {{ guide.title }}</p>
-                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ guide.content }}</p>
+                <p class="typo-body-1 neutral-500 lh-base mb-0">{{ guide.content|safe }}</p>
             </div>
         </div>
     </div>

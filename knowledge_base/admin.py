@@ -10,6 +10,11 @@ class ImageInline(GenericTabularInline):  # You can also use admin.StackedInline
 class TechnicalGuideAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
 
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name in ('content'):
+            kwargs['widget'] = TinyMCE(attrs={'cols': 80, 'rows': 30})
+        return super().formfield_for_dbfield(db_field, **kwargs)
+
 class CaseStudyAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
     
