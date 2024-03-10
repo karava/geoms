@@ -28,6 +28,7 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('aboutus', TemplateView.as_view(template_name='static_pages/aboutus.html', extra_context=dict(page_title='About Us')), name='aboutus'),
     path('capabilities', TemplateView.as_view(template_name='static_pages/capabilities_statement.html', extra_context=dict(page_title='Capabilities Statement')), name='capabilities_statement'),
+    path('sustainability', TemplateView.as_view(template_name='static_pages/sustainability.html', extra_context=dict(page_title='Sustainability')), name='sustainability'),
     path('contact', views.product_enquiry, name='contact'),
     path('applications', views.render_applications, name='applications'),
     path('applications/<slug:slug>/', views.render_application_detail, name='application_detail'),
