@@ -541,6 +541,20 @@ header .v-divider {
     box-shadow: 0px 1px 8px 0px rgba(47, 56, 104, 0.10), 0px 11px 114px 0px rgba(42, 51, 102, 0.06);
 }
 
+.icon-text-card-section-1 .card-thumbnail {
+    border-bottom: 4px solid #15B79E;
+    background: #FFF;
+    overflow: hidden;
+    aspect-ratio: 387 / 220;
+    margin: -20px -20px 20px;
+    border-radius: 6px 6px 0px 0px;
+}
+.icon-text-card-section-1 .card-thumbnail img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
 .icon-text-card-section-1 .eyebrow {
     /* */
 }
@@ -855,7 +869,9 @@ header .v-divider {
     background: linear-gradient(0deg, rgba(5, 8, 17, 0.46) 0%, rgba(5, 8, 17, 0.46) 100%), url('../assets/images/product_categories_hero.jpg'), lightgray 50% / cover no-repeat;
     background-position-x: center!important;
 }
-
+.hero-section-1.sustainability-hero {
+    background: linear-gradient(0deg, rgba(5, 8, 17, 0.46) 0%, rgba(5, 8, 17, 0.46) 100%), url('../assets/images/sustainability-hero.jpg'), lightgray 50% / cover no-repeat;
+}
 .hero-section-1 .eyebrow {
     color: white;
 }
