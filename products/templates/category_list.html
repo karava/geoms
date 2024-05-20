@@ -63,12 +63,12 @@
                 <p class="typo-heading-5 neutral-600 fw-bold">Get More Details About {{category}}</p>
                 {% for item in detail.faq %}
                 <div class="faq-item">
-                    <button type="button" class="faq-item-header">
+                    <div class="faq-item-header">
                         <p class="neutral-600 mb-0 fw-bold">{{item.question}}</p>
-                        <img src="{% static 'assets/icons/add-line.svg' %}" class="plus-icon" width="24px" height="24px" alt="add-line">
+                        {% comment %} <img src="{% static 'assets/icons/add-line.svg' %}" class="plus-icon" width="24px" height="24px" alt="add-line">
                         <img src="{% static 'assets/icons/subtract-line.svg' %}" class="minus-icon" width="24px" height="24px"
-                            alt="subtract-line">
-                    </button>
+                            alt="subtract-line"> {% endcomment %}
+                    </div>
                     <div class="faq-item-body">
                         <p class="neutral-500 typo-body-1 lh-base mb-0">{{item.answer}}</p>
                     </div>

@@ -1203,7 +1203,7 @@ header .v-divider {
     display: none;
 }
 
-.faq-item .faq-item-body {
+/* .faq-item .faq-item-body {
     height: auto;
     max-height: 0;
     overflow: hidden;
@@ -1214,7 +1214,7 @@ header .v-divider {
     max-height: 30rem;
     padding-top: 16px;
     transition: all .5s ease-out;
-}
+} */
 
 .faq-item .faq-item-header {
     font-size: 18px;

@@ -64,8 +64,8 @@ const faqItemHeaderButtons = document.querySelectorAll(
   ".faq-item .faq-item-header"
 );
 
-faqItemHeaderButtons.forEach((element) => {
-  element.addEventListener("click", function () {
-    element.parentElement.classList.toggle("opened");
-  });
-});
+// faqItemHeaderButtons.forEach((element) => {
+//   element.addEventListener("click", function () {
+//     element.parentElement.classList.toggle("opened");
+//   });
+// });
