@@ -63,16 +63,16 @@ def render_application_detail(request, slug):
     return render(request, 'application/detail.html', context)
 
 def product_enquiry(request):
-    print("------we've arrived here-----")
     if request.method == 'POST':
         form = ProductEnquiryForm(request.POST)
         if form.is_valid():
             enquiry = form.save()
             
             # Sending email:
-            subject = 'New Product Enquiry'
+            subject = 'New Product Enquiry - Infratex'
             message = f"""
 Name: {enquiry.full_name}
+Company: {enquiry.company}
 Email: {enquiry.email}
 Phone: {enquiry.phone}
 Existing Customer: {enquiry.existing_customer}

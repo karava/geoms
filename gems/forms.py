@@ -22,6 +22,8 @@ class ProductEnquiryForm(forms.ModelForm):
         self.fields['full_name'].label = 'Full Name'
         self.fields['full_name'].widget.attrs['placeholder'] = 'Enter your full name'
 
+        self.fields['company'].widget.attrs['placeholder'] = 'Enter your company name'
+
         self.fields['email'].widget.attrs['placeholder'] = 'Youremail@email.com'
 
         self.fields['phone'].widget.attrs['placeholder'] = '+03 1111 1111'
@@ -54,7 +56,7 @@ class ProductEnquiryForm(forms.ModelForm):
     class Meta:
         model = ProductEnquiry
         fields = [
-            'full_name', 'email', 'phone', 'existing_customer',
+            'full_name', 'company', 'email', 'phone', 'existing_customer',
             'product_interested_in', 'estimated_quantity', 'specifications',
             'project_based', 'needed_by', 'captcha'
         ]
