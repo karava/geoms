@@ -15,6 +15,7 @@ import os
 from django.core.management.utils import get_random_secret_key
 import sys
 import dj_database_url
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") 
+ALLOWED_HOSTS = json.loads(os.getenv('DJANGO_ALLOWED_HOSTS', '["*"]'))
 
 # Custom helper variable to determine when to correct to production or development database.
 # Can be used for other items to distinguish production and development

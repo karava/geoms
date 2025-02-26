@@ -7,7 +7,7 @@ class TechnicalGuideListView(ListView):
     model = TechnicalGuide
     template_name = 'technical_guide_list.html'
     context_object_name = 'guides'
-    paginate_by = 10    # default items per page
+    paginate_by = 20    # default items per page
     
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
@@ -49,7 +49,7 @@ class CaseStudyListView(ListView):
     model = CaseStudy
     template_name = 'case_study_list.html'
     context_object_name = 'studies'
-    paginate_by = 10    # default items per page
+    paginate_by = 20    # default items per page
 
     def get_paginate_by(self, queryset):
         return self.request.GET.get('pagesize', self.paginate_by)

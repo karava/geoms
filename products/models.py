@@ -35,10 +35,11 @@ SUB_CATEGORIES = [
     ('sheet', 'Drainage - Sheet Drain'),
     ('powder', 'GCL - Powder'),
     ('granules', 'GCL - Granules'),
+    ('geomembrane', 'GCL - Geomembrane'),
     ('biaxial', 'Geogrid - Biaxial'),
     ('triaxial', 'Geogrid - Triaxial'),
     ('composite', 'Geogrid - Composite Biaxial'),
-    ('woven', 'Geotextiel - Woven'),
+    ('woven', 'Geotextile - Woven'),
     ('nonwoven', 'Geotextile - Non-woven'),
 ]
 
