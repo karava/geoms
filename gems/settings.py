@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = json.loads(os.getenv('DJANGO_ALLOWED_HOSTS', '["*"]'))
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") + ["infratex.com.au", "www.infratex.com.au"]
 
 # Custom helper variable to determine when to correct to production or development database.
 # Can be used for other items to distinguish production and development
