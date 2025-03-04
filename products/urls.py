@@ -3,6 +3,8 @@ from .views import ProductDetailView
 
 from . import views
 
+app_name = 'products'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('<str:category_slug>/', views.CategoryListView, name='product_category'),

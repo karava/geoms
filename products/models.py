@@ -4,6 +4,7 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, BooleanField, DecimalField, IntegerField
 from datetime import date, timedelta
 from django.contrib.contenttypes.fields import GenericRelation
+from django.urls import reverse
 from knowledge_base.models import Media
 from storage_backends import PublicMediaStorage
 
@@ -99,6 +100,10 @@ class Product(models.Model):
     
     def get_latest_price(self):
         return self.prices.order_by('-date').first()
+
+    def get_absolute_url(self):
+        return reverse("products:product_detail", kwargs={"category_slug": self.category, "product_code": self.code})
+    
 
 class Price(models.Model):
     date = models.DateField(default=date.today)

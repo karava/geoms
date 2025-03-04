@@ -18,8 +18,38 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 from django.views.static import serve
 from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import GenericSitemap
+from products.models import Product
+from knowledge_base.models import CaseStudy, TechnicalGuide
 
+from .sitemaps import StaticViewSitemap, HomeViewSitemap, CategorySitemap, ApplicationSitemap
 from . import views
+
+products_dict = {
+    "queryset": Product.objects.all(),
+    # "date_field": "updated_at", # Still to be implemented
+}
+
+case_study_dict = {
+    "queryset": CaseStudy.objects.all(),
+    "date_field": "updated_at",
+}
+
+tech_guide_dict = {
+    "queryset": TechnicalGuide.objects.all(),
+    "date_field": "updated_at",
+}
+
+sitemaps = {
+    "home": HomeViewSitemap,
+    "static": StaticViewSitemap,
+    "categories": CategorySitemap,
+    "applications": ApplicationSitemap,
+    "case-studies": GenericSitemap(case_study_dict, priority=0.64),
+    "technical-guides": GenericSitemap(tech_guide_dict, priority=0.64),
+    "products": GenericSitemap(products_dict, priority=0.64),
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,8 +62,9 @@ urlpatterns = [
     path('contact', views.product_enquiry, name='contact'),
     path('applications', views.render_applications, name='applications'),
     path('applications/<slug:slug>/', views.render_application_detail, name='application_detail'),
-    path('products/', include('products.urls')),
+    path('products/', include(('products.urls', 'products'), namespace='products')),
     path('knowledgebase/', include('knowledge_base.urls')),
     path('tinymce/', include('tinymce.urls')),
-    path('sitemap.xml', serve, {'path': 'assets/sitemap.xml', 'document_root': settings.STATIC_ROOT}),
+    # path('sitemap.xml', serve, {'path': 'assets/sitemap.xml', 'document_root': settings.STATIC_ROOT}),
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",)
 ]

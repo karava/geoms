@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 from storage_backends import PublicMediaStorage
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
@@ -96,6 +97,9 @@ class TechnicalGuide(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("technical_guide_detail", kwargs={"guide_slug": self.slug})
 
 class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
@@ -118,3 +122,6 @@ class CaseStudy(models.Model):
     
     class Meta:
         verbose_name_plural = "Case Studies"
+
+    def get_absolute_url(self):
+        return reverse("case_study_detail", kwargs={"case_study_slug": self.slug})
