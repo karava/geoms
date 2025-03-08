@@ -28,7 +28,7 @@ from . import views
 
 products_dict = {
     "queryset": Product.objects.all(),
-    # "date_field": "updated_at", # Still to be implemented
+    "date_field": "updated_at", # Still to be implemented
 }
 
 case_study_dict = {
