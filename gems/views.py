@@ -44,13 +44,13 @@ def render_application_detail(request, slug):
     application = json.load(open(json_url))
 
     product_urls = {
-        "View InfraThread": reverse('product_category', kwargs={'category_slug': 'geotextiles'}),
-        "View InfraSheet": reverse('product_category', kwargs={'category_slug': 'drainage-systems'}),
-        "View InfraStrip": reverse('product_category', kwargs={'category_slug': 'drainage-systems'}),
-        "View InfraGrid": reverse('product_category', kwargs={'category_slug': 'geogrids'}),   
-        "View InfraCell": reverse('product_category', kwargs={'category_slug': 'geocells'}),
-        "View InfraDrain": reverse('product_category', kwargs={'category_slug': 'drainage-systems'}),
-        "View InfraClay": reverse('product_category', kwargs={'category_slug': 'gcls'}),
+        "View InfraThread": reverse('products:product_category', kwargs={'category_slug': 'geotextiles'}),
+        "View InfraSheet": reverse('products:product_category', kwargs={'category_slug': 'drainage-systems'}),
+        "View InfraStrip": reverse('products:product_category', kwargs={'category_slug': 'drainage-systems'}),
+        "View InfraGrid": reverse('products:product_category', kwargs={'category_slug': 'geogrids'}),   
+        "View InfraCell": reverse('products:product_category', kwargs={'category_slug': 'geocells'}),
+        "View InfraDrain": reverse('products:product_category', kwargs={'category_slug': 'drainage-systems'}),
+        "View InfraClay": reverse('products:product_category', kwargs={'category_slug': 'gcls'}),
     }
 
     # Iterate over the links and update the URLs
