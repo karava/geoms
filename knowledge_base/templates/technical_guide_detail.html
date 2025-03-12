@@ -34,6 +34,25 @@
     </div>
 </div>
 
+{% if extra_images %}
+<div class="project-gallery">
+    <div class="container">
+        <div class="default-grid">
+            <div class="col-span-full title">
+                <p class="fw-semibold typo-body-2 mb-2 eyebrow neutral-500"><span class="orange-600">//</span>&nbsp;Additional Media
+                </p>
+            </div>
+        </div>
+        <div class="default-grid project-grid">
+            {% for image in extra_images %}
+            <div class="project-gallery-item"><img src="{{ image }}" alt="Image for {{ study.title }}"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div><br></br></div>
+{% endif %}
+
 <div class="container">
     <div class="text-link-section-1">
         <div class="row">

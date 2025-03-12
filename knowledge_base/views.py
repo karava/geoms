@@ -113,5 +113,10 @@ class TechnicalGuideDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['main_image'] = self.object.images.filter(is_default=True).first()
+        extra_image_items = self.object.images.filter(is_default=False)
+        extra_images = []
+        for item in extra_image_items:
+            extra_images.append(item.image.file.url)
+        context['extra_images'] = extra_images
         context['page_title'] = self.object.title
         return context
