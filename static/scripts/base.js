@@ -58,6 +58,29 @@ menuTogglerElement.addEventListener("click", function () {
   searchPanelElement.classList.remove("show");
 });
 
+const input = document.querySelector('input');
+const resultsList = document.querySelector('#search-list');
+
+input.addEventListener('keyup', async function(event) {
+  const query = input.value.trim();
+  if (!query) {
+    resultsList.innerHTML = '';
+    return;
+  }
+
+  const response = await fetch(`/search/?q=${encodeURIComponent(query)}`);
+  const data = await response.json();
+
+  // Clear old results
+  resultsList.innerHTML = '';
+
+  data.forEach(item => {
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="${item.url}" target="_blank" style="text-decoration: none;">${item.title}</a>`;
+    resultsList.appendChild(li);
+  })
+})
+
 // faq content handler
 
 const faqItemHeaderButtons = document.querySelectorAll(

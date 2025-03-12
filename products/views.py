@@ -1,8 +1,11 @@
 import os, json
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import DetailView
 from .models import Product, ProductMediaRelation
+from knowledge_base.models import TechnicalGuide, CaseStudy
 from django.db.models import Prefetch
 from django.shortcuts import get_object_or_404
 
@@ -90,3 +93,54 @@ class ProductDetailView(DetailView):
         
         return context
 
+class ProductSearchView(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q', '')
+        products = Product.objects.filter(title__icontains=query)[:10]  # limit to 10 results
+
+        # Prepare data to return as JSON
+        # Typically you might return just a list of names or some additional fields
+        results = []
+        for product in products:
+            results.append({
+                'id': product.id,
+                'title': product.title,
+                'url': product.get_absolute_url()
+            })
+
+        # Return a JSON response
+        return JsonResponse(results, safe=False)
+    
+class CombinedSearchView(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q', '')
+        products = Product.objects.filter(title__icontains=query)[:10]  # limit to 10 results
+        techGuides = TechnicalGuide.objects.filter(title__icontains=query)[:10]
+        caseStudies = CaseStudy.objects.filter(title__icontains=query)[:10]
+
+        # Prepare data to return as JSON
+        # Typically you might return just a list of names or some additional fields
+        results = []
+        for product in products:
+            results.append({
+                'id': product.id,
+                'title': product.title,
+                'url': product.get_absolute_url()
+            })
+        
+        for guide in techGuides:
+            results.append({
+                'id': guide.id,
+                'title': guide.title,
+                'url': guide.get_absolute_url()
+            })
+        
+        for study in caseStudies:
+            results.append({
+                'id': study.id,
+                'title': study.title,
+                'url': study.get_absolute_url()
+            })
+
+        # Return a JSON response
+        return JsonResponse(results, safe=False)

@@ -360,14 +360,15 @@
               <input type="text" class="neutral-600" placeholder="Search Anything..." />
               <img src="{% static 'assets/icons/arrow-top-right.svg' %}" alt="arrow">
             </div>
-            <p class="fw-semibold neutral-600 mt-4 mb-0 typo-caption-2">Most Popular</p>
-            <div class="chip-wrapper">
+            {% comment %} <p class="fw-semibold neutral-600 mt-4 mb-0 typo-caption-2">Most Popular</p> {% endcomment %}
+            <ul id="search-list"></ul>
+            {% comment %} <div class="chip-wrapper">
               <button type="button" class="btn neutral-600 typo-bdy-1 fw-medium chip">Geogrids</button>
               <button type="button" class="btn neutral-600 typo-bdy-1 fw-medium chip">Geocells</button>
               <button type="button" class="btn neutral-600 typo-bdy-1 fw-medium chip">Clay liners</button>
               <button type="button" class="btn neutral-600 typo-bdy-1 fw-medium chip">Geotextiles</button>
               <button type="button" class="btn neutral-600 typo-bdy-1 fw-medium chip">Drainage Systems</button>
-            </div>
+            </div> {% endcomment %}
           </div>
         </div>
       </div>
@@ -481,6 +482,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <script src="{% static 'scripts/words.js' %}"></script>
   <script src="{% static 'scripts/base.js' %}"></script>
 
 </body>

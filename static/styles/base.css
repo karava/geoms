@@ -515,3 +515,19 @@ input[type=radio] {
         grid-column-end: auto;
     }
 }
+
+#search-list {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none; /* Removes default underline */
+    color: #333;           /* Update the color to fit your theme */
+    /* Add any font styling you want, for example: */
+    font-weight: 500;      /* Adjust as needed */
+}
+  
+a:hover, a:focus {
+    text-decoration: underline; /* If you want an underline on hover/focus, or something else */
+    color: #ff9900;
+}

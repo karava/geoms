@@ -22,6 +22,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
 from products.models import Product
 from knowledge_base.models import CaseStudy, TechnicalGuide
+from products.views import ProductSearchView, CombinedSearchView
 
 from .sitemaps import StaticViewSitemap, HomeViewSitemap, CategorySitemap, ApplicationSitemap
 from . import views
@@ -66,5 +67,6 @@ urlpatterns = [
     path('knowledgebase/', include('knowledge_base.urls')),
     path('tinymce/', include('tinymce.urls')),
     # path('sitemap.xml', serve, {'path': 'assets/sitemap.xml', 'document_root': settings.STATIC_ROOT}),
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",)
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",),
+    path('search/', CombinedSearchView.as_view(), name="search"),
 ]
