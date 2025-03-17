@@ -17,6 +17,7 @@ class TechnicalGuideAdmin(admin.ModelAdmin):
 
 class CaseStudyAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
+    filter_horizontal = ('products',)
     
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name in ('project_description', 'challenges', 'solution'):

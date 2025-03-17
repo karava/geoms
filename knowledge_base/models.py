@@ -89,6 +89,11 @@ class TechnicalGuide(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
     images = GenericRelation(MediaRelation)
+    products = models.ManyToManyField(
+        'products.Product',
+        related_name='technical_guides',
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -111,6 +116,11 @@ class CaseStudy(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     images = GenericRelation(MediaRelation)
+    products = models.ManyToManyField(
+        'products.Product',
+        related_name='case_studies',
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
