@@ -538,3 +538,29 @@ a:hover, a:focus {
     text-decoration: underline; /* If you want an underline on hover/focus, or something else */
     color: #ff9900;
 }
+
+/* Base link color (unselected pages) */
+.pagination .page-link {
+    color: #FA6400;
+    border-color: #FA6400;
+}
+  
+/* Hover state for links */
+.pagination .page-link:hover {
+background-color: #FA6400;
+color: #FFF;
+}
+
+/* Active/current page style */
+.pagination .page-item.active .page-link {
+background-color: #FA6400;
+border-color: #FA6400;
+color: #FFF;
+}
+
+/* Disabled pagination buttons (e.g. no previous/next page) */
+.pagination .page-item.disabled .page-link {
+color: #CCC;
+border-color: #EEE;
+background-color: #F8F9FA;
+}  
