@@ -9,6 +9,7 @@ class ImageInline(GenericTabularInline):  # You can also use admin.StackedInline
 
 class TechnicalGuideAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
+    filter_horizontal = ('products',)
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name in ('content'):

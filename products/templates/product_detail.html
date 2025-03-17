@@ -88,6 +88,9 @@
                     <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#resources">Resources</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#links">Links</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link typo-body-2 fw-semibold neutral-500" href="#options_available">Options Available</a>
                 </li>
             </ul>
@@ -130,8 +133,28 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-span-full">
-                <div class="h-divider-2"></div>
+            <div id="links" class="col-span-full col-lg-span-10 product-detail-block">
+                <p class="neutral-600 fw-bold typo-heading-6">Technical Guides &amp; Case Studies&nbsp;<span
+                        class="neutral-500">({{guides_and_studies_total}})</span></p>
+                <ul class="p-0 mb-0">
+
+                    {% for guide in technical_guides %}
+                    <li class="product-resource d-flex justify-content-between align-items-center">
+                        <a href="{{ guide.get_absolute_url }}" target="_blank" class="text-decoration-none neutral-500 fw-semibold typo-heading-8 text-capitalize">
+                            Tech-Guide: {{ guide.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+
+                    {% for study in case_studies %}
+                    <li class="product-resource d-flex justify-content-between align-items-center">
+                        <a href="{{ study.get_absolute_url }}" target="_blank" class="text-decoration-none neutral-500 fw-semibold typo-heading-8 text-capitalize">
+                            Case-Study: {{ study.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+
+                </ul>
             </div>
             <div id="options_available" class="col-span-full product-detail-block">
                 <p class="neutral-600 fw-bold typo-heading-6">Options Available&nbsp;<span

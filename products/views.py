@@ -90,6 +90,11 @@ class ProductDetailView(DetailView):
         related_products = Product.objects.filter(category=self.object.category).exclude(id=self.object.id)
         context['related_products'] = related_products
         context['category_slug'] = self.kwargs.get('category_slug')
+
+        # Get the knowledge base items
+        context['technical_guides'] = self.object.technical_guides.all()
+        context['case_studies'] = self.object.case_studies.all()
+        context["guides_and_studies_total"] = context["technical_guides"].count() + context["case_studies"].count()
         
         return context
 
