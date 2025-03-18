@@ -91,8 +91,8 @@ class Product(models.Model):
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
     packing_description = models.CharField(blank=True, max_length=200)
-    created_at = models.DateTimeField(null=True, blank=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     def get_default_image(self):
         default_media = self.media.filter(is_default=True, resource_type='product_image').first()

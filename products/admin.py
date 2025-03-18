@@ -15,6 +15,7 @@ class PriceInLine(nested_admin.NestedTabularInline):
 class ProductAdmin(nested_admin.NestedModelAdmin):
     inlines = [ProductRelationInline, PriceInLine]
     filter_horizontal = ('applications',)
+    readonly_fields = ('created_at', 'updated_at')
     
     ## Allows save as to be enabled so that we can duplicate products
     save_as = True

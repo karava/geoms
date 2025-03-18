@@ -10,6 +10,7 @@ class ImageInline(GenericTabularInline):  # You can also use admin.StackedInline
 class TechnicalGuideAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
     filter_horizontal = ('products',)
+    readonly_fields = ('created_at', 'updated_at')
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name in ('content'):
@@ -19,6 +20,7 @@ class TechnicalGuideAdmin(admin.ModelAdmin):
 class CaseStudyAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
     filter_horizontal = ('products',)
+    readonly_fields = ('created_at', 'updated_at')
     
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name in ('project_description', 'challenges', 'solution'):
