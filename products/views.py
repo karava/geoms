@@ -85,6 +85,7 @@ class ProductDetailView(DetailView):
         context['product_images'] = self.object.media.filter(resource_type='product_image').all()
         context['resources'] = self.object.media.exclude(resource_type='product_image').all()
         context['page_title'] = self.object.title
+        context['meta_description'] = self.object.short_description
 
         # Getting the related products based on category
         related_products = Product.objects.filter(category=self.object.category).exclude(id=self.object.id)

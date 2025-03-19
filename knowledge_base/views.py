@@ -74,6 +74,7 @@ class CaseStudyDetailView(DetailView):
             gallery_images.append(item.image.file.url)
         context['gallery_images'] = gallery_images
         context['page_title'] = self.object.title
+        context['meta_description'] = self.object.solution
         return context
 
 class TechnicalGuideDetailView(DetailView):
@@ -91,4 +92,5 @@ class TechnicalGuideDetailView(DetailView):
             extra_images.append(item.image.file.url)
         context['extra_images'] = extra_images
         context['page_title'] = self.object.title
+        context['meta_description'] = self.object.content
         return context

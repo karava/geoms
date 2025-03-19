@@ -15,7 +15,7 @@ def index(request):
     for product in products:
         products_dict[product['title'].lower().replace(' ', '_')] = product
     
-    context = {'products': products_dict, 'page_title': 'Home'}
+    context = {'products': products_dict, 'page_title': 'Infratex'}
 
     return render(request, 'static_pages/index.html', context)
 
@@ -59,7 +59,11 @@ def render_application_detail(request, slug):
             if link["label"] in product_urls:
                 link["url"] = product_urls[link["label"]]
 
-    context = {'data': application, 'page_title': application['title']}
+    context = {
+        'data': application, 
+        'page_title': application['title'],
+        'meta_description': application['Summary_text']
+        }
     return render(request, 'application/detail.html', context)
 
 def product_enquiry(request):

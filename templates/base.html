@@ -28,6 +28,11 @@
   <link rel="stylesheet" href="{% static 'styles/main.css' %}">
 
   <title>{{ page_title }}</title>
+  
+  {% if meta_description %}
+    <meta name="description" content="{{ meta_description|striptags|truncatewords:25 }}">
+  {% endif %}
+  
   <meta name="google-site-verification" content="p37kyEyO13RxHOKQVJPafYa_8gi2jQBQJ6EJI4dklT8" />
   <link rel="icon" href="{% static 'assets/logo.ico' %}">
 </head>
