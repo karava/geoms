@@ -24,7 +24,7 @@
             </p>
             <p class="typo-heading-2 fw-bold title">{{ guide.title }}</p>
             {% if main_image %}
-            <img src="{{ main_image.image.file.url }}" alt="Main Image for {{ guide.title }}" style="width:100%;">
+            <img src="{{ main_image.image.file.url }}" alt="{{ main_image.alt_text|default_if_none:guide.title }}" style="width:100%;">
             {% endif %}
             <div class="article-content-block">
                 <p class="typo-heading-5 neutral-600 fw-bold">About {{ guide.title }}</p>

@@ -25,7 +25,7 @@
             </p>
             <p class="typo-heading-2 fw-bold title">{{ study.title }}</p>
             {% if main_image %}
-            <img src="{{ main_image.image.file.url }}" alt="Main Image for {{ study.title }}" style="width:100%;">
+            <img src="{{ main_image.image.file.url }}" alt="{{ main_image.alt_text|default_if_none:study.title }}" style="width:100%;">
             {% endif %}
             <div class="article-content-block">
                 <p class="typo-heading-5 neutral-600 fw-bold">The Project</p>

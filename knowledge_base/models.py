@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -57,6 +58,8 @@ class MediaRelation(models.Model):
     image = models.ForeignKey(Media, on_delete=models.CASCADE)
     is_default = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
+
+    alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Alternative text for SEO and accessibility.")
     
     class Meta:
         ordering = ['order']
@@ -68,6 +71,12 @@ class MediaRelation(models.Model):
                 content_type=self.content_type,
                 object_id=self.object_id
             ).exclude(id=self.id).update(is_default=False)
+        if not self.alt_text and self.image and self.image.file and self.image.file.name:
+            # Extract file name, remove extension, replace underscores
+            base_name = os.path.basename(self.image.file.name)      # e.g. "my_image_file.jpg"
+            base, ext = os.path.splitext(base_name)                 # base="my_image_file", ext=".jpg"
+            base = base.replace("_", " ")                           # "my image file"
+            self.alt_text = base
         super().save(*args, **kwargs)
     
     def __str__(self):

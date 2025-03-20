@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.db.models import base
 from django.db.models.deletion import CASCADE
@@ -126,6 +127,7 @@ class ProductMediaRelation(models.Model):
     media = models.ForeignKey(Media, on_delete=models.CASCADE)
     is_default = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
+    alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Alternative text for SEO and accessibility.")
 
     class Meta:
         ordering = ['order']
@@ -134,6 +136,15 @@ class ProductMediaRelation(models.Model):
         if self.is_default:
             # Unset other main images for this product
             ProductMediaRelation.objects.filter(product=self.product).update(is_default=False)
+        # Only set alt_text if it is blank (i.e. user hasn't manually provided one)
+        # and there's a valid media file name
+        if not self.alt_text and self.media and self.media.file and self.media.file.name:
+            # Extract file name, remove extension, replace underscores
+            base_name = os.path.basename(self.media.file.name)      # e.g. "my_image_file.jpg"
+            base, ext = os.path.splitext(base_name)                 # base="my_image_file", ext=".jpg"
+            base = base.replace("_", " ")                           # "my image file"
+            self.alt_text = base
+        super().save(*args, **kwargs)
         super().save(*args, **kwargs)
     
     def __str__(self):

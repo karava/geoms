@@ -40,13 +40,13 @@
             <div class="image-wrapper">
                 <div class="main-image">
                     {% if default_image %}
-                    <img id="defaultImage" src="{{ default_image.media.file.url }}" alt="{{ object.title }}">
+                    <img id="defaultImage" src="{{ default_image.media.file.url }}" alt="{{ default_image.alt_text|default_if_none:object.title }}">
                     {% endif %}
                 </div>
                 <div class="other-images">
                     {% for product_image in product_images %}
                     <div class="other-image-thumbnail">
-                        <img id="otherImage" src="{{ product_image.media.file.url }}" alt="{{ object.title }}" onclick="replaceMainImage('{{ product_image.media.file.url }}', '{{ object.title }}')">
+                        <img id="otherImage" src="{{ product_image.media.file.url }}" alt="{{ product_image.alt_text|default_if_none:object.title }}" onclick="replaceMainImage('{{ product_image.media.file.url }}', '{{ product_image.alt_text|default_if_none:object.title }}')">
                     </div>
                     {% endfor %}
                 </div>
@@ -61,13 +61,13 @@
             <div class="image-wrapper d-block d-md-none">
                 <div class="main-image">
                     {% if default_image %}
-                    <img src="{{ default_image.media.file.url }}" alt="{{ object.title }}">
+                    <img src="{{ default_image.media.file.url }}" alt="{{ default_image.alt_text|default_if_none:object.title }}">
                     {% endif %}
                 </div>
                 <div class="other-images">
                     {% for product_image in product_images %}
                     <div class="other-image-thumbnail">
-                        <img src="{{ product_image.media.file.url }}" alt="{{ object.title }}">
+                        <img src="{{ product_image.media.file.url }}" alt="{{ product_image.alt_text|default_if_none:object.title }}">
                     </div>
                     {% endfor %}
                 </div>
