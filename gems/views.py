@@ -97,5 +97,6 @@ Needed By: {enquiry.needed_by}
             # Redirect to a 'thank you' page or similar after submission
             return redirect('contact')
     else:
+        product = request.GET.get('product')
         form = ProductEnquiryForm()
-    return render(request, 'static_pages/contact.html', {'form': form, 'page_title': 'Contact Us'})
+    return render(request, 'static_pages/contact.html', {'form': form, 'page_title': 'Contact Us', 'product':product})
