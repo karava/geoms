@@ -92,3 +92,11 @@ const faqItemHeaderButtons = document.querySelectorAll(
 //     element.parentElement.classList.toggle("opened");
 //   });
 // });
+
+// base.js
+function scrollToIframe() {
+  var iframe = document.getElementById("myIframe");
+  if (iframe) {
+    iframe.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}

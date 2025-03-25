@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="col-span-full col-lg-span-6">
-            <iframe height='900px' width='100%' frameborder='0' allowTransparency='true' scrolling='auto' src='https://creatorapp.zohopublic.com.au/geolink/quote-ninja/form-embed/Product_Enquiry_Form/EbJkYV8jtrDUGQJgeMu5Q3TnjbjPPbZ4WwDkpBbwsAbHtXFVOHn48CERpTpGkDKYBu37Otn8hhDebCJrh0venZXMtQeV4Ju3AsRt?Lead_Channel=Website%20Infratex&What_product_are_you_interested_in={{ product }}'></iframe>
+            <iframe id="myIframe" height='900px' width='100%' frameborder='0' allowTransparency='true' scrolling='auto' src='https://creatorapp.zohopublic.com.au/geolink/quote-ninja/form-embed/Product_Enquiry_Form/EbJkYV8jtrDUGQJgeMu5Q3TnjbjPPbZ4WwDkpBbwsAbHtXFVOHn48CERpTpGkDKYBu37Otn8hhDebCJrh0venZXMtQeV4Ju3AsRt?Lead_Channel=Website%20Infratex&What_product_are_you_interested_in={{ product }}'></iframe>
             {% comment %} <div class="contact-form">
                 <p class="typo-heading-7 neutral-600 fw-bold">Product Enquiry Form</p>
                 {{ form.media }}
@@ -165,4 +165,15 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  {% if product %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        scrollToIframe();
+      });
+    </script>
+  {% endif %}
 {% endblock %}
