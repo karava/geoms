@@ -75,6 +75,7 @@ class CaseStudyDetailView(DetailView):
         context['gallery_images'] = gallery_images
         context['page_title'] = self.object.title
         context['meta_description'] = self.object.solution
+        context['related_products'] = self.object.products.all()
         return context
 
 class TechnicalGuideDetailView(DetailView):
@@ -93,4 +94,5 @@ class TechnicalGuideDetailView(DetailView):
         context['extra_images'] = extra_images
         context['page_title'] = self.object.title
         context['meta_description'] = self.object.content
+        context['related_products'] = self.object.products.all()
         return context

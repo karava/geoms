@@ -53,6 +53,42 @@
 <div><br></br></div>
 {% endif %}
 
+{% if related_products %}
+<div class="container">
+    <div class="default-grid">
+        <div class="col-span-full title">
+            <p class="fw-semibold typo-body-2 mb-2 eyebrow neutral-500"><span class="orange-600">//</span>&nbsp;Related Products
+            </p>
+            <p class="fw-bold typo-heading-6 neutral-600">Explore Our Range</p>
+            <div class="default-grid application-grid">
+                {% for product in related_products %}
+                <a href="{{ product.get_absolute_url }}" role="button"
+                    class="d-inline-flex flex-column application-item casestudy-item text-decoration-none mb-3">
+                    <div class="application-thumbnail">
+                        {% if product.get_default_image %}
+                        <img src="{{ product.get_default_image.file.url }}" alt="{{ product.title }} image">
+                        {% else %}
+                        <img src="{% static 'default_placeholder_image.jpg' %}/test" alt="Default placeholder">
+                        {% endif %}
+                    </div>
+                    <div class="application-content d-flex flex-column flex-fill">
+                        <p class="title neutral-600 fw-bold mb-2 mb-lg-3">{{product.title}}</p>
+                        <div class="d-flex align-items-center mt-auto">
+                            <p class="caption typo-caption neutral-500 mb-0">{{product.code}}</p>
+                            <div class="link-arrow ms-auto">
+                                <img src="{% static 'assets/icons/arrow-top-right.svg' %}" width="24px" height="24px"
+                                    alt="arrow-top-right">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="container">
     <div class="text-link-section-1">
         <div class="row">
