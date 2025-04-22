@@ -14,7 +14,7 @@ from django.utils.timezone import now
 def get_expiry_date():
     return date.today() + timedelta(days=30)
 
-# Choices
+# Choices (right side side is human readable, left side is the value stored in the database)
 UNITS_OF_MEASURE = [
     ('rolls', 'Rolls'),
     ('sqm', 'SQM'),
@@ -69,25 +69,25 @@ class Product(models.Model):
     code = models.CharField(max_length=200, blank=True)
 
     # Common fields across product categories
-    width = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
-    length = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
-    heigth = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm, this is for geocells and drainage products")
-    density = models.IntegerField(null=True, blank=True, help_text="Unit of measure is gsm, this is for geotextiles and GCL(Need to decide if this is for overall density or bentonite density)")
+    # width = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
+    # length = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
+    # heigth = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm, this is for geocells and drainage products")
+    # density = models.IntegerField(null=True, blank=True, help_text="Unit of measure is gsm, this is for geotextiles and GCL(Need to decide if this is for overall density or bentonite density)")
 
     title = models.CharField(max_length=200, blank=False)
-    material = models.CharField(max_length=200, blank=True)
+    # material = models.CharField(max_length=200, blank=True)
     short_description = models.TextField(blank=True)
     short_description.help_text = "This is a short concise and useful description of the product"
     long_description = models.TextField(blank=True)
-    long_description.help_text = "This is for SEO purposes"
+    long_description.help_text = "This is for SEO purposes, roughly 500 words"
     applications = models.ManyToManyField(Application, related_name="products", blank=True)
     notes = models.TextField(blank=True)
-    suppliers = models.CharField(max_length=200, blank=True)
-    suppliers.help_text = "Please comma separate names"
+    # suppliers = models.CharField(max_length=200, blank=True)
+    # suppliers.help_text = "Please comma separate names"
     unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    twentygp_cap = models.IntegerField(blank=True, null=True, default=0)
-    fortygp_cap = models.IntegerField(blank=True, null=True, default=0)
-    fortyhc_cap = models.IntegerField(blank=True, null=True, default=0)
+    # twentygp_cap = models.IntegerField(blank=True, null=True, default=0)
+    # fortygp_cap = models.IntegerField(blank=True, null=True, default=0)
+    # fortyhc_cap = models.IntegerField(blank=True, null=True, default=0)
     moq = models.IntegerField(null=True, default=0)
     alternative_names = models.CharField(max_length=200, blank=True)
     alternative_names.help_text = "Please comma separate names"
