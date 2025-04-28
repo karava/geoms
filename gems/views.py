@@ -2,7 +2,6 @@ import os, json
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .forms import ProductEnquiryForm
 from django.core.mail import send_mail
 
 # Create your views here.
@@ -67,36 +66,5 @@ def render_application_detail(request, slug):
     return render(request, 'application/detail.html', context)
 
 def product_enquiry(request):
-    if request.method == 'POST':
-        form = ProductEnquiryForm(request.POST)
-        if form.is_valid():
-            enquiry = form.save()
-            
-            # Sending email:
-            subject = 'New Product Enquiry - Infratex'
-            message = f"""
-Name: {enquiry.full_name}
-Company: {enquiry.company}
-Email: {enquiry.email}
-Phone: {enquiry.phone}
-Existing Customer: {enquiry.existing_customer}
-Product Interested In: {enquiry.product_interested_in}
-Estimated Quantity: {enquiry.estimated_quantity}
-Specifications: {enquiry.specifications}
-Project Based: {enquiry.project_based}
-Needed By: {enquiry.needed_by}
-"""
-
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL, # Sender's email
-                ['support@geosynthetics.net.au'], # Replace with your receiving email
-            )
-
-            # Redirect to a 'thank you' page or similar after submission
-            return redirect('contact')
-    else:
-        product = request.GET.get('product')
-        form = ProductEnquiryForm()
-    return render(request, 'static_pages/contact.html', {'form': form, 'page_title': 'Contact Us', 'product':product})
+    product = request.GET.get('product')
+    return render(request, 'static_pages/contact.html', {'page_title': 'Contact Us', 'product':product})
