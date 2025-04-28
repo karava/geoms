@@ -1,6 +1,6 @@
 [{
     "title": "Geocells",
-    "url": "/geocells",
+    "url": "/geocell",
     "description": "When it comes to erosion control and soil stabilization, InfraCell Geocells deliver unparalleled performance. Designed for a range of applications from slope stabilization to ground reinforcement, InfraCell is the go-to solution for challenging environmental conditions.",
     "thumbnail": "product_category_geocell.png",
     "summary": "InfraCell by Infratex isn’t just another Geocell product; it’s a groundbreaking solution tailored for Australia’s unique requirements. Make the right choice for your project by opting for the durability, reliability, and sustainability that comes with InfraCell.",
@@ -28,7 +28,7 @@
     }]
 }, {
     "title": "Geogrids",
-    "url": "/geogrids",
+    "url": "/geogrid",
     "description": "InfraGrid Geogrids offer unparalleled soil stabilization and reinforcement solutions. Ideal for road construction, retaining walls, and slope stabilization, these products guarantee a strong and reliable foundation for any project.",
     "thumbnail": "product_category_geogrids.png",
     "summary": "InfraGrid isn’t just a Geogrid product—it’s a commitment to excellence. Crafted to meet the unique challenges of the Australian landscape, InfraGrid provides the assurance of quality, durability, and performance. When it comes to Geogrid solutions, make InfraGrid by Infratex your first choice.",
@@ -56,7 +56,7 @@
     }]
 }, {
     "title": "Geotextiles",
-    "url": "/geotextiles",
+    "url": "/geotextile",
     "description": "Our Geotextiles, marketed as InfraThread, offer robust, multi-functional solutions for soil separation, filtration, and drainage. Made from premium materials, these geotextiles are a staple in civil and environmental engineering projects.",
     "thumbnail": "product_category_geotextiles.png",
     "summary": "Infratex's Geotextile-Fabric is not just a product but a promise. A promise of durability, innovation, and eco-friendliness. Entrust your projects to InfraThread and experience the Infratex difference.",
@@ -81,7 +81,7 @@
     }]
 }, {
     "title": "Clay Liners",
-    "url": "/gcls",
+    "url": "/gcl",
     "description": "Geosynthetic Clay Liners, known by our product name InfraClay, provide effective and environmentally friendly sealing solutions. Used extensively in waste management and water treatment plants, InfraClay ensures compliance with the most stringent environmental regulations.",
     "thumbnail": "product_category_gcl.png",
     "summary": "When it comes to Geosynthetic clay liners in Australia, Infratex’s InfraClay isn’t just a product – it's a promise. A promise of quality, durability, and environmental protection. Experience the gold standard in GCL technology with Infratex.",
@@ -109,7 +109,7 @@
     }]
 }, {
     "title": "Drainage Systems",
-    "url": "/drainage-systems",
+    "url": "/drainage",
     "description": "Last but not least, our Geocomposite Drains, known as InfraDrain, offer advanced drainage solutions for various applications, from roadways to retaining walls.",
     "thumbnail": "product_category_ds.png",
     "summary": "The right drainage system is integral to the success of any construction venture. With Infratex, you’re not just choosing products; you’re investing in quality, innovation, and peace of mind. Elevate your projects with our unparalleled geosynthetic drainage solutions and build with confidence.",
