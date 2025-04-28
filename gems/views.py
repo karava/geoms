@@ -1,5 +1,6 @@
 import os, json
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.mail import send_mail
@@ -67,4 +68,13 @@ def render_application_detail(request, slug):
 
 def product_enquiry(request):
     product = request.GET.get('product')
-    return render(request, 'static_pages/contact.html', {'page_title': 'Contact Us', 'product':product})
+
+    response: HttpResponse = render(request, 'static_pages/contact.html', {'page_title': 'Contact Us', 'product':product})
+
+    canonical_url = request.build_absolute_uri(reverse("contact"))
+    response["Link"] = f'<{canonical_url}>; rel="canonical"'
+    
+    if 'product' in request.GET:
+        response["X-Robots-Tag"] = "noindex, nofollow"
+        
+    return response
