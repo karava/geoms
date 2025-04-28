@@ -23,24 +23,24 @@ def index(request):
     return render(request, 'index.html', context)
 
 def CategoryListView(request, category_slug):
-    # Mapping slugs to their corresponding categories
-    slug_to_category = {
-        'geocells': 'geocell',
-        'gcls': 'gcl',
-        'geotextiles': 'geotextile',
-        'geogrids': 'geogrid',
-        'drainage-systems': 'drainage',
-    }
+    # # Mapping slugs to their corresponding categories
+    # slug_to_category = {
+    #     'geocells': 'geocell',
+    #     'gcls': 'gcl',
+    #     'geotextiles': 'geotextile',
+    #     'geogrids': 'geogrid',
+    #     'drainage-systems': 'drainage',
+    # }
 
-    # Check if the provided slug is valid
-    if category_slug not in slug_to_category:
-        # Handle invalid slugs (you can render an error page or raise a 404)
-        return render(request, 'error_page.html', {'message': 'Invalid category.'})
+    # # Check if the provided slug is valid
+    # if category_slug not in slug_to_category:
+    #     # Handle invalid slugs (you can render an error page or raise a 404)
+    #     return render(request, 'error_page.html', {'message': 'Invalid category.'})
     
-    category = slug_to_category[category_slug]
+    # category = slug_to_category[category_slug]
 
     # Get all the products in the category
-    products = Product.objects.filter(category=category)
+    products = Product.objects.filter(category=category_slug)
 
     # Prefetch related default images
     default_image = ProductMediaRelation.objects.filter(is_default=True, resource_type='product_image')
