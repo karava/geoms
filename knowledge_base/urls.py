@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import TechnicalGuideDetailView, TechnicalGuideListView, CaseStudyDetailView, CaseStudyListView
 
+app_name = "knowledge_base"
+
 urlpatterns = [
     path('technical-guides/', TechnicalGuideListView.as_view(), name='technical_guide_list'),
     path('case-studies/', CaseStudyListView.as_view(), name='case_study_list'),

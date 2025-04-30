@@ -66,6 +66,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if not DEBUG:
+    MIDDLEWARE.insert(0, "core.middleware.CanonicalHostMiddleware")
+
 ROOT_URLCONF = 'gems.urls'
 
 TEMPLATES = [
