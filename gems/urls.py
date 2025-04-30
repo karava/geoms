@@ -64,7 +64,7 @@ urlpatterns = [
     path('applications', views.render_applications, name='applications'),
     path('applications/<slug:slug>/', views.render_application_detail, name='application_detail'),
     path('products/', include(('products.urls', 'products'), namespace='products')),
-    path('knowledgebase/', include('knowledge_base.urls')),
+    path('knowledgebase/', include('knowledge_base.urls'), name='knowledge_base'),
     path('tinymce/', include('tinymce.urls')),
     # path('sitemap.xml', serve, {'path': 'assets/sitemap.xml', 'document_root': settings.STATIC_ROOT}),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",),

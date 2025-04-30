@@ -1,13 +1,19 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from .models import TechnicalGuide, CaseStudy
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+# TODO: Refactor duplication in CaseStudyListView and TechnicalGuideListView if possible
 class TechnicalGuideListView(ListView):
     model = TechnicalGuide
     template_name = 'technical_guide_list.html'
     context_object_name = 'guides'
     paginate_by = 10    # default items per page
+
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get('pagesize', self.paginate_by)
     
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
@@ -27,9 +33,19 @@ class TechnicalGuideListView(ListView):
         context['page_title'] = 'Technical Guides'
 
         return context
+    
+    def render_to_response(self, context, **kwargs) -> HttpResponse:
+        response: HttpResponse = super().render_to_response(context, **kwargs)
 
-    def get_paginate_by(self, queryset):
-        return self.request.GET.get('pagesize', self.paginate_by)
+        if "page" in self.request.GET:                # catches page=1,2,…
+            canonical = self.request.build_absolute_uri(
+                reverse("knowledge_base:technical_guide_list")
+            )
+            response["X-Robots-Tag"] = "noindex, follow"
+            response["Link"] = f'<{canonical}>; rel="canonical"'
+
+        return response
+
 
 class CaseStudyListView(ListView):
     model = CaseStudy
@@ -58,6 +74,18 @@ class CaseStudyListView(ListView):
         context['page_title'] = 'Case Studies'
 
         return context
+    
+    def render_to_response(self, context, **kwargs) -> HttpResponse:
+        response: HttpResponse = super().render_to_response(context, **kwargs)
+
+        if "page" in self.request.GET:                # catches page=1,2,…
+            canonical = self.request.build_absolute_uri(
+                reverse("knowledge_base:case_study_list")
+            )
+            response["X-Robots-Tag"] = "noindex, follow"
+            response["Link"] = f'<{canonical}>; rel="canonical"'
+
+        return response
 
 class CaseStudyDetailView(DetailView):
     model = CaseStudy

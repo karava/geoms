@@ -64,8 +64,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core.middleware.CanonicalHostMiddleware',
 ]
+
+if not DEBUG:
+    MIDDLEWARE.insert(0, "core.middleware.CanonicalHostMiddleware")
 
 ROOT_URLCONF = 'gems.urls'
 
