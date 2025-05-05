@@ -20,8 +20,16 @@ class ProductAdmin(nested_admin.NestedModelAdmin):
     ## Allows save as to be enabled so that we can duplicate products
     save_as = True
 
-    list_display = ('code', 'title', 'category', 'sub_category', 'display_latest_price')  # Adjust as needed
+    list_display = ('code', 'title', 'category', 'sub_category', 'updated_at')  # Adjust as needed
     list_filter = ('category',)  # Add category to the list of filters
+
+    search_fields = (
+        'code',                         # exact match or prefix match
+        'title__icontains',             # title contains …
+    )
+    search_help_text = (
+        "Search by product code or title."
+    )
 
     # def formfield_for_dbfield(self, db_field, **kwargs):
     #     if db_field.name == 'long_description':
