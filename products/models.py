@@ -14,7 +14,7 @@ from django.utils.timezone import now
 def get_expiry_date():
     return date.today() + timedelta(days=30)
 
-# Choices
+# Choices (right side side is human readable, left side is the value stored in the database)
 UNITS_OF_MEASURE = [
     ('rolls', 'Rolls'),
     ('sqm', 'SQM'),
@@ -68,30 +68,13 @@ class Product(models.Model):
     sub_category = models.CharField(choices=SUB_CATEGORIES, max_length=200, blank=True)
     code = models.CharField(max_length=200, blank=True)
 
-    # Common fields across product categories
-    width = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
-    length = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm")
-    heigth = models.IntegerField(null=True, blank=True, help_text="Unit of measure is mm, this is for geocells and drainage products")
-    density = models.IntegerField(null=True, blank=True, help_text="Unit of measure is gsm, this is for geotextiles and GCL(Need to decide if this is for overall density or bentonite density)")
-
     title = models.CharField(max_length=200, blank=False)
-    material = models.CharField(max_length=200, blank=True)
     short_description = models.TextField(blank=True)
     short_description.help_text = "This is a short concise and useful description of the product"
     long_description = models.TextField(blank=True)
-    long_description.help_text = "This is for SEO purposes"
+    long_description.help_text = "This is for SEO purposes, roughly 500 words"
     applications = models.ManyToManyField(Application, related_name="products", blank=True)
     notes = models.TextField(blank=True)
-    suppliers = models.CharField(max_length=200, blank=True)
-    suppliers.help_text = "Please comma separate names"
-    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='rolls')
-    twentygp_cap = models.IntegerField(blank=True, null=True, default=0)
-    fortygp_cap = models.IntegerField(blank=True, null=True, default=0)
-    fortyhc_cap = models.IntegerField(blank=True, null=True, default=0)
-    moq = models.IntegerField(null=True, default=0)
-    alternative_names = models.CharField(max_length=200, blank=True)
-    alternative_names.help_text = "Please comma separate names"
-    packing_description = models.CharField(blank=True, max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -101,24 +84,9 @@ class Product(models.Model):
     
     def __str__(self):
         return self.code
-    
-    def get_latest_price(self):
-        return self.prices.order_by('-date').first()
 
     def get_absolute_url(self):
         return reverse("products:product_detail", kwargs={"category_slug": self.category, "product_code": self.code})
-    
-
-class Price(models.Model):
-    date = models.DateField(default=date.today)
-    qty = models.IntegerField()
-    unit_of_measure = models.CharField(choices=UNITS_OF_MEASURE, max_length=200, default='sqm')
-    comment = models.CharField(max_length=200, blank=True, null=True)
-    FOB_port = models.CharField(max_length=200, blank=True, null=True)
-    currency = models.CharField(choices=CURRENCIES, max_length=200, default='usd')
-    expiry = models.DateField(blank=True, null=True, default=get_expiry_date())
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    base_product = models.ForeignKey(Product, on_delete=CASCADE, related_name='prices')
 
 class ProductMediaRelation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='media')
