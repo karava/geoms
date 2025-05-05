@@ -113,7 +113,7 @@ class TechnicalGuide(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("technical_guide_detail", kwargs={"guide_slug": self.slug})
+        return reverse("knowledge_base:technical_guide_detail", kwargs={"guide_slug": self.slug})
 
 class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
@@ -143,4 +143,4 @@ class CaseStudy(models.Model):
         verbose_name_plural = "Case Studies"
 
     def get_absolute_url(self):
-        return reverse("case_study_detail", kwargs={"case_study_slug": self.slug})
+        return reverse("knowledge_base:case_study_detail", kwargs={"case_study_slug": self.slug})
