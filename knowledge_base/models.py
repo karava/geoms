@@ -103,6 +103,13 @@ class TechnicalGuide(models.Model):
         related_name='technical_guides',
         blank=True
     )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,              # allow data migration if older rows exist
+        blank=True,             # optional so admin can auto-set
+        related_name='technical_guides',
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -129,6 +136,13 @@ class CaseStudy(models.Model):
         'products.Product',
         related_name='case_studies',
         blank=True
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,              # allow data migration if older rows exist
+        blank=True,             # optional so admin can auto-set
+        related_name='case_studies',
     )
 
     def save(self, *args, **kwargs):
