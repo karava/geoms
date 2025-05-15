@@ -24,14 +24,18 @@ def index(request):
 
 def CategoryListView(request, category_slug):
     # # Mapping slugs to their corresponding categories
-    # slug_to_category = {
-    #     'geocells': 'geocell',
-    #     'gcls': 'gcl',
-    #     'geotextiles': 'geotextile',
-    #     'geogrids': 'geogrid',
-    #     'drainage-systems': 'drainage',
-    # }
+    slug_to_category = {
+        'geocells': 'geocell',
+        'gcls': 'gcl',
+        'geotextiles': 'geotextile',
+        'geogrids': 'geogrid',
+        'drainage-systems': 'drainage',
+    }
 
+    # TODO: Do the following for the redirect
+    if category_slug in slug_to_category:
+        category_slug = slug_to_category[category_slug]
+        
     # # Check if the provided slug is valid
     # if category_slug not in slug_to_category:
     #     # Handle invalid slugs (you can render an error page or raise a 404)
