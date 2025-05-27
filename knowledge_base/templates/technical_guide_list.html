@@ -39,6 +39,62 @@
     </div>
 </div>
 
+{% if is_paginated %}
+  <nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+      
+      {# Previous button #}
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a 
+            class="page-link" 
+            href="?page={{ page_obj.previous_page_number }}{% if request.GET.pagesize %}&pagesize={{ request.GET.pagesize }}{% endif %}"
+            aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">&laquo;</span>
+        </li>
+      {% endif %}
+
+      {# Page numbers #}
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a 
+              class="page-link" 
+              href="?page={{ num }}{% if request.GET.pagesize %}&pagesize={{ request.GET.pagesize }}{% endif %}">
+              {{ num }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {# Next button #}
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.next_page_number }}{% if request.GET.pagesize %}&pagesize={{ request.GET.pagesize }}{% endif %}"
+            aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">&raquo;</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
 <div class="container">
     <div class="text-link-section-1">
         <div class="row">
