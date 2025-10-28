@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -l \"ubersuggest site audit infratex.com.au (2).zip\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

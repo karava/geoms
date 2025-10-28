@@ -30,8 +30,8 @@ class CategorySitemap(sitemaps.Sitemap):
     priority = 0.7
 
     def items(self):
-        # Return the category slugs you want in the sitemap
-        return ["geocells", "gcls", "geotextiles", "geogrids", "drainage-systems"]
+        # Return the category slugs you want in the sitemap (plural for SEO)
+        return ["geocells", "gcls", "geotextiles", "geogrids", "drainage"]
 
     def location(self, item):
         # item will be one of the slugs above

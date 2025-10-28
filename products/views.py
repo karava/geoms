@@ -23,28 +23,43 @@ def index(request):
     return render(request, 'index.html', context)
 
 def CategoryListView(request, category_slug):
-    # # Mapping slugs to their corresponding categories
-    slug_to_category = {
+    # Redirect singular URLs to canonical plural forms with 301 redirect
+    # This ensures we don't have duplicate content for SEO
+    singular_to_plural_redirects = {
+        'geocell': 'geocells',
+        'gcl': 'gcls',
+        'geotextile': 'geotextiles',
+        'geogrid': 'geogrids',
+        'drainage-systems': 'drainage',  # Legacy URL redirect
+    }
+
+    # If it's a singular URL or legacy URL, redirect to canonical plural form
+    if category_slug in singular_to_plural_redirects:
+        return redirect('products:product_category',
+                       category_slug=singular_to_plural_redirects[category_slug],
+                       permanent=True)
+
+    # Map plural URLs to database category values
+    # Database stores singular (Django convention), URLs use plural (better for SEO)
+    plural_url_to_db_category = {
         'geocells': 'geocell',
         'gcls': 'gcl',
         'geotextiles': 'geotextile',
         'geogrids': 'geogrid',
-        'drainage-systems': 'drainage',
+        'drainage': 'drainage',  # This one stays singular (sounds better)
     }
 
-    # TODO: Do the following for the redirect
-    if category_slug in slug_to_category:
-        category_slug = slug_to_category[category_slug]
-        
-    # # Check if the provided slug is valid
-    # if category_slug not in slug_to_category:
-    #     # Handle invalid slugs (you can render an error page or raise a 404)
-    #     return render(request, 'error_page.html', {'message': 'Invalid category.'})
-    
-    # category = slug_to_category[category_slug]
+    # Check if the category is valid
+    if category_slug not in plural_url_to_db_category:
+        # Handle invalid slugs - return 404
+        from django.http import Http404
+        raise Http404(f"Category '{category_slug}' not found")
+
+    # Get the database category value
+    db_category = plural_url_to_db_category[category_slug]
 
     # Get all the products in the category
-    products = Product.objects.filter(category=category_slug)
+    products = Product.objects.filter(category=db_category)
 
     # Prefetch related default images
     default_image = ProductMediaRelation.objects.filter(is_default=True, resource_type='product_image')
@@ -57,15 +72,17 @@ def CategoryListView(request, category_slug):
     json_url = "%s/%s" % (path, file_name)
     items = json.load(open(json_url))
     category_detail = None
-    
+
+    # Use db_category to find the right item in products.json
+    # (products.json uses singular forms like "/geocell")
     for item in items:
-        if item['url'] == ('/' + category_slug):
+        if item['url'] == ('/' + db_category):
             category_detail = item
 
     context = {
         'products': products,
         'category': category_slug.title().replace('_', ' '),
-        'category_slug': category_slug,
+        'category_slug': category_slug,  # Keep plural for templates/URLs
         'detail': category_detail,
         'page_title': category_slug.title().replace('_', ' ')
     }
