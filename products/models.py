@@ -86,7 +86,16 @@ class Product(models.Model):
         return self.code
 
     def get_absolute_url(self):
-        return reverse("products:product_detail", kwargs={"category_slug": self.category, "product_code": self.code})
+        # Map singular database values to plural URL slugs
+        category_to_plural = {
+            'geocell': 'geocells',
+            'gcl': 'gcls',
+            'geotextile': 'geotextiles',
+            'geogrid': 'geogrids',
+            'drainage': 'drainage',  # stays singular
+        }
+        plural_category = category_to_plural.get(self.category, self.category)
+        return reverse("products:product_detail", kwargs={"category_slug": plural_category, "product_code": self.code})
 
 class ProductMediaRelation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='media')

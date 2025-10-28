@@ -32,46 +32,58 @@ redirect_tests = [
 
 def test_url(url, expected_redirect=None, expected_status=200):
     """Test a single URL for proper redirect/status."""
-    full_url = BASE_URL + url
+    import http.client
+    from urllib.parse import urlparse
+
+    parsed = urlparse(BASE_URL)
+    host = parsed.hostname
+    port = parsed.port or (443 if parsed.scheme == 'https' else 80)
+
+    # Use low-level http.client to avoid automatic redirect following
+    if parsed.scheme == 'https':
+        conn = http.client.HTTPSConnection(host, port)
+    else:
+        conn = http.client.HTTPConnection(host, port)
 
     try:
-        request = urllib.request.Request(full_url)
-        # Don't follow redirects
-        opener = urllib.request.build_opener(urllib.request.HTTPRedirectHandler)
-        response = opener.open(request)
+        # Make request without following redirects
+        conn.request('GET', url)
+        response = conn.getresponse()
 
-        return {
-            'success': response.code == expected_status,
-            'status_code': response.code,
-            'expected_status': expected_status,
-        }
+        status_code = response.status
 
-    except urllib.error.HTTPError as e:
-        # This catches redirect responses (301, 302, etc.) and 404s
+        # Get redirect location if present
         actual_redirect = None
-        if e.code in [301, 302] and 'Location' in e.headers:
-            actual_redirect = e.headers['Location']
-            # Handle both relative and absolute redirects
-            if actual_redirect.startswith('http'):
-                redirect_match = actual_redirect.endswith(expected_redirect) if expected_redirect else True
+        if status_code in [301, 302]:
+            actual_redirect = response.getheader('Location')
+            # Check if redirect matches expected
+            if expected_redirect:
+                if actual_redirect:
+                    redirect_match = actual_redirect == expected_redirect or actual_redirect.endswith(expected_redirect)
+                else:
+                    redirect_match = False
             else:
-                redirect_match = actual_redirect == expected_redirect if expected_redirect else True
+                redirect_match = True
         else:
-            redirect_match = True  # For non-redirect status codes
+            redirect_match = True
+
+        # Read response to clear buffer
+        response.read()
 
         return {
-            'success': e.code == expected_status and redirect_match,
-            'status_code': e.code,
+            'success': status_code == expected_status and redirect_match,
+            'status_code': status_code,
             'expected_status': expected_status,
             'actual_redirect': actual_redirect,
             'expected_redirect': expected_redirect
         }
-
-    except urllib.error.URLError as e:
+    except Exception as e:
         return {
             'success': False,
             'error': f'Connection failed - is the Django server running? ({str(e)})'
         }
+    finally:
+        conn.close()
 
 def run_tests():
     """Run all redirect tests."""
