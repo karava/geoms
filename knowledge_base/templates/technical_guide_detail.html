@@ -22,7 +22,7 @@
             <p class="fw-semibold typo-body-1 mb-2 eyebrow neutral-500"><span class="orange-600">//</span>&nbsp;Technical Guides&nbsp;&bull;
                 {{guide.created_at|date:"d/m/Y"}}
             </p>
-            <p class="typo-heading-2 fw-bold title">{{ guide.title }}</p>
+            <h1 class="typo-heading-2 fw-bold title">{{ guide.title }}</h1>
             {% if main_image %}
             <img src="{{ main_image.image.file.url }}" alt="{{ main_image.alt_text|default_if_none:guide.title }}" style="width:100%;">
             {% endif %}
