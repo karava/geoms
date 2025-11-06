@@ -23,7 +23,7 @@
                 Studies&nbsp;&bull;
                 {{study.caption}}
             </p>
-            <p class="typo-heading-2 fw-bold title">{{ study.title }}</p>
+            <h1 class="typo-heading-2 fw-bold title">{{ study.title }}</h1>
             {% if main_image %}
             <img src="{{ main_image.image.file.url }}" alt="{{ main_image.alt_text|default_if_none:study.title }}" style="width:100%;">
             {% endif %}
