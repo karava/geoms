@@ -45,11 +45,11 @@ def render_application_detail(request, slug):
 
     product_urls = {
         "View InfraThread": reverse('products:product_category', kwargs={'category_slug': 'geotextiles'}),
-        "View InfraSheet": reverse('products:product_category', kwargs={'category_slug': 'drainage-systems'}),
-        "View InfraStrip": reverse('products:product_category', kwargs={'category_slug': 'drainage-systems'}),
-        "View InfraGrid": reverse('products:product_category', kwargs={'category_slug': 'geogrids'}),   
+        "View InfraSheet": reverse('products:product_category', kwargs={'category_slug': 'drainage'}),
+        "View InfraStrip": reverse('products:product_category', kwargs={'category_slug': 'drainage'}),
+        "View InfraGrid": reverse('products:product_category', kwargs={'category_slug': 'geogrids'}),
         "View InfraCell": reverse('products:product_category', kwargs={'category_slug': 'geocells'}),
-        "View InfraDrain": reverse('products:product_category', kwargs={'category_slug': 'drainage-systems'}),
+        "View InfraDrain": reverse('products:product_category', kwargs={'category_slug': 'drainage'}),
         "View InfraClay": reverse('products:product_category', kwargs={'category_slug': 'gcls'}),
     }
 
