@@ -79,12 +79,18 @@ def CategoryListView(request, category_slug):
         if item['url'] == ('/' + db_category):
             category_detail = item
 
+    # Build canonical URL for this category page
+    from django.urls import reverse
+    canonical_path = reverse('products:product_category', kwargs={'category_slug': category_slug})
+    canonical_url = request.build_absolute_uri(canonical_path)
+
     context = {
         'products': products,
         'category': category_slug.title().replace('_', ' '),
         'category_slug': category_slug,  # Keep plural for templates/URLs
         'detail': category_detail,
-        'page_title': category_slug.title().replace('_', ' ')
+        'page_title': category_slug.title().replace('_', ' '),
+        'canonical_url': canonical_url,
     }
 
     return render(request, 'category_list.html', context)
@@ -99,6 +105,32 @@ class ProductDetailView(DetailView):
         # Use the product_code from the URL to get the product
         product_code = self.kwargs.get('product_code')
         return get_object_or_404(Product, code=product_code)
+
+    def get(self, request, *args, **kwargs):
+        """Override get to validate category slug and redirect if wrong"""
+        self.object = self.get_object()
+
+        # Get the correct category slug for this product
+        correct_url = self.object.get_absolute_url()
+        current_category_slug = self.kwargs.get('category_slug')
+
+        # Map database categories to URL slugs to check if current slug is correct
+        category_to_plural = {
+            'geocell': 'geocells',
+            'gcl': 'gcls',
+            'geotextile': 'geotextiles',
+            'geogrid': 'geogrids',
+            'drainage': 'drainage',
+        }
+        correct_category_slug = category_to_plural.get(self.object.category, self.object.category)
+
+        # If the category slug in the URL doesn't match the product's category, redirect
+        if current_category_slug != correct_category_slug:
+            return redirect(correct_url, permanent=True)
+
+        # Continue with normal rendering
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -118,7 +150,10 @@ class ProductDetailView(DetailView):
         context['technical_guides'] = self.object.technical_guides.all()
         context['case_studies'] = self.object.case_studies.all()
         context["guides_and_studies_total"] = context["technical_guides"].count() + context["case_studies"].count()
-        
+
+        # Add canonical URL for SEO
+        context['canonical_url'] = self.request.build_absolute_uri(self.object.get_absolute_url())
+
         return context
 
 class ProductSearchView(View):

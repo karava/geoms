@@ -9,13 +9,20 @@ from django.core.mail import send_mail
 def index(request):
     with open(settings.BASE_DIR / 'data/products.json') as f:
         products = json.load(f)
-    
+
     products_dict = {}
-    
+
     for product in products:
         products_dict[product['title'].lower().replace(' ', '_')] = product
-    
-    context = {'products': products_dict, 'page_title': 'Infratex'}
+
+    # Add canonical URL for SEO
+    canonical_url = request.build_absolute_uri(reverse('home'))
+
+    context = {
+        'products': products_dict,
+        'page_title': 'Infratex',
+        'canonical_url': canonical_url,
+    }
 
     return render(request, 'static_pages/index.html', context)
 
@@ -35,7 +42,14 @@ def render_applications(request):
                 'description': item['What_is_text']
             })
 
-    context = {'applications': applications, 'page_title': 'Applications'}
+    # Add canonical URL for SEO
+    canonical_url = request.build_absolute_uri(reverse('applications'))
+
+    context = {
+        'applications': applications,
+        'page_title': 'Applications',
+        'canonical_url': canonical_url,
+    }
     return render(request, 'application/index.html', context)
 
 def render_application_detail(request, slug):
@@ -59,22 +73,31 @@ def render_application_detail(request, slug):
             if link["label"] in product_urls:
                 link["url"] = product_urls[link["label"]]
 
+    # Add canonical URL for SEO
+    canonical_url = request.build_absolute_uri(reverse('application_detail', kwargs={'slug': slug}))
+
     context = {
-        'data': application, 
+        'data': application,
         'page_title': application['title'],
-        'meta_description': application['Summary_text']
-        }
+        'meta_description': application['Summary_text'],
+        'canonical_url': canonical_url,
+    }
     return render(request, 'application/detail.html', context)
 
 def product_enquiry(request):
     product = request.GET.get('product')
 
-    response: HttpResponse = render(request, 'static_pages/contact.html', {'page_title': 'Contact Us', 'product':product})
-
     canonical_url = request.build_absolute_uri(reverse("contact"))
+
+    response: HttpResponse = render(request, 'static_pages/contact.html', {
+        'page_title': 'Contact Us',
+        'product': product,
+        'canonical_url': canonical_url,
+    })
+
     response["Link"] = f'<{canonical_url}>; rel="canonical"'
-    
+
     if 'product' in request.GET:
         response["X-Robots-Tag"] = "noindex, nofollow"
-        
+
     return response

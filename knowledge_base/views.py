@@ -18,7 +18,7 @@ class TechnicalGuideListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         new_context = []
-        
+
         for item in context['guides']:
             main_image = item.images.filter(is_default=True).first()
             new_context.append({
@@ -31,6 +31,10 @@ class TechnicalGuideListView(ListView):
 
         context['guides'] = new_context
         context['page_title'] = 'Technical Guides'
+
+        # Add canonical URL for SEO (always point to page 1)
+        canonical_path = reverse("knowledge_base:technical_guide_list")
+        context['canonical_url'] = self.request.build_absolute_uri(canonical_path)
 
         return context
     
@@ -59,7 +63,7 @@ class CaseStudyListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         new_context = []
-        
+
         for item in context['studies']:
             main_image = item.images.filter(is_default=True).first()
             new_context.append({
@@ -72,6 +76,10 @@ class CaseStudyListView(ListView):
 
         context['studies'] = new_context
         context['page_title'] = 'Case Studies'
+
+        # Add canonical URL for SEO (always point to page 1)
+        canonical_path = reverse("knowledge_base:case_study_list")
+        context['canonical_url'] = self.request.build_absolute_uri(canonical_path)
 
         return context
     
@@ -92,7 +100,7 @@ class CaseStudyDetailView(DetailView):
     template_name = 'case_study_detail.html'
     context_object_name = 'study'
     slug_url_kwarg = 'case_study_slug'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['main_image'] = self.object.images.filter(is_default=True).first()
@@ -104,6 +112,10 @@ class CaseStudyDetailView(DetailView):
         context['page_title'] = self.object.title
         context['meta_description'] = self.object.solution
         context['related_products'] = self.object.products.all()
+
+        # Add canonical URL for SEO
+        context['canonical_url'] = self.request.build_absolute_uri(self.object.get_absolute_url())
+
         return context
 
 class TechnicalGuideDetailView(DetailView):
@@ -111,7 +123,7 @@ class TechnicalGuideDetailView(DetailView):
     template_name = 'technical_guide_detail.html'
     context_object_name = 'guide'
     slug_url_kwarg = 'guide_slug'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['main_image'] = self.object.images.filter(is_default=True).first()
@@ -123,4 +135,8 @@ class TechnicalGuideDetailView(DetailView):
         context['page_title'] = self.object.title
         context['meta_description'] = self.object.content
         context['related_products'] = self.object.products.all()
+
+        # Add canonical URL for SEO
+        context['canonical_url'] = self.request.build_absolute_uri(self.object.get_absolute_url())
+
         return context
