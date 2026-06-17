@@ -11,8 +11,6 @@ class PublicMediaStorage(S3Boto3Storage):
     location = settings.FOLDER_NAME
 
     def delete(self, name):
-        name = self._normalize_name(self._clean_name(name))
-        self.bucket.Object(name).delete()
         return super().delete(name)
 
     def list_all_filenames(self):
