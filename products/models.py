@@ -122,7 +122,6 @@ class ProductMediaRelation(models.Model):
             base = base.replace("_", " ")                           # "my image file"
             self.alt_text = base
         super().save(*args, **kwargs)
-        super().save(*args, **kwargs)
     
     def __str__(self):
         return f"{self.resource_type} for {self.product.code}"

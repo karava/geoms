@@ -6,7 +6,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from apis import constants
 from datetime import datetime, timedelta
-import pytz
+from zoneinfo import ZoneInfo
 import json
 import io
 import os
@@ -118,7 +118,7 @@ Leadtime: {quoteData["leadTime"]}"""
         taxType = "EXEMPTOUTPUT"
         currencyCode = "USD"
 
-    currentDateTime = datetime.now(pytz.timezone('Australia/Victoria'))
+    currentDateTime = datetime.now(ZoneInfo('Australia/Melbourne'))
     today = str(currentDateTime.year)+"-"+str(currentDateTime.month)+"-"+str(currentDateTime.day)
     expiryDateTime = currentDateTime + timedelta(days=14)
     expiryDate = str(expiryDateTime.year)+"-"+str(expiryDateTime.month)+"-"+(str(expiryDateTime.day))

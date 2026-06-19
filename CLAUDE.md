@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Geo Gems is a Django-based B2B e-commerce website for Infratex (infratex.com.au), an Australian geosynthetics supplier. The site manages product catalogs, technical documentation, case studies, and integrates with Xero for quote management.
 
 ## Tech Stack
-- **Backend:** Django 3.2.9, Python
+- **Backend:** Django 5.2, Python
 - **Database:** SQLite (dev), PostgreSQL (prod)
 - **Storage:** AWS S3 for media files
 - **Integrations:** Xero API for quotes/invoices

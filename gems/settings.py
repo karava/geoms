@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'nested_admin',
     'apis',
     'knowledge_base',
-    'captcha',
+    'django_recaptcha',
     'tinymce',
 ]
 
@@ -136,8 +136,6 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 
@@ -168,7 +166,14 @@ STATICFILES_DIRS = [
 ## Media files storage
 # https://docs.djangoproject.com/en/4.2/topics/files/
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
 AWS_PUBLIC_STORAGE_BUCKET_NAME = 'infratex-public-assets'
 AWS_PRIVATE_STORAGE_BUCKET_NAME = 'infratex-private-assets'
@@ -201,8 +206,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'accounts@geosynthetics.net.au'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
 
 # Site ID for enabling sites framework required for sitemap
 # Run a migration to set the correct name and domain for the project
